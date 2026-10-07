@@ -47,15 +47,15 @@ export const teamData = {
       }
     ]
   },
-  
+
   members: [
     {
       id: "member-1",
-      name: "Alex Rivera",
+      name: "Can Ahmet Kurt",
       role: "Lead",
       speciality: "Full-Stack & Systems",
       bio: "Focusing on distributed backends, clean API contracts, and scalable infrastructure under pressure.",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+      avatar: "https://media.licdn.com/dms/image/v2/D4D03AQEqWxc3r4zAew/profile-displayphoto-scale_200_200/B4DZ39b6GXGQAY-/0/1778073449090?e=2147483647&v=beta&t=dX2KfDUTHU1z1LFLCr4coOCseT47SRVS_ylhZYBy1RY",
       skills: ["TypeScript", "Go", "Docker", "PostgreSQL"],
       social: {
         github: "https://github.com/WeOwnVision",
@@ -65,8 +65,8 @@ export const teamData = {
     },
     {
       id: "member-2",
-      name: "Sarah Chen",
-      role: "Engineering",
+      name: "Bircan Taş",
+      role: "AI/ML",
       speciality: "Backend & ML Systems",
       bio: "Building robust data pipelines, model inference endpoints, and high-concurrency event loops.",
       avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80",
@@ -79,11 +79,11 @@ export const teamData = {
     },
     {
       id: "member-3",
-      name: "Marcus Vance",
+      name: "Talha Topatan",
       role: "Frontend",
       speciality: "Creative Web & Shaders",
       bio: "Crafting hardware-accelerated WebGL visuals, keyboard-first interfaces, and kinetic typography.",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+      avatar: "https://media.licdn.com/dms/image/v2/D4D03AQH9Xt6wdIafxw/profile-displayphoto-scale_200_200/B4DZ39.MV0HoAY-/0/1778082434630?e=2147483647&v=beta&t=JaPtJ4DVCi01ZkF_4GzMeUnLsNRQU6JsRUR6tJb2OQs",
       skills: ["WebGL", "Three.js", "Astro", "Tailwind"],
       social: {
         github: "https://github.com/WeOwnVision",
@@ -93,11 +93,11 @@ export const teamData = {
     },
     {
       id: "member-4",
-      name: "Elena Rostova",
+      name: "Emir Cumaoğulları",
       role: "Design",
       speciality: "Product & UI Architecture",
       bio: "Transforming raw hackathon ideas into razor-sharp, intuitive product flows and design systems.",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80",
+      avatar: "https://media.licdn.com/dms/image/v2/D4D03AQEpP28uDSWzeA/profile-displayphoto-scale_200_200/B4DZ3YAfs4JAAY-/0/1777445504433?e=2147483647&v=beta&t=NiCXseWM2Mg378B222tICw4Z4aaH3Io16LhUxHjgo60",
       skills: ["Design Systems", "Figma", "Next.js", "CSS"],
       social: {
         github: "https://github.com/WeOwnVision",
@@ -107,11 +107,11 @@ export const teamData = {
     },
     {
       id: "member-5",
-      name: "Liam Zhang",
+      name: "Abdullah Sayılğan",
       role: "Systems",
       speciality: "Security & Cloud Ops",
       bio: "Hardening production deploys, zero-trust network boundaries, and container security for fast-shipping teams.",
-      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+      avatar: "https://media.licdn.com/dms/image/v2/D4D03AQG5Gn4cU5DaNg/profile-displayphoto-scale_200_200/B4DaAg5cQFJcAg-/0/1787258327071?e=2147483647&v=beta&t=jLDk06LPzPTnQW3THqey-sUEjkOuN0jrSVqcD_FHDAc",
       skills: ["Linux", "Kubernetes", "Rust", "Networks"],
       social: {
         github: "https://github.com/WeOwnVision",

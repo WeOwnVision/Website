@@ -329,7 +329,7 @@ import { teamData } from "../config/team";
           const squadY = sRect ? (sRect.top + window.scrollY - trackerTopDoc + 7) : 1310;
           const endY = squadRect ? (squadRect.bottom + window.scrollY - trackerTopDoc - 36) : 1750;
 
-          const curveStart = heroY + 160;
+          const curveStart = heroY + 270  ;
           const newD = `M ${heroX} ${heroY} L ${heroX} ${curveStart} C ${heroX} ${curveStart + 120}, 360 ${principlesY - 140}, 160 ${principlesY - 80} C 95 ${principlesY - 60}, ${spineX} ${principlesY - 30}, ${spineX} ${principlesY} L ${spineX} ${squadY} L ${spineX} ${endY - 60} C ${spineX} ${endY - 20}, 105 ${endY}, 140 ${endY}`;
 
           path.setAttribute("d", newD);
