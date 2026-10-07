@@ -1,7 +1,6 @@
 ---
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
-import HexagonVisual from "../components/HexagonVisual.astro";
 import TeamCard from "../components/TeamCard.astro";
 import ScrollObserver from "../components/ScrollObserver.astro";
 import { siteConfig } from "../config/site";
@@ -37,10 +36,34 @@ import { teamData } from "../config/team";
         </p>
       </div>
 
-      <!-- Feature Grid: Wireframe Hexagon + Story -->
+      <!-- Feature Grid: 36-Hour Sprint Timeline + Story -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-20 border-t border-white/[0.08] pt-16">
-        <div class="lg:col-span-5 flex justify-center">
-          <HexagonVisual size="responsive" className="max-w-[320px]" />
+        <div class="lg:col-span-5">
+          <div class="p-6 rounded-xl border border-white/[0.08] bg-[#111113]/60 space-y-4">
+            <div class="flex items-center justify-between text-xs font-mono text-[#8A8A93] border-b border-white/[0.06] pb-3">
+              <span>// SPRINT PROTOCOL</span>
+              <span class="text-[#FF5B1F]">36:00 RUNTIME</span>
+            </div>
+            
+            <div class="space-y-3 font-mono text-xs">
+              <div class="flex items-start justify-between py-1 border-b border-white/[0.04]">
+                <span class="text-[#EDEDEF]">H-00 Kickoff</span>
+                <span class="text-[#8A8A93]">Arch & Schema</span>
+              </div>
+              <div class="flex items-start justify-between py-1 border-b border-white/[0.04]">
+                <span class="text-[#EDEDEF]">H-06 Freeze</span>
+                <span class="text-[#A1A1AA]">Feature Lock</span>
+              </div>
+              <div class="flex items-start justify-between py-1 border-b border-white/[0.04]">
+                <span class="text-[#EDEDEF]">H-24 Dry Run</span>
+                <span class="text-[#8A8A93]">End-to-End Test</span>
+              </div>
+              <div class="flex items-start justify-between py-1">
+                <span class="text-[#FF5B1F]">H-36 Buzzer</span>
+                <span class="text-[#EDEDEF] font-semibold">Live Production</span>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="lg:col-span-7 space-y-6" data-scroll-reveal="text">
           <h2 class="text-2xl sm:text-3xl font-bold text-[#EDEDEF] tracking-tight">

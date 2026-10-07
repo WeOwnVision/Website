@@ -21,7 +21,7 @@ import { teamData } from "../config/team";
   </head>
 
   <body class="min-h-screen bg-[#0A0A0B] text-[#EDEDEF] flex flex-col relative selection:bg-[#EDEDEF] selection:text-[#0A0A0B]">
-    <!-- Navigation -->
+    <!-- Top Navigation -->
     <Navigation />
 
     <main class="relative z-10 flex-1 flex flex-col">
@@ -39,7 +39,7 @@ import { teamData } from "../config/team";
           <!-- Background Dashed Track Line (The Deliberate Spine) -->
           <path 
             id="hexagon-motion-path" 
-            d="M 685 260 L 685 450 C 685 560, 360 600, 160 640 C 95 655, 75 690, 75 740 L 75 1600 C 75 1640, 110 1660, 140 1660" 
+            d="M 685 260 L 685 450 C 685 570, 360 620, 160 660 C 95 680, 75 700, 75 740 L 75 1310 L 75 1690 C 75 1730, 105 1750, 140 1750" 
             stroke="rgba(255, 255, 255, 0.12)" 
             stroke-width="1.5" 
             stroke-dasharray="4 4" 
@@ -49,7 +49,7 @@ import { teamData } from "../config/team";
           <!-- Active Tracer Line -->
           <path 
             id="hexagon-tracer-path" 
-            d="M 685 260 L 685 450 C 685 560, 360 600, 160 640 C 95 655, 75 690, 75 740 L 75 1600 C 75 1640, 110 1660, 140 1660" 
+            d="M 685 260 L 685 450 C 685 570, 360 620, 160 660 C 95 680, 75 700, 75 740 L 75 1310 L 75 1690 C 75 1730, 105 1750, 140 1750" 
             stroke="#FF5B1F" 
             stroke-width="1.8" 
             fill="none" 
@@ -57,21 +57,22 @@ import { teamData } from "../config/team";
 
           <!-- Numbered Spine Node Markers -->
           <!-- Node 01: Hero Start -->
-          <circle cx="685" cy="260" r="4" fill="#FF5B1F" />
+          <circle id="spine-node-01-circle" cx="685" cy="260" r="4" fill="#FF5B1F" />
+          <text id="spine-node-01-text" x="660" y="264" class="text-[11px] font-mono fill-[#A1A1AA]" text-anchor="end">01</text>
 
-          <!-- Node 02: Principles Start -->
-          <circle cx="75" cy="740" r="4" fill="#EDEDEF" />
-          <text x="50" y="744" class="text-[9px] font-mono fill-[#8A8A93] text-anchor-end" text-anchor="end">02</text>
+          <!-- Node 02: Principles Start (Beside \"How We Build\" Heading) -->
+          <circle id="spine-node-02-circle" cx="75" cy="740" r="4" fill="#EDEDEF" />
+          <text id="spine-node-02-text" x="48" y="744" class="text-[11px] font-mono fill-[#A1A1AA]" text-anchor="end">02</text>
 
-          <!-- Node 03: Squad Start -->
-          <circle cx="75" cy="1160" r="4" fill="#EDEDEF" />
-          <text x="50" y="1164" class="text-[9px] font-mono fill-[#8A8A93] text-anchor-end" text-anchor="end">03</text>
+          <!-- Node 03: Squad Start (Beside \"The Collective\" Heading) -->
+          <circle id="spine-node-03-circle" cx="75" cy="1310" r="4" fill="#EDEDEF" />
+          <text id="spine-node-03-text" x="48" y="1314" class="text-[11px] font-mono fill-[#A1A1AA]" text-anchor="end">03</text>
 
           <!-- Terminal Circle Node (○ at end of Squad) -->
-          <circle cx="140" cy="1660" r="7" stroke="#EDEDEF" stroke-width="1.5" fill="#0A0A0B" />
-          <circle cx="140" cy="1660" r="2.5" fill="#FF5B1F" />
+          <circle id="spine-node-terminal-outer" cx="140" cy="1750" r="7" stroke="#EDEDEF" stroke-width="1.5" fill="#0A0A0B" />
+          <circle id="spine-node-terminal-inner" cx="140" cy="1750" r="2.5" fill="#FF5B1F" />
 
-          <!-- THE MOVING HEXAGON: Unified transparent scanner directly in SVG space -->
+          <!-- THE MOVING HEXAGON: Centered in the middle of the screen at all times -->
           <g id="scroll-moving-hexagon" transform="translate(685, 260) scale(0.48)" class="pointer-events-auto">
             <HexagonVisual asSvgGroup={true} />
           </g>
@@ -83,7 +84,7 @@ import { teamData } from "../config/team";
             
             <!-- Left Text Content -->
             <div class="sm:col-span-8 space-y-6 text-left">
-              <div class="inline-flex items-center gap-2 text-xs font-medium text-[#8A8A93] uppercase tracking-wider hero-render-1">
+              <div class="inline-flex items-center gap-2 text-xs font-mono text-[#A1A1AA] uppercase tracking-wider hero-render-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-[#FF5B1F]"></span>
                 <span>WeOwnVision — Hackathon Collective</span>
               </div>
@@ -108,9 +109,12 @@ import { teamData } from "../config/team";
                   href={siteConfig.social.github} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  class="px-3 py-2.5 text-sm font-medium text-[#A1A1AA] hover:text-[#EDEDEF] transition-colors"
+                  class="px-3 py-2.5 text-sm font-medium text-[#A1A1AA] hover:text-[#EDEDEF] transition-colors inline-flex items-center gap-1.5 group"
                 >
-                  GitHub →
+                  <span>GitHub</span>
+                  <svg class="w-4 h-4 inline-block transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
                 </a>
               </div>
             </div>
@@ -137,7 +141,7 @@ import { teamData } from "../config/team";
             <!-- Right Content -->
             <div class="sm:col-span-10 space-y-8">
               <div data-scroll-reveal="text">
-                <span class="text-xs font-mono text-[#8A8A93] uppercase tracking-wider">
+                <span class="text-xs font-mono text-[#A1A1AA] uppercase tracking-wider">
                   02 / PRINCIPLES
                 </span>
                 <h2 class="text-2xl sm:text-3xl font-bold text-[#EDEDEF] tracking-tight mt-1">
@@ -148,12 +152,12 @@ import { teamData } from "../config/team";
                 </p>
               </div>
 
-              <!-- Numbered List with Hairlines (Replacing Card Soup) -->
+              <!-- Numbered List with Hairlines (Neutral numbers so orange stays rare) -->
               <div class="border-t border-white/[0.08]" data-scroll-reveal="card">
                 {teamData.manifesto.values.map((val, idx) => (
                   <div class="py-6 border-b border-white/[0.08] grid grid-cols-1 md:grid-cols-12 gap-4 items-baseline">
                     <div class="md:col-span-4 flex items-baseline gap-3">
-                      <span class="text-xs font-mono text-[#FF5B1F]">0{idx + 1}</span>
+                      <span class="text-xs font-mono text-[#8A8A93]">0{idx + 1}</span>
                       <h3 class="text-base font-semibold text-[#EDEDEF] tracking-tight">
                         {val.title}
                       </h3>
@@ -185,7 +189,7 @@ import { teamData } from "../config/team";
             <div class="sm:col-span-10 space-y-6">
               
               <div data-scroll-reveal="text">
-                <span class="text-xs font-mono text-[#8A8A93] uppercase tracking-wider">
+                <span class="text-xs font-mono text-[#A1A1AA] uppercase tracking-wider">
                   03 / THE SQUAD
                 </span>
                 <h2 class="text-2xl sm:text-3xl font-bold text-[#EDEDEF] tracking-tight mt-1">
@@ -196,7 +200,7 @@ import { teamData } from "../config/team";
                 </p>
               </div>
 
-              <!-- Editorial Hairline List (Solving 5-Card Orphan Problem) -->
+              <!-- Editorial Hairline List -->
               <div class="border-t border-white/[0.08] mt-6">
                 {teamData.members.map((member, idx) => (
                   <TeamCard member={member} index={idx} />
@@ -214,7 +218,7 @@ import { teamData } from "../config/team";
       <section class="relative max-w-5xl mx-auto w-full px-6 sm:px-8 py-16 border-t border-white/[0.08]">
         <div class="flex items-baseline justify-between mb-6" data-scroll-reveal="text">
           <div>
-            <span class="text-xs font-mono text-[#8A8A93] uppercase tracking-wider">04 / BUILDS</span>
+            <span class="text-xs font-mono text-[#A1A1AA] uppercase tracking-wider">04 / BUILDS</span>
             <h2 class="text-2xl font-bold text-[#EDEDEF] tracking-tight mt-1">
               Hackathon Drops
             </h2>
@@ -231,10 +235,12 @@ import { teamData } from "../config/team";
               href={siteConfig.social.github} 
               target="_blank" 
               rel="noopener noreferrer" 
-              class="inline-flex items-center gap-1.5 text-sm font-medium text-[#EDEDEF] hover:underline"
+              class="inline-flex items-center gap-1.5 text-sm font-medium text-[#EDEDEF] hover:underline group"
             >
               <span>Track real-time commits on GitHub</span>
-              <span>→</span>
+              <svg class="w-4 h-4 ml-0.5 inline-block transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
             </a>
           </div>
         </div>
@@ -247,83 +253,190 @@ import { teamData } from "../config/team";
 
     <ScrollObserver />
 
-    <!-- Unified SVG Motion Controller with Native getPointAtLength + Lerp -->
+    <!-- Viewport-Centered Motion Controller (Keeps Hexagon in Screen Middle At All Times) -->
     <script>
       function initHexagonMotion() {
-        const tracker = document.getElementById('hero-team-tracker');
-        const path = document.getElementById('hexagon-motion-path') as SVGPathElement | null;
-        const tracerPath = document.getElementById('hexagon-tracer-path') as SVGPathElement | null;
-        const movingHex = document.getElementById('scroll-moving-hexagon') as SVGGElement | null;
+        const tracker = document.getElementById("hero-team-tracker");
+        const path = document.getElementById("hexagon-motion-path") as SVGPathElement | null;
+        const tracerPath = document.getElementById("hexagon-tracer-path") as SVGPathElement | null;
+        const movingHex = document.getElementById("scroll-moving-hexagon") as SVGGElement | null;
 
         if (!tracker || !path || !movingHex) return;
 
-        const pathLength = path.getTotalLength();
+        let pathLength = path.getTotalLength();
+        let lut: Array<{ d: number; x: number; y: number }> = [];
 
-        if (tracerPath) {
-          tracerPath.style.strokeDasharray = `${pathLength}`;
-          tracerPath.style.strokeDashoffset = `${pathLength}`;
+        function buildLUT() {
+          if (!path) return;
+          pathLength = path.getTotalLength();
+          if (tracerPath) {
+            tracerPath.style.strokeDasharray = `${pathLength}`;
+          }
+          const steps = 300;
+          lut = [];
+          for (let i = 0; i <= steps; i++) {
+            const d = (i / steps) * pathLength;
+            const pt = path.getPointAtLength(d);
+            lut.push({ d, x: pt.x, y: pt.y });
+          }
         }
 
-        let targetProgress = 0;
-        let currentProgress = 0;
+        // Fast binary search to find exact point on path for any given Y coordinate
+        function getPointForY(targetY: number) {
+          if (!lut.length) return { x: 685, y: 260, d: 0 };
+          const startY = lut[0].y;
+          const endY = lut[lut.length - 1].y;
+
+          if (targetY <= startY) return lut[0];
+          if (targetY >= endY) return lut[lut.length - 1];
+
+          let low = 0, high = lut.length - 1;
+          while (low <= high) {
+            const mid = (low + high) >> 1;
+            if (lut[mid].y < targetY) low = mid + 1;
+            else high = mid - 1;
+          }
+          const i = Math.min(Math.max(1, low), lut.length - 1);
+          const p0 = lut[i - 1];
+          const p1 = lut[i];
+          const diff = p1.y - p0.y;
+          const t = diff === 0 ? 0 : (targetY - p0.y) / diff;
+          return {
+            x: p0.x + (p1.x - p0.x) * t,
+            y: targetY,
+            d: p0.d + (p1.d - p0.d) * t
+          };
+        }
+
+        function updateSpineLayout() {
+          if (!tracker || !path) return;
+          const trackerRect = tracker.getBoundingClientRect();
+          const trackerTopDoc = trackerRect.top + window.scrollY;
+
+          const heroX = 685;
+          const heroY = 260;
+          const spineX = 75;
+
+          const pHeading = document.querySelector("#principles-section [data-scroll-reveal=\"text\"]") || document.querySelector("#principles-section h2");
+          const sHeading = document.querySelector("#squad-section [data-scroll-reveal=\"text\"]") || document.querySelector("#squad-section h2");
+          const squadSection = document.getElementById("squad-section");
+
+          const pRect = pHeading ? pHeading.getBoundingClientRect() : null;
+          const sRect = sHeading ? sHeading.getBoundingClientRect() : null;
+          const squadRect = squadSection ? squadSection.getBoundingClientRect() : null;
+
+          const principlesY = pRect ? (pRect.top + window.scrollY - trackerTopDoc + 7) : 740;
+          const squadY = sRect ? (sRect.top + window.scrollY - trackerTopDoc + 7) : 1310;
+          const endY = squadRect ? (squadRect.bottom + window.scrollY - trackerTopDoc - 36) : 1750;
+
+          const curveStart = heroY + 160;
+          const newD = `M ${heroX} ${heroY} L ${heroX} ${curveStart} C ${heroX} ${curveStart + 120}, 360 ${principlesY - 140}, 160 ${principlesY - 80} C 95 ${principlesY - 60}, ${spineX} ${principlesY - 30}, ${spineX} ${principlesY} L ${spineX} ${squadY} L ${spineX} ${endY - 60} C ${spineX} ${endY - 20}, 105 ${endY}, 140 ${endY}`;
+
+          path.setAttribute("d", newD);
+          if (tracerPath) {
+            tracerPath.setAttribute("d", newD);
+          }
+
+          const n2C = document.getElementById("spine-node-02-circle");
+          const n2T = document.getElementById("spine-node-02-text");
+          if (n2C) n2C.setAttribute("cy", `${principlesY}`);
+          if (n2T) n2T.setAttribute("y", `${principlesY + 4}`);
+
+          const n3C = document.getElementById("spine-node-03-circle");
+          const n3T = document.getElementById("spine-node-03-text");
+          if (n3C) n3C.setAttribute("cy", `${squadY}`);
+          if (n3T) n3T.setAttribute("y", `${squadY + 4}`);
+
+          const termOut = document.getElementById("spine-node-terminal-outer");
+          const termIn = document.getElementById("spine-node-terminal-inner");
+          if (termOut) termOut.setAttribute("cy", `${endY}`);
+          if (termIn) termIn.setAttribute("cy", `${endY}`);
+
+          buildLUT();
+        }
+
+        updateSpineLayout();
+
+        let targetY = lut.length ? lut[0].y : 260;
+        let currentY = targetY;
         let isRunning = false;
 
-        function calculateTargetProgress() {
+        function calculateTargetY() {
+          if (!lut.length) return;
           const rect = tracker.getBoundingClientRect();
-          const trackerTop = rect.top + window.scrollY;
-          const startScroll = trackerTop - 40;
-          const endScroll = trackerTop + tracker.offsetHeight - window.innerHeight * 0.55;
           const currentScroll = window.scrollY;
+          const startY = lut[0].y;
+          const endY = lut[lut.length - 1].y;
 
-          targetProgress = Math.min(Math.max((currentScroll - startScroll) / (endScroll - startScroll), 0), 1);
+          // Target center of viewport (50% of screen height)
+          const targetViewportCenter = window.innerHeight * 0.5;
+
+          // Resting hero position in viewport coordinates:
+          const heroRestingViewportY = startY + (rect.top + currentScroll);
+
+          // Smoothly transition from resting hero position to viewport center over first 140px of scroll
+          const blend = Math.min(Math.max(currentScroll / 140, 0), 1);
+          const activeViewportY = (heroRestingViewportY - currentScroll) * (1 - blend) + targetViewportCenter * blend;
+
+          // Desired Y in tracker coordinates such that: rect.top + desired = activeViewportY
+          const desired = activeViewportY - rect.top;
+
+          targetY = Math.min(Math.max(desired, startY), endY);
         }
 
-        function updatePosition(progress: number) {
-          const pt = path.getPointAtLength(progress * pathLength);
-          movingHex.setAttribute('transform', `translate(${pt.x}, ${pt.y}) scale(0.48)`);
+        function updatePosition(y: number) {
+          const pt = getPointForY(y);
+          movingHex.setAttribute("transform", `translate(${pt.x}, ${pt.y}) scale(0.48)`);
 
           if (tracerPath) {
-            tracerPath.style.strokeDashoffset = `${pathLength * (1 - progress)}`;
+            tracerPath.style.strokeDashoffset = `${pathLength - pt.d}`;
           }
         }
 
         function renderLoop() {
-          // Physics lerp damping (0.07 for silky smooth momentum)
-          currentProgress += (targetProgress - currentProgress) * 0.07;
+          // Physics lerp damping (0.085 for responsive, silky smooth glide)
+          currentY += (targetY - currentY) * 0.085;
 
-          updatePosition(currentProgress);
+          updatePosition(currentY);
 
-          if (Math.abs(targetProgress - currentProgress) > 0.0002) {
+          if (Math.abs(targetY - currentY) > 0.15) {
             requestAnimationFrame(renderLoop);
           } else {
-            currentProgress = targetProgress;
-            updatePosition(currentProgress);
+            currentY = targetY;
+            updatePosition(currentY);
             isRunning = false;
           }
         }
 
         function onScroll() {
-          calculateTargetProgress();
+          calculateTargetY();
           if (!isRunning) {
             isRunning = true;
             requestAnimationFrame(renderLoop);
           }
         }
 
-        window.addEventListener('scroll', onScroll, { passive: true });
-        window.addEventListener('resize', () => {
-          calculateTargetProgress();
-          currentProgress = targetProgress;
-          updatePosition(currentProgress);
-        });
+        function onResize() {
+          updateSpineLayout();
+          calculateTargetY();
+          currentY = targetY;
+          updatePosition(currentY);
+        }
 
-        calculateTargetProgress();
-        currentProgress = targetProgress;
-        updatePosition(currentProgress);
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onResize);
+        window.addEventListener("load", onResize);
+        if ("fonts" in document) {
+          document.fonts.ready.then(onResize);
+        }
+
+        calculateTargetY();
+        currentY = targetY;
+        updatePosition(currentY);
       }
 
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initHexagonMotion);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initHexagonMotion);
       } else {
         initHexagonMotion();
       }

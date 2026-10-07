@@ -34,16 +34,16 @@ export const teamData = {
     description: "We are WeOwnVision — a dedicated 5-person hackathon squad. When the clock starts, we don't waste time on slide decks or endless deliberations. We architect clean backends, design razor-sharp interfaces, and ship working code that solves actual problems before the buzzer sounds.",
     values: [
       {
-        title: "Sprint Discipline",
-        description: "Zero bloat. We prioritize working core loops, robust APIs, and measurable user value."
+        title: "Feature Freeze by Hour 6",
+        description: "The core loop and data schema are locked before midnight. Everything after is polish, error states, and live deployment."
       },
       {
-        title: "Craft & Detail",
-        description: "Speed is never an excuse for broken UI or unpolished interactions. Every detail matters."
+        title: "Zero Broken Fallbacks",
+        description: "Sprint speed is never an excuse for broken states or unhandled API errors. Every user interaction must resolve cleanly."
       },
       {
         title: "Full-Stack Ownership",
-        description: "From low-level systems and database schemas to the final frontend polish, we own the whole stack."
+        description: "From database migrations and backend endpoints to typography and CSS polish, every engineer commits across the stack."
       }
     ]
   },
