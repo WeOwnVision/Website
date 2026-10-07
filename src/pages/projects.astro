@@ -17,28 +17,6 @@ import { teamData } from "../config/team";
     <title>Projects & Builds | {siteConfig.title}</title>
     <meta name="description" content="Explore hackathon projects and software drops engineered by WeOwnVision." />
     <link rel="stylesheet" href="/src/styles/global.css" />
-      <!-- Automatic Turkish Language Detector -->
-    <script is:inline>
-      (function() {
-        function checkLanguage() {
-          var lang = (navigator.language || navigator.userLanguage || "").toLowerCase();
-          if (lang.startsWith("tr")) {
-            document.documentElement.lang = "tr";
-            document.querySelectorAll("[data-tr]").forEach(function(el) {
-              el.textContent = el.getAttribute("data-tr");
-            });
-            document.querySelectorAll("[data-tr-html]").forEach(function(el) {
-              el.innerHTML = el.getAttribute("data-tr-html");
-            });
-          }
-        }
-        if (document.readyState === "loading") {
-          document.addEventListener("DOMContentLoaded", checkLanguage);
-        } else {
-          checkLanguage();
-        }
-      })();
-    </script>
   </head>
 
   <body class="min-h-screen bg-[#0A0A0B] text-[#EDEDEF] flex flex-col relative selection:bg-[#EDEDEF] selection:text-[#0A0A0B]">
