@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "WeOwnVision",
-  title: "WeOwnVision | Hackathon & Builder Collective",
-  description: "A collective of developers, designers, and systems architects building high-velocity software at hackathons and beyond.",
+  title: "WeOwnVision — Hackathon Collective",
+  description: "Five engineers building and deploying functional software prototypes under 36-hour sprint constraints.",
   url: "https://weownvision.vercel.app",
   social: {
     github: "https://github.com/WeOwnVision",
@@ -10,8 +10,6 @@ export const siteConfig = {
   },
   nav: [
     { name: "Home", href: "/" },
-    { name: "About & Team", href: "/about/" },
-    { name: "Projects", href: "/projects/" },
-    { name: "Posts", href: "/posts/" },
+    { name: "About", href: "/about/" },
   ],
 };

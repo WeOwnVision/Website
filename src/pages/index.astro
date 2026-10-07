@@ -3,17 +3,13 @@ import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 import HexagonVisual from "../components/HexagonVisual.astro";
 import TeamCard from "../components/TeamCard.astro";
-import ProjectCard from "../components/ProjectCard.astro";
 import ScrollObserver from "../components/ScrollObserver.astro";
 import { siteConfig } from "../config/site";
 import { teamData } from "../config/team";
-import { getAllPosts } from "../utils/getPosts";
-
-const recentPosts = getAllPosts().slice(0, 2);
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth bg-black text-zinc-100">
+<html lang="en" class="scroll-smooth bg-[#0A0A0B] text-[#EDEDEF]">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -24,89 +20,95 @@ const recentPosts = getAllPosts().slice(0, 2);
     <link rel="stylesheet" href="/src/styles/global.css" />
   </head>
 
-  <body class="min-h-screen bg-black text-zinc-100 flex flex-col relative selection:bg-white selection:text-black">
-    <!-- 1. Floating Pill Navigation with Render Animation -->
+  <body class="min-h-screen bg-[#0A0A0B] text-[#EDEDEF] flex flex-col relative selection:bg-[#EDEDEF] selection:text-[#0A0A0B]">
+    <!-- Navigation -->
     <Navigation />
 
     <main class="relative z-10 flex-1 flex flex-col">
       
-      <!-- ================= TRACKER CONTAINER: HERO + TEAM ================= -->
-      <div id="hero-team-tracker" class="relative max-w-5xl mx-auto w-full px-4 sm:px-6 pt-12">
+      <!-- ================= MAIN CONTAINER: HERO, PRINCIPLES, SQUAD ================= -->
+      <div id="hero-team-tracker" class="relative max-w-5xl mx-auto w-full px-6 sm:px-8 pt-8">
         
-        <!-- SVG Trajectory Path & Moving Hexagon (Unified 1:1 SVG Coordinate System) -->
+        <!-- SVG Trajectory Spine (Unified 1:1 SVG Coordinate System) -->
         <svg 
           id="trajectory-svg" 
+          fill="none" 
           class="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible hidden sm:block" 
           xmlns="http://www.w3.org/2000/svg"
         >
-          <!-- Background Dashed Track Line -->
+          <!-- Background Dashed Track Line (The Deliberate Spine) -->
           <path 
             id="hexagon-motion-path" 
-            d="M 685 280 L 685 470 C 685 580, 420 620, 180 670 C 110 685, 95 720, 95 770 L 95 1360 C 95 1420, 150 1460, 220 1460" 
-            stroke="#27272a" 
-            stroke-width="1.8" 
-            stroke-dasharray="5 5" 
+            d="M 685 260 L 685 450 C 685 560, 360 600, 160 640 C 95 655, 75 690, 75 740 L 75 1600 C 75 1640, 110 1660, 140 1660" 
+            stroke="rgba(255, 255, 255, 0.12)" 
+            stroke-width="1.5" 
+            stroke-dasharray="4 4" 
             fill="none" 
           />
 
           <!-- Active Tracer Line -->
           <path 
             id="hexagon-tracer-path" 
-            d="M 685 280 L 685 470 C 685 580, 420 620, 180 670 C 110 685, 95 720, 95 770 L 95 1360 C 95 1420, 150 1460, 220 1460" 
-            stroke="#71717a" 
-            stroke-width="2" 
+            d="M 685 260 L 685 450 C 685 560, 360 600, 160 640 C 95 655, 75 690, 75 740 L 75 1600 C 75 1640, 110 1660, 140 1660" 
+            stroke="#FF5B1F" 
+            stroke-width="1.8" 
             fill="none" 
           />
 
-          <!-- Terminal Circle Node (○ at the end of the trajectory) -->
-          <circle cx="220" cy="1460" r="7" stroke="#71717a" stroke-width="1.8" fill="#09090b" />
-          <circle cx="220" cy="1460" r="2.5" fill="#ffffff" />
+          <!-- Numbered Spine Node Markers -->
+          <!-- Node 01: Hero Start -->
+          <circle cx="685" cy="260" r="4" fill="#FF5B1F" />
 
-          <!-- THE MOVING HEXAGON: Exactly in the same SVG coordinate system! -->
-          <!-- Dead-center at (685, 280) initially, zero offset, zero drift -->
-          <g id="scroll-moving-hexagon" transform="translate(685, 280) scale(0.48)" class="pointer-events-auto">
+          <!-- Node 02: Principles Start -->
+          <circle cx="75" cy="740" r="4" fill="#EDEDEF" />
+          <text x="50" y="744" class="text-[9px] font-mono fill-[#8A8A93] text-anchor-end" text-anchor="end">02</text>
+
+          <!-- Node 03: Squad Start -->
+          <circle cx="75" cy="1160" r="4" fill="#EDEDEF" />
+          <text x="50" y="1164" class="text-[9px] font-mono fill-[#8A8A93] text-anchor-end" text-anchor="end">03</text>
+
+          <!-- Terminal Circle Node (○ at end of Squad) -->
+          <circle cx="140" cy="1660" r="7" stroke="#EDEDEF" stroke-width="1.5" fill="#0A0A0B" />
+          <circle cx="140" cy="1660" r="2.5" fill="#FF5B1F" />
+
+          <!-- THE MOVING HEXAGON: Unified transparent scanner directly in SVG space -->
+          <g id="scroll-moving-hexagon" transform="translate(685, 260) scale(0.48)" class="pointer-events-auto">
             <HexagonVisual asSvgGroup={true} />
           </g>
         </svg>
 
-        <!-- HERO SECTION (Headline on Left, Spacer on Right) -->
-        <section id="hero-section" class="relative min-h-[580px] flex items-center pb-16">
+        <!-- ================= 1. HERO SECTION ================= -->
+        <section id="hero-section" class="relative min-h-[560px] flex items-center pb-20">
           <div class="w-full grid grid-cols-1 sm:grid-cols-12 gap-8 items-center">
             
-            <!-- Left Text Content with smooth cascade render animations -->
-            <div class="sm:col-span-7 space-y-6 text-left">
-              <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded text-xs font-mono bg-zinc-900 border border-zinc-800 text-zinc-400 hero-render-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-                <span>WE OWN VISION // HACKATHON COLLECTIVE</span>
+            <!-- Left Text Content -->
+            <div class="sm:col-span-8 space-y-6 text-left">
+              <div class="inline-flex items-center gap-2 text-xs font-medium text-[#8A8A93] uppercase tracking-wider hero-render-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#FF5B1F]"></span>
+                <span>WeOwnVision — Hackathon Collective</span>
               </div>
 
-              <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.05] hero-render-2">
-                We Own <br />
-                The Vision.
+              <h1 class="text-5xl sm:text-7xl lg:text-8xl font-extrabold text-[#EDEDEF] tracking-tight leading-[0.93] hero-render-2">
+                Five engineers.<br />
+                36 hours. Shipped.
               </h1>
 
-              <p class="text-sm sm:text-base text-zinc-400 max-w-lg font-light leading-relaxed hero-render-3">
-                Architecting resilient software prototypes and shipping end-to-end systems under 36-hour sprint constraints.
+              <p class="text-base sm:text-lg text-[#A1A1AA] max-w-xl font-normal leading-relaxed hero-render-3">
+                We build and deploy functional software prototypes under hackathon constraints. Every project is engineered from scratch and shipped before the buzzer.
               </p>
 
-              <div class="flex flex-wrap items-center gap-3 pt-2 hero-render-4">
+              <div class="flex flex-wrap items-center gap-4 pt-2 hero-render-4">
                 <a 
-                  href="#team-section" 
-                  class="px-5 py-2.5 rounded-lg text-xs font-mono font-semibold bg-white text-black hover:bg-zinc-200 transition-all duration-200 hover:-translate-y-0.5"
+                  href="#squad-section" 
+                  class="px-5 py-2.5 rounded-lg text-sm font-semibold bg-[#EDEDEF] text-[#0A0A0B] hover:bg-white transition-all duration-200"
                 >
-                  Meet the Team ↓
-                </a>
-                <a 
-                  href="/projects/" 
-                  class="px-5 py-2.5 rounded-lg text-xs font-mono font-semibold bg-zinc-900 text-zinc-300 border border-zinc-800 hover:border-zinc-700 hover:text-white transition-all duration-200 hover:-translate-y-0.5"
-                >
-                  View Builds
+                  Meet the squad ↓
                 </a>
                 <a 
                   href={siteConfig.social.github} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  class="px-4 py-2.5 rounded-lg text-xs font-mono text-zinc-500 hover:text-white transition-colors"
+                  class="px-3 py-2.5 text-sm font-medium text-[#A1A1AA] hover:text-[#EDEDEF] transition-colors"
                 >
                   GitHub →
                 </a>
@@ -114,7 +116,7 @@ const recentPosts = getAllPosts().slice(0, 2);
             </div>
 
             <!-- Right Spacer / Mobile Hexagon Anchor -->
-            <div class="sm:col-span-5 flex items-center justify-center sm:justify-end min-h-[220px]">
+            <div class="sm:col-span-4 flex items-center justify-center sm:justify-end min-h-[220px]">
               <div class="sm:hidden w-48 h-48 flex items-center justify-center hero-render-hex">
                 <HexagonVisual size="responsive" className="w-full h-full" />
               </div>
@@ -123,51 +125,82 @@ const recentPosts = getAllPosts().slice(0, 2);
           </div>
         </section>
 
-        <!-- TEAM SECTION: Left rail for moving hexagon, 5 team cards on right -->
-        <section id="team-section" class="relative py-16 scroll-mt-20">
+        <!-- ================= 2. PRINCIPLES / HOW WE BUILD ================= -->
+        <section id="principles-section" class="relative py-16 scroll-mt-20 border-t border-white/[0.08]">
           <div class="grid grid-cols-1 sm:grid-cols-12 gap-8 items-start">
             
-            <!-- Left Rail Spacer -->
-            <div class="hidden sm:block sm:col-span-3 min-h-[500px]">
-              <!-- Clear room for the moving hexagon on the left rail -->
+            <!-- Left Spine Spacer (Desktop) -->
+            <div class="hidden sm:block sm:col-span-2">
+              <!-- Clear room for the left spine & hexagon tracker -->
             </div>
 
-            <!-- Right Side: Manifesto + 5 Team Cards in Full Color -->
-            <div class="sm:col-span-9 space-y-8">
-              
-              <!-- Manifesto Header -->
+            <!-- Right Content -->
+            <div class="sm:col-span-10 space-y-8">
               <div data-scroll-reveal="text">
-                <span class="text-xs font-mono text-zinc-500 uppercase tracking-wider">
-                  {teamData.manifesto.badge}
+                <span class="text-xs font-mono text-[#8A8A93] uppercase tracking-wider">
+                  02 / PRINCIPLES
                 </span>
-
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-1">
-                  What We Do &amp; Why We're Here
+                <h2 class="text-2xl sm:text-3xl font-bold text-[#EDEDEF] tracking-tight mt-1">
+                  How We Build
                 </h2>
-
-                <p class="mt-2 text-sm font-mono text-zinc-400">
-                  {teamData.manifesto.tagline}
-                </p>
-
-                <p class="mt-3 text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">
-                  {teamData.manifesto.description}
+                <p class="mt-2 text-sm text-[#A1A1AA] font-normal leading-relaxed max-w-xl">
+                  Sprint discipline over slide decks. When the clock is ticking, we focus entirely on the core loop and shipping working software.
                 </p>
               </div>
 
-              <!-- 5 Team Cards Grid -->
-              <div>
-                <div class="flex items-center justify-between mb-3 text-xs font-mono text-zinc-500" data-scroll-reveal="text">
-                  <span>// THE SQUAD</span>
-                  <span>5 MEMBERS</span>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {teamData.members.map((member, idx) => (
-                    <div class={idx === 4 ? "sm:col-span-2" : ""}>
-                      <TeamCard member={member} index={idx} />
+              <!-- Numbered List with Hairlines (Replacing Card Soup) -->
+              <div class="border-t border-white/[0.08]" data-scroll-reveal="card">
+                {teamData.manifesto.values.map((val, idx) => (
+                  <div class="py-6 border-b border-white/[0.08] grid grid-cols-1 md:grid-cols-12 gap-4 items-baseline">
+                    <div class="md:col-span-4 flex items-baseline gap-3">
+                      <span class="text-xs font-mono text-[#FF5B1F]">0{idx + 1}</span>
+                      <h3 class="text-base font-semibold text-[#EDEDEF] tracking-tight">
+                        {val.title}
+                      </h3>
                     </div>
-                  ))}
-                </div>
+                    <div class="md:col-span-8">
+                      <p class="text-sm text-[#A1A1AA] leading-relaxed font-normal">
+                        {val.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ================= 3. SQUAD SECTION ================= -->
+        <section id="squad-section" class="relative py-16 scroll-mt-20 border-t border-white/[0.08]">
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-8 items-start">
+            
+            <!-- Left Spine Spacer (Desktop) -->
+            <div class="hidden sm:block sm:col-span-2">
+              <!-- Clear room for the left spine & hexagon tracker -->
+            </div>
+
+            <!-- Right Content: The 5 Builders Editorial List -->
+            <div class="sm:col-span-10 space-y-6">
+              
+              <div data-scroll-reveal="text">
+                <span class="text-xs font-mono text-[#8A8A93] uppercase tracking-wider">
+                  03 / THE SQUAD
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-[#EDEDEF] tracking-tight mt-1">
+                  The Collective
+                </h2>
+                <p class="mt-2 text-sm text-[#A1A1AA] font-normal leading-relaxed">
+                  Five builders spanning distributed systems, ML pipelines, creative frontend, and product architecture.
+                </p>
+              </div>
+
+              <!-- Editorial Hairline List (Solving 5-Card Orphan Problem) -->
+              <div class="border-t border-white/[0.08] mt-6">
+                {teamData.members.map((member, idx) => (
+                  <TeamCard member={member} index={idx} />
+                ))}
               </div>
 
             </div>
@@ -177,97 +210,39 @@ const recentPosts = getAllPosts().slice(0, 2);
 
       </div>
 
-      <!-- ================= 4. PROJECT SHOWCASE: 3 CARDS IN A ROW ================= -->
-      <section class="relative max-w-5xl mx-auto w-full px-4 sm:px-6 py-16 border-t border-zinc-850">
-        <div class="flex items-baseline justify-between mb-8" data-scroll-reveal="text">
+      <!-- ================= 4. BUILDS ARCHIVE / STANDBY STATE ================= -->
+      <section class="relative max-w-5xl mx-auto w-full px-6 sm:px-8 py-16 border-t border-white/[0.08]">
+        <div class="flex items-baseline justify-between mb-6" data-scroll-reveal="text">
           <div>
-            <span class="text-xs font-mono text-zinc-500">// BUILDS</span>
-            <h2 class="text-2xl font-bold text-white tracking-tight mt-0.5">
+            <span class="text-xs font-mono text-[#8A8A93] uppercase tracking-wider">04 / BUILDS</span>
+            <h2 class="text-2xl font-bold text-[#EDEDEF] tracking-tight mt-1">
               Hackathon Drops
             </h2>
           </div>
-          <a href="/projects/" class="text-xs font-mono text-zinc-400 hover:text-white transition-colors">
-            All Projects →
-          </a>
         </div>
 
-        {teamData.projects.length > 0 ? (
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {teamData.projects.map((proj, idx) => (
-              <ProjectCard project={proj} index={idx} />
-            ))}
-          </div>
-        ) : (
-          <div class="p-8 sm:p-12 rounded-2xl tech-panel text-center max-w-2xl mx-auto space-y-4" data-scroll-reveal="card">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-zinc-900 border border-zinc-800 text-zinc-400">
-              <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
-              <span>STANDBY // IN DEVELOPMENT</span>
-            </div>
-            <h3 class="text-xl font-bold text-white tracking-tight">Active Builds Under Wraps</h3>
-            <p class="text-xs sm:text-sm text-zinc-400 font-light max-w-md mx-auto leading-relaxed">
-              We are currently engineering our first public hackathon drops. Prototype repositories and live deployments will be revealed here upon completion.
-            </p>
-            <div class="pt-1">
-              <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-mono text-zinc-400 hover:text-white transition-colors">
-                <span>Follow commits on GitHub</span> →
-              </a>
-            </div>
-          </div>
-        )}
-      </section>
-
-      <!-- Horizontal Divider Line (if posts exist) -->
-      {recentPosts.length > 0 && (
-        <div class="max-w-5xl mx-auto w-full px-4 sm:px-6">
-          <div class="border-t border-zinc-850"></div>
-        </div>
-      )}
-
-      <!-- ================= 5. BLOG / DISPATCHES: 2 WIDE CARDS ================= -->
-      {recentPosts.length > 0 && (
-        <section class="relative max-w-5xl mx-auto w-full px-4 sm:px-6 py-16">
-          <div class="flex items-baseline justify-between mb-8" data-scroll-reveal="text">
-            <div>
-              <span class="text-xs font-mono text-zinc-500">// LOGS</span>
-              <h2 class="text-2xl font-bold text-white tracking-tight mt-0.5">
-                Latest Dispatches
-              </h2>
-            </div>
-            <a href="/posts/" class="text-xs font-mono text-zinc-400 hover:text-white transition-colors">
-              All Posts →
+        <!-- Honest One-Line Editorial State Aligned with Header -->
+        <div class="py-6" data-scroll-reveal="card">
+          <p class="text-sm text-[#A1A1AA] leading-relaxed">
+            First project write-ups and public repositories will be deployed here following our upcoming hackathons.
+          </p>
+          <div class="mt-3">
+            <a 
+              href={siteConfig.social.github} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="inline-flex items-center gap-1.5 text-sm font-medium text-[#EDEDEF] hover:underline"
+            >
+              <span>Track real-time commits on GitHub</span>
+              <span>→</span>
             </a>
           </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {recentPosts.map((post, idx) => (
-              <a 
-                href={post.href} 
-                class="group p-6 rounded-xl tech-panel block"
-                data-scroll-reveal="card"
-                style={`transition-delay: ${idx * 70}ms;`}
-              >
-                <div class="flex items-center justify-between text-xs font-mono text-zinc-500">
-                  <span>{post.date}</span>
-                  <span>{post.readTime}</span>
-                </div>
-                <h3 class="text-lg font-bold text-white group-hover:text-zinc-300 transition-colors mt-2 tracking-tight">
-                  {post.title}
-                </h3>
-                <p class="text-xs text-zinc-400 font-light mt-2 line-clamp-2 leading-relaxed">
-                  {post.description}
-                </p>
-                <div class="mt-4 text-xs font-mono text-zinc-500 group-hover:text-white transition-colors">
-                  Read Article →
-                </div>
-              </a>
-            ))}
-          </div>
-        </section>
-      )}
+        </div>
+      </section>
 
     </main>
 
-    <!-- 6. Footer -->
+    <!-- Footer -->
     <Footer />
 
     <ScrollObserver />
