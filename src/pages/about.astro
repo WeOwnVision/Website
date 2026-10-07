@@ -8,111 +8,162 @@ import { teamData } from "../config/team";
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="bg-[#0A0A0B] text-[#EDEDEF]">
+<html lang="en" class="scroll-smooth bg-[#0A0A0B] text-[#EDEDEF]">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <title>About & Squad | {siteConfig.title}</title>
-    <meta name="description" content="Meet the WeOwnVision team: five engineers turning concepts into functional software under hackathon constraints." />
+    <meta name="description" content="Meet the WeOwnVision team: five engineers turning concepts into functional software under 36-hour sprint constraints." />
     <link rel="stylesheet" href="/src/styles/global.css" />
+
+    <!-- Automatic Turkish Language Detector -->
+    <script is:inline>
+      (function() {
+        function checkLanguage() {
+          var lang = (navigator.language || navigator.userLanguage || "").toLowerCase();
+          if (lang.startsWith("tr")) {
+            document.documentElement.lang = "tr";
+            document.querySelectorAll("[data-tr]").forEach(function(el) {
+              el.textContent = el.getAttribute("data-tr");
+            });
+            document.querySelectorAll("[data-tr-html]").forEach(function(el) {
+              el.innerHTML = el.getAttribute("data-tr-html");
+            });
+          }
+        }
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", checkLanguage);
+        } else {
+          checkLanguage();
+        }
+      })();
+    </script>
   </head>
 
   <body class="min-h-screen bg-[#0A0A0B] text-[#EDEDEF] flex flex-col relative selection:bg-[#EDEDEF] selection:text-[#0A0A0B]">
     <Navigation />
 
-    <main class="relative z-10 flex-1 max-w-5xl mx-auto px-6 sm:px-8 py-16 w-full">
-      <!-- Page Header -->
+    <main class="relative z-10 flex-1 max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-20 w-full">
+      <!-- 1. Page Header -->
       <div class="text-left max-w-2xl mb-16" data-scroll-reveal="text">
-        <span class="text-xs font-mono text-[#8A8A93] uppercase tracking-wider">
-          ABOUT / COLLECTIVE
+        <span 
+          class="text-[11px] font-mono text-[#A1A1AA] uppercase tracking-wider"
+          data-en="// ABOUT THE COLLECTIVE"
+          data-tr="// KOLEKTİF HAKKINDA"
+        >
+          // ABOUT THE COLLECTIVE
         </span>
-        <h1 class="text-4xl sm:text-6xl font-extrabold text-[#EDEDEF] tracking-tight mt-2">
+        <h1 
+          class="text-4xl sm:text-6xl font-extrabold text-[#EDEDEF] tracking-tight mt-2"
+          data-en="Built for the Clock."
+          data-tr="Zaman İçin İnşa Edildi."
+        >
           Built for the Clock.
         </h1>
-        <p class="mt-4 text-base text-[#A1A1AA] font-normal leading-relaxed">
+        <p 
+          class="mt-4 text-base sm:text-lg text-[#A1A1AA] font-normal leading-relaxed"
+          data-en="We are WeOwnVision — five engineers who compete in hackathon sprints. When the clock starts, we turn blank repositories into functional products."
+          data-tr="Biz WeOwnVision\x27ız — hackathon sprintlerinde yarışan beş mühendis. Süre başladığında boş depoları işlevsel ürünlere dönüştürürüz."
+        >
           We are WeOwnVision — five engineers who compete in hackathon sprints. When the clock starts, we turn blank repositories into functional products.
         </p>
       </div>
 
-      <!-- Feature Grid: 36-Hour Sprint Timeline + Story -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-20 border-t border-white/[0.08] pt-16">
-        <div class="lg:col-span-5">
-          <div class="p-6 rounded-xl border border-white/[0.08] bg-[#111113]/60 space-y-4">
-            <div class="flex items-center justify-between text-xs font-mono text-[#8A8A93] border-b border-white/[0.06] pb-3">
-              <span>// SPRINT PROTOCOL</span>
-              <span class="text-[#FF5B1F]">36:00 RUNTIME</span>
-            </div>
-            
-            <div class="space-y-3 font-mono text-xs">
-              <div class="flex items-start justify-between py-1 border-b border-white/[0.04]">
-                <span class="text-[#EDEDEF]">H-00 Kickoff</span>
-                <span class="text-[#8A8A93]">Arch & Schema</span>
+      <!-- 2. The 36-Hour Sprint Architecture Deep Dive -->
+      <div class="border-t border-white/[0.08] pt-16 mb-20">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          <div class="lg:col-span-5 space-y-4" data-scroll-reveal="text">
+            <span 
+              class="text-[11px] font-mono text-[#A1A1AA] uppercase tracking-wider"
+              data-en="// SPRINT ARCHITECTURE"
+              data-tr="// SPRINT MİMARİSİ"
+            >
+              // SPRINT ARCHITECTURE
+            </span>
+            <h2 
+              class="text-2xl sm:text-3xl font-bold text-[#EDEDEF] tracking-tight"
+              data-en="The 36-Hour Protocol"
+              data-tr="36 Saatlik Protokol"
+            >
+              The 36-Hour Protocol
+            </h2>
+            <p 
+              class="text-sm text-[#A1A1AA] leading-relaxed font-normal"
+              data-en="Under 36-hour constraints, there is no time for corporate hierarchy or unnecessary layers. Everyone writes code, everyone tests, and everyone owns their component from the first commit to the demo floor."
+              data-tr="36 saatlik kısıtlar altında kurumsal hiyerarşiye veya gereksiz katmanlara yer yoktur. Herkes kod yazar, herkes test eder ve ilk commit\x27ten sunum sahnesine kadar bileşenine bizzat sahip çıkar."
+            >
+              Under 36-hour constraints, there is no time for corporate hierarchy or unnecessary layers. Everyone writes code, everyone tests, and everyone owns their component from the first commit to the demo floor.
+            </p>
+          </div>
+
+          <div class="lg:col-span-7" data-scroll-reveal="card">
+            <div class="p-6 sm:p-7 rounded-xl border border-white/[0.08] bg-[#111113]/70 space-y-4">
+              <div class="flex items-center justify-between text-xs font-mono border-b border-white/[0.08] pb-3">
+                <span class="text-[#A1A1AA]">// SPRINT TIMELINE</span>
+                <span class="text-[#FF5B1F] font-semibold">36:00:00 TOTAL</span>
               </div>
-              <div class="flex items-start justify-between py-1 border-b border-white/[0.04]">
-                <span class="text-[#EDEDEF]">H-06 Freeze</span>
-                <span class="text-[#A1A1AA]">Feature Lock</span>
-              </div>
-              <div class="flex items-start justify-between py-1 border-b border-white/[0.04]">
-                <span class="text-[#EDEDEF]">H-24 Dry Run</span>
-                <span class="text-[#8A8A93]">End-to-End Test</span>
-              </div>
-              <div class="flex items-start justify-between py-1">
-                <span class="text-[#FF5B1F]">H-36 Buzzer</span>
-                <span class="text-[#EDEDEF] font-semibold">Live Production</span>
+              
+              <div class="space-y-3 font-mono text-xs">
+                <div class="flex items-start justify-between py-1.5 border-b border-white/[0.04]">
+                  <div>
+                    <span class="text-[#EDEDEF] font-bold">H-00 Kickoff</span>
+                    <p class="text-[11px] text-[#8A8A93] font-normal mt-0.5" data-en="Architecture & database schemas locked" data-tr="Mimari & veritabanı şemaları kilitlendi">Architecture & database schemas locked</p>
+                  </div>
+                  <span class="text-[#A1A1AA]">HOUR 0</span>
+                </div>
+                <div class="flex items-start justify-between py-1.5 border-b border-white/[0.04]">
+                  <div>
+                    <span class="text-[#EDEDEF] font-bold">H-06 Freeze</span>
+                    <p class="text-[11px] text-[#8A8A93] font-normal mt-0.5" data-en="Core loop locked, zero scope expansion" data-tr="Çekirdek döngü kilitlendi, kapsam mühürlendi">Core loop locked, zero scope expansion</p>
+                  </div>
+                  <span class="text-[#FF5B1F] font-semibold">HOUR 6</span>
+                </div>
+                <div class="flex items-start justify-between py-1.5 border-b border-white/[0.04]">
+                  <div>
+                    <span class="text-[#EDEDEF] font-bold">H-24 Dry Run</span>
+                    <p class="text-[11px] text-[#8A8A93] font-normal mt-0.5" data-en="End-to-end integration & failover test" data-tr="Uçtan uca entegrasyon & yük testi">End-to-end integration & failover test</p>
+                  </div>
+                  <span class="text-[#A1A1AA]">HOUR 24</span>
+                </div>
+                <div class="flex items-start justify-between py-1.5">
+                  <div>
+                    <span class="text-[#FF5B1F] font-bold">H-36 Buzzer</span>
+                    <p class="text-[11px] text-[#8A8A93] font-normal mt-0.5" data-en="Live production deploy & demo floor" data-tr="Canlı dağıtım ve sahne demosu">Live production deploy & demo floor</p>
+                  </div>
+                  <span class="text-[#EDEDEF] font-bold">HOUR 36</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="lg:col-span-7 space-y-6" data-scroll-reveal="text">
-          <h2 class="text-2xl sm:text-3xl font-bold text-[#EDEDEF] tracking-tight">
-            Sprint Focus Over Slide Decks
-          </h2>
-          <p class="text-sm text-[#A1A1AA] leading-relaxed font-normal">
-            We built this collective around complementary engineering disciplines: distributed infrastructure, machine learning pipelines, creative WebGL graphics, product systems, and cloud security.
-          </p>
-          <p class="text-sm text-[#A1A1AA] leading-relaxed font-normal">
-            Under 36-hour constraints, there is no time for corporate hierarchy or unnecessary layers. Everyone writes code, everyone tests, and everyone owns their component from the first commit to the demo floor.
-          </p>
-        </div>
       </div>
 
-      <!-- Principles Section: Numbered Editorial List -->
-      <div class="border-t border-white/[0.08] pt-16 mb-20">
-        <div class="mb-10" data-scroll-reveal="text">
-          <span class="text-xs font-mono text-[#8A8A93] uppercase tracking-wider">CORE PRINCIPLES</span>
-          <h2 class="text-2xl sm:text-3xl font-bold text-[#EDEDEF] tracking-tight mt-1">
-            How We Operate
-          </h2>
-        </div>
-
-        <div class="border-t border-white/[0.08]" data-scroll-reveal="card">
-          {teamData.manifesto.values.map((val, idx) => (
-            <div class="py-6 border-b border-white/[0.08] grid grid-cols-1 md:grid-cols-12 gap-4 items-baseline">
-              <div class="md:col-span-4 flex items-baseline gap-3">
-                <span class="text-xs font-mono text-[#FF5B1F]">0{idx + 1}</span>
-                <h3 class="text-base font-semibold text-[#EDEDEF] tracking-tight">
-                  {val.title}
-                </h3>
-              </div>
-              <div class="md:col-span-8">
-                <p class="text-sm text-[#A1A1AA] leading-relaxed font-normal">
-                  {val.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <!-- Team Members Section -->
+      <!-- 3. Full Squad Dossier (All 5 Members In-Depth) -->
       <div class="border-t border-white/[0.08] pt-16">
         <div class="mb-8" data-scroll-reveal="text">
-          <span class="text-xs font-mono text-[#8A8A93] uppercase tracking-wider">THE SQUAD</span>
-          <h2 class="text-2xl sm:text-3xl font-bold text-[#EDEDEF] tracking-tight mt-1">
-            Five Members
+          <span 
+            class="text-[11px] font-mono text-[#A1A1AA] uppercase tracking-wider"
+            data-en="// SQUAD DOSSIER"
+            data-tr="// EKİP DOSYASI"
+          >
+            // SQUAD DOSSIER
+          </span>
+          <h2 
+            class="text-2xl sm:text-3xl font-bold text-[#EDEDEF] tracking-tight mt-1"
+            data-en="Five Engineers"
+            data-tr="Beş Mühendis"
+          >
+            Five Engineers
           </h2>
+          <p 
+            class="mt-2 text-sm text-[#A1A1AA] font-normal leading-relaxed max-w-xl"
+            data-en="Distributed backends, machine learning pipelines, creative WebGL graphics, product architecture, and cloud operations."
+            data-tr="Dağıtık arka yüzler, makine öğrenimi boru hatları, yaratıcı WebGL grafikleri, ürün mimarisi ve bulut operasyonları."
+          >
+            Distributed backends, machine learning pipelines, creative WebGL graphics, product architecture, and cloud operations.
+          </p>
         </div>
 
         <div class="border-t border-white/[0.08]">

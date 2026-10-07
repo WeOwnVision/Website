@@ -1,8 +1,7 @@
 ---
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
-import HexagonVisual from "../components/HexagonVisual.astro";
-import TeamCard from "../components/TeamCard.astro";
+import SprintProtocolHero from "../components/SprintProtocolHero.astro";
 import ScrollObserver from "../components/ScrollObserver.astro";
 import { siteConfig } from "../config/site";
 import { teamData } from "../config/team";
@@ -18,6 +17,29 @@ import { teamData } from "../config/team";
     <title>{siteConfig.title}</title>
     <meta name="description" content={siteConfig.description} />
     <link rel="stylesheet" href="/src/styles/global.css" />
+
+    <!-- Automatic Turkish Language Detector (Zero-Flicker) -->
+    <script is:inline>
+      (function() {
+        function checkLanguage() {
+          var lang = (navigator.language || navigator.userLanguage || "").toLowerCase();
+          if (lang.startsWith("tr")) {
+            document.documentElement.lang = "tr";
+            document.querySelectorAll("[data-tr]").forEach(function(el) {
+              el.textContent = el.getAttribute("data-tr");
+            });
+            document.querySelectorAll("[data-tr-html]").forEach(function(el) {
+              el.innerHTML = el.getAttribute("data-tr-html");
+            });
+          }
+        }
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", checkLanguage);
+        } else {
+          checkLanguage();
+        }
+      })();
+    </script>
   </head>
 
   <body class="min-h-screen bg-[#0A0A0B] text-[#EDEDEF] flex flex-col relative selection:bg-[#EDEDEF] selection:text-[#0A0A0B]">
@@ -26,75 +48,30 @@ import { teamData } from "../config/team";
 
     <main class="relative z-10 flex-1 flex flex-col">
       
-      <!-- ================= MAIN CONTAINER: HERO, PRINCIPLES, SQUAD ================= -->
-      <div id="hero-team-tracker" class="relative max-w-5xl mx-auto w-full px-6 sm:px-8 pt-8">
+      <!-- ================= MAIN CONTAINER ================= -->
+      <div id="timeline-container" class="relative max-w-5xl mx-auto w-full px-6 sm:px-8 pt-8 sm:pt-12">
         
-        <!-- SVG Trajectory Spine (Unified 1:1 SVG Coordinate System) -->
-        <svg 
-          id="trajectory-svg" 
-          fill="none" 
-          class="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible hidden sm:block" 
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <!-- Background Dashed Track Line (The Deliberate Spine) -->
-          <path 
-            id="hexagon-motion-path" 
-            d="M 685 260 L 685 450 C 685 570, 360 620, 160 660 C 95 680, 75 700, 75 740 L 75 1310 L 75 1690 C 75 1730, 105 1750, 140 1750" 
-            stroke="rgba(255, 255, 255, 0.12)" 
-            stroke-width="1.5" 
-            stroke-dasharray="4 4" 
-            fill="none" 
-          />
-
-          <!-- Active Tracer Line -->
-          <path 
-            id="hexagon-tracer-path" 
-            d="M 685 260 L 685 450 C 685 570, 360 620, 160 660 C 95 680, 75 700, 75 740 L 75 1310 L 75 1690 C 75 1730, 105 1750, 140 1750" 
-            stroke="#FF5B1F" 
-            stroke-width="1.8" 
-            fill="none" 
-          />
-
-          <!-- Numbered Spine Node Markers -->
-          <!-- Node 01: Hero Start -->
-          <circle id="spine-node-01-circle" cx="685" cy="260" r="4" fill="#FF5B1F" />
-          <text id="spine-node-01-text" x="660" y="264" class="text-[11px] font-mono fill-[#A1A1AA]" text-anchor="end">01</text>
-
-          <!-- Node 02: Principles Start (Beside \"How We Build\" Heading) -->
-          <circle id="spine-node-02-circle" cx="75" cy="740" r="4" fill="#EDEDEF" />
-          <text id="spine-node-02-text" x="48" y="744" class="text-[11px] font-mono fill-[#A1A1AA]" text-anchor="end">02</text>
-
-          <!-- Node 03: Squad Start (Beside \"The Collective\" Heading) -->
-          <circle id="spine-node-03-circle" cx="75" cy="1310" r="4" fill="#EDEDEF" />
-          <text id="spine-node-03-text" x="48" y="1314" class="text-[11px] font-mono fill-[#A1A1AA]" text-anchor="end">03</text>
-
-          <!-- Terminal Circle Node (○ at end of Squad) -->
-          <circle id="spine-node-terminal-outer" cx="140" cy="1750" r="7" stroke="#EDEDEF" stroke-width="1.5" fill="#0A0A0B" />
-          <circle id="spine-node-terminal-inner" cx="140" cy="1750" r="2.5" fill="#FF5B1F" />
-
-          <!-- THE MOVING HEXAGON: Centered in the middle of the screen at all times -->
-          <g id="scroll-moving-hexagon" transform="translate(685, 260) scale(0.48)" class="pointer-events-auto">
-            <HexagonVisual asSvgGroup={true} />
-          </g>
-        </svg>
-
-        <!-- ================= 1. HERO SECTION ================= -->
-        <section id="hero-section" class="relative min-h-[560px] flex items-center pb-20">
-          <div class="w-full grid grid-cols-1 sm:grid-cols-12 gap-8 items-center">
+        <!-- ================= 1. HERO SECTION (H-00 KICKOFF) ================= -->
+        <section id="hero-section" class="relative pb-16 sm:pb-24">
+          <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             
             <!-- Left Text Content -->
-            <div class="sm:col-span-8 space-y-6 text-left">
-              <div class="inline-flex items-center gap-2 text-xs font-mono text-[#A1A1AA] uppercase tracking-wider hero-render-1">
+            <div class="lg:col-span-7 space-y-6 text-left">
+              <div class="inline-flex items-center gap-2 text-[11px] font-mono text-[#A1A1AA] uppercase tracking-wider hero-render-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-[#FF5B1F]"></span>
-                <span>WeOwnVision — Hackathon Collective</span>
+                <span data-en="H-00 KICKOFF // WEOWNVISION" data-tr="H-00 BAŞLANGIÇ // WEOWNVISION">H-00 KICKOFF // WEOWNVISION</span>
               </div>
 
               <h1 class="text-5xl sm:text-7xl lg:text-8xl font-extrabold text-[#EDEDEF] tracking-tight leading-[0.93] hero-render-2">
-                Five engineers.<br />
-                36 hours. Shipped.
+                <span data-en="Five engineers." data-tr="Beş mühendis.">Five engineers.</span><br />
+                <span data-en="36 hours. Shipped." data-tr="36 saat. Yayında.">36 hours. Shipped.</span>
               </h1>
 
-              <p class="text-base sm:text-lg text-[#A1A1AA] max-w-xl font-normal leading-relaxed hero-render-3">
+              <p 
+                class="text-base sm:text-lg text-[#A1A1AA] max-w-xl font-normal leading-relaxed hero-render-3"
+                data-en="We build and deploy functional software prototypes under hackathon constraints. Every project is engineered from scratch and shipped before the buzzer."
+                data-tr="Hackathon kısıtları altında çalışan yazılım prototipleri geliştiriyor ve devreye alıyoruz. Her proje sıfırdan mimarilendirilir ve süre bitmeden canlıya alınır."
+              >
                 We build and deploy functional software prototypes under hackathon constraints. Every project is engineered from scratch and shipped before the buzzer.
               </p>
 
@@ -102,6 +79,8 @@ import { teamData } from "../config/team";
                 <a 
                   href="#squad-section" 
                   class="px-5 py-2.5 rounded-lg text-sm font-semibold bg-[#EDEDEF] text-[#0A0A0B] hover:bg-white transition-all duration-200"
+                  data-en="Meet the squad ↓"
+                  data-tr="Ekiple tanış ↓"
                 >
                   Meet the squad ↓
                 </a>
@@ -119,94 +98,197 @@ import { teamData } from "../config/team";
               </div>
             </div>
 
-            <!-- Right Spacer / Mobile Hexagon Anchor -->
-            <div class="sm:col-span-4 flex items-center justify-center sm:justify-end min-h-[220px]">
-              <div class="sm:hidden w-48 h-48 flex items-center justify-center hero-render-hex">
-                <HexagonVisual size="responsive" className="w-full h-full" />
-              </div>
+            <!-- Right: 36-Hour Sprint Telemetry Console -->
+            <div class="lg:col-span-5 flex items-center justify-center lg:justify-end">
+              <SprintProtocolHero />
             </div>
 
           </div>
         </section>
 
-        <!-- ================= 2. PRINCIPLES / HOW WE BUILD ================= -->
-        <section id="principles-section" class="relative py-16 scroll-mt-20 border-t border-white/[0.08]">
-          <div class="grid grid-cols-1 sm:grid-cols-12 gap-8 items-start">
-            
-            <!-- Left Spine Spacer (Desktop) -->
-            <div class="hidden sm:block sm:col-span-2">
-              <!-- Clear room for the left spine & hexagon tracker -->
+        <!-- ================= 2. PRINCIPLES / HOW WE BUILD (H-06 FREEZE) ================= -->
+        <section id="principles-section" class="relative py-16 sm:py-20 scroll-mt-16 border-t border-white/[0.08]">
+          <div class="space-y-8">
+            <div data-scroll-reveal="text">
+              <span 
+                class="text-[11px] font-mono text-[#A1A1AA] uppercase tracking-wider"
+                data-en="H-06 // PRINCIPLES"
+                data-tr="H-06 // İLKELER"
+              >
+                H-06 // PRINCIPLES
+              </span>
+              <h2 
+                class="text-2xl sm:text-3xl font-bold text-[#EDEDEF] tracking-tight mt-1"
+                data-en="How We Build"
+                data-tr="Nasıl Geliştiriyoruz"
+              >
+                How We Build
+              </h2>
+              <p 
+                class="mt-2 text-sm text-[#A1A1AA] font-normal leading-relaxed max-w-2xl"
+                data-en="Sprint discipline over slide decks. When the clock is ticking, we focus entirely on the core loop and shipping working software."
+                data-tr="Sunum slaytları yerine sprint disiplini. Zaman daralırken yalnızca çekirdek döngüye ve çalışan yazılım üretmeye odaklanıyoruz."
+              >
+                Sprint discipline over slide decks. When the clock is ticking, we focus entirely on the core loop and shipping working software.
+              </p>
             </div>
 
-            <!-- Right Content -->
-            <div class="sm:col-span-10 space-y-8">
-              <div data-scroll-reveal="text">
-                <span class="text-xs font-mono text-[#A1A1AA] uppercase tracking-wider">
-                  02 / PRINCIPLES
-                </span>
-                <h2 class="text-2xl sm:text-3xl font-bold text-[#EDEDEF] tracking-tight mt-1">
-                  How We Build
-                </h2>
-                <p class="mt-2 text-sm text-[#A1A1AA] font-normal leading-relaxed max-w-xl">
-                  Sprint discipline over slide decks. When the clock is ticking, we focus entirely on the core loop and shipping working software.
-                </p>
-              </div>
-
-              <!-- Numbered List with Hairlines (Neutral numbers so orange stays rare) -->
-              <div class="border-t border-white/[0.08]" data-scroll-reveal="card">
-                {teamData.manifesto.values.map((val, idx) => (
-                  <div class="py-6 border-b border-white/[0.08] grid grid-cols-1 md:grid-cols-12 gap-4 items-baseline">
-                    <div class="md:col-span-4 flex items-baseline gap-3">
-                      <span class="text-xs font-mono text-[#8A8A93]">0{idx + 1}</span>
-                      <h3 class="text-base font-semibold text-[#EDEDEF] tracking-tight">
-                        {val.title}
-                      </h3>
-                    </div>
-                    <div class="md:col-span-8">
-                      <p class="text-sm text-[#A1A1AA] leading-relaxed font-normal">
-                        {val.description}
-                      </p>
-                    </div>
+            <!-- Numbered Principles List with Hairlines -->
+            <div class="border-t border-white/[0.08]" data-scroll-reveal="card">
+              {teamData.manifesto.values.map((val, idx) => (
+                <div class="py-6 border-b border-white/[0.08] grid grid-cols-1 md:grid-cols-12 gap-4 items-baseline">
+                  <div class="md:col-span-4 flex items-baseline gap-3">
+                    <span class="text-xs font-mono text-[#8A8A93]">0{idx + 1}</span>
+                    <h3 
+                      class="text-base font-semibold text-[#EDEDEF] tracking-tight"
+                      data-en={val.title}
+                      data-tr={val.titleTr}
+                    >
+                      {val.title}
+                    </h3>
                   </div>
-                ))}
-              </div>
-
+                  <div class="md:col-span-8">
+                    <p 
+                      class="text-sm text-[#A1A1AA] leading-relaxed font-normal"
+                      data-en={val.description}
+                      data-tr={val.descriptionTr}
+                    >
+                      {val.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
 
           </div>
         </section>
 
-        <!-- ================= 3. SQUAD SECTION ================= -->
-        <section id="squad-section" class="relative py-16 scroll-mt-20 border-t border-white/[0.08]">
-          <div class="grid grid-cols-1 sm:grid-cols-12 gap-8 items-start">
-            
-            <!-- Left Spine Spacer (Desktop) -->
-            <div class="hidden sm:block sm:col-span-2">
-              <!-- Clear room for the left spine & hexagon tracker -->
-            </div>
-
-            <!-- Right Content: The 5 Builders Editorial List -->
-            <div class="sm:col-span-10 space-y-6">
-              
-              <div data-scroll-reveal="text">
-                <span class="text-xs font-mono text-[#A1A1AA] uppercase tracking-wider">
-                  03 / THE SQUAD
+        <!-- ================= 3. SQUAD PREVIEW STRIP (H-24 DRY RUN) ================= -->
+        <section id="squad-section" class="relative py-16 sm:py-20 scroll-mt-16 border-t border-white/[0.08]">
+          <div class="space-y-8">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4" data-scroll-reveal="text">
+              <div>
+                <span 
+                  class="text-[11px] font-mono text-[#A1A1AA] uppercase tracking-wider"
+                  data-en="H-24 // THE SQUAD"
+                  data-tr="H-24 // EKİP"
+                >
+                  H-24 // THE SQUAD
                 </span>
-                <h2 class="text-2xl sm:text-3xl font-bold text-[#EDEDEF] tracking-tight mt-1">
+                <h2 
+                  class="text-2xl sm:text-3xl font-bold text-[#EDEDEF] tracking-tight mt-1"
+                  data-en="The Collective"
+                  data-tr="Kolektif"
+                >
                   The Collective
                 </h2>
-                <p class="mt-2 text-sm text-[#A1A1AA] font-normal leading-relaxed">
+                <p 
+                  class="mt-2 text-sm text-[#A1A1AA] font-normal leading-relaxed max-w-xl"
+                  data-en="Five builders spanning distributed systems, ML pipelines, creative frontend, and product architecture."
+                  data-tr="Dağıtık sistemler, makine öğrenimi boru hatları, yaratıcı ön yüz ve ürün mimarisinde uzmanlaşmış beş geliştirici."
+                >
                   Five builders spanning distributed systems, ML pipelines, creative frontend, and product architecture.
                 </p>
               </div>
 
-              <!-- Editorial Hairline List -->
-              <div class="border-t border-white/[0.08] mt-6">
-                {teamData.members.map((member, idx) => (
-                  <TeamCard member={member} index={idx} />
-                ))}
-              </div>
+              <a 
+                href="/about/" 
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#EDEDEF] hover:text-white transition-colors group flex-shrink-0"
+              >
+                <span data-en="Full dossier & roles" data-tr="Tüm ekip dosyası & roller">Full dossier & roles</span>
+                <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+            </div>
 
+            <!-- Squad Preview Grid (5 Builders Compact Hairline Cards) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 pt-2" data-scroll-reveal="card">
+              {teamData.members.map((member, idx) => (
+                <div class="p-4 rounded-xl border border-white/[0.08] bg-[#111113]/50 hover:bg-[#111113] hover:border-white/20 transition-all flex flex-col justify-between space-y-3">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg overflow-hidden border border-white/10 flex-shrink-0 bg-[#0A0A0B]">
+                      <img src={member.avatar} alt={member.name} class="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                    <div class="min-w-0">
+                      <h3 class="text-sm font-semibold text-[#EDEDEF] truncate">{member.name}</h3>
+                      <p 
+                        class="text-[11px] font-mono text-[#8A8A93]"
+                        data-en={member.role}
+                        data-tr={member.roleTr}
+                      >
+                        {member.role}
+                      </p>
+                    </div>
+                  </div>
+
+                  <p 
+                    class="text-xs text-[#A1A1AA] leading-relaxed line-clamp-2"
+                    data-en={member.bio}
+                    data-tr={member.bioTr}
+                  >
+                    {member.bio}
+                  </p>
+
+                  <div class="flex items-center justify-between pt-1 border-t border-white/[0.06] text-[10px] font-mono text-[#8A8A93]">
+                    <span>{member.skills.join(" · ")}</span>
+                    {member.social.github && (
+                      <a href={member.social.github} target="_blank" rel="noopener noreferrer" class="text-[#A1A1AA] hover:text-[#EDEDEF]">
+                        GH ↗
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ================= 4. BUILDS / HACKATHON DROPS (H-36 BUZZER) ================= -->
+        <section id="builds-section" class="relative py-16 sm:py-20 border-t border-white/[0.08]">
+          <div class="space-y-6" data-scroll-reveal="text">
+            <div class="flex items-baseline justify-between">
+              <div>
+                <span 
+                  class="text-[11px] font-mono text-[#A1A1AA] uppercase tracking-wider"
+                  data-en="H-36 // BUILDS"
+                  data-tr="H-36 // ÇIKTILAR"
+                >
+                  H-36 // BUILDS
+                </span>
+                <h2 
+                  class="text-2xl sm:text-3xl font-bold text-[#EDEDEF] tracking-tight mt-1"
+                  data-en="Hackathon Drops"
+                  data-tr="Hackathon Çıktıları"
+                >
+                  Hackathon Drops
+                </h2>
+              </div>
+            </div>
+
+            <!-- Honest Standby State -->
+            <div class="py-4" data-scroll-reveal="card">
+              <p 
+                class="text-sm text-[#A1A1AA] leading-relaxed max-w-2xl"
+                data-en="First project write-ups and public repositories will be deployed here following our upcoming hackathons."
+                data-tr="İlk proje incelemeleri ve açık kaynak depolarımız, yaklaşan hackathonlarımızın ardından burada yayımlanacaktır."
+              >
+                First project write-ups and public repositories will be deployed here following our upcoming hackathons.
+              </p>
+              <div class="mt-4">
+                <a 
+                  href={siteConfig.social.github} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="inline-flex items-center gap-1.5 text-sm font-medium text-[#EDEDEF] hover:underline group"
+                >
+                  <span data-en="Track real-time commits on GitHub" data-tr="GitHub\x27da gerçek zamanlı commit\x27leri takip et">Track real-time commits on GitHub</span>
+                  <svg class="w-4 h-4 ml-0.5 inline-block transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </a>
+              </div>
             </div>
 
           </div>
@@ -214,232 +296,11 @@ import { teamData } from "../config/team";
 
       </div>
 
-      <!-- ================= 4. BUILDS ARCHIVE / STANDBY STATE ================= -->
-      <section class="relative max-w-5xl mx-auto w-full px-6 sm:px-8 py-16 border-t border-white/[0.08]">
-        <div class="flex items-baseline justify-between mb-6" data-scroll-reveal="text">
-          <div>
-            <span class="text-xs font-mono text-[#A1A1AA] uppercase tracking-wider">04 / BUILDS</span>
-            <h2 class="text-2xl font-bold text-[#EDEDEF] tracking-tight mt-1">
-              Hackathon Drops
-            </h2>
-          </div>
-        </div>
-
-        <!-- Honest One-Line Editorial State Aligned with Header -->
-        <div class="py-6" data-scroll-reveal="card">
-          <p class="text-sm text-[#A1A1AA] leading-relaxed">
-            First project write-ups and public repositories will be deployed here following our upcoming hackathons.
-          </p>
-          <div class="mt-3">
-            <a 
-              href={siteConfig.social.github} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              class="inline-flex items-center gap-1.5 text-sm font-medium text-[#EDEDEF] hover:underline group"
-            >
-              <span>Track real-time commits on GitHub</span>
-              <svg class="w-4 h-4 ml-0.5 inline-block transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </section>
-
     </main>
 
     <!-- Footer -->
     <Footer />
 
     <ScrollObserver />
-
-    <!-- Viewport-Centered Motion Controller (Keeps Hexagon in Screen Middle At All Times) -->
-    <script>
-      function initHexagonMotion() {
-        const tracker = document.getElementById("hero-team-tracker");
-        const path = document.getElementById("hexagon-motion-path") as SVGPathElement | null;
-        const tracerPath = document.getElementById("hexagon-tracer-path") as SVGPathElement | null;
-        const movingHex = document.getElementById("scroll-moving-hexagon") as SVGGElement | null;
-
-        if (!tracker || !path || !movingHex) return;
-
-        let pathLength = path.getTotalLength();
-        let lut: Array<{ d: number; x: number; y: number }> = [];
-
-        function buildLUT() {
-          if (!path) return;
-          pathLength = path.getTotalLength();
-          if (tracerPath) {
-            tracerPath.style.strokeDasharray = `${pathLength}`;
-          }
-          const steps = 300;
-          lut = [];
-          for (let i = 0; i <= steps; i++) {
-            const d = (i / steps) * pathLength;
-            const pt = path.getPointAtLength(d);
-            lut.push({ d, x: pt.x, y: pt.y });
-          }
-        }
-
-        // Fast binary search to find exact point on path for any given Y coordinate
-        function getPointForY(targetY: number) {
-          if (!lut.length) return { x: 685, y: 260, d: 0 };
-          const startY = lut[0].y;
-          const endY = lut[lut.length - 1].y;
-
-          if (targetY <= startY) return lut[0];
-          if (targetY >= endY) return lut[lut.length - 1];
-
-          let low = 0, high = lut.length - 1;
-          while (low <= high) {
-            const mid = (low + high) >> 1;
-            if (lut[mid].y < targetY) low = mid + 1;
-            else high = mid - 1;
-          }
-          const i = Math.min(Math.max(1, low), lut.length - 1);
-          const p0 = lut[i - 1];
-          const p1 = lut[i];
-          const diff = p1.y - p0.y;
-          const t = diff === 0 ? 0 : (targetY - p0.y) / diff;
-          return {
-            x: p0.x + (p1.x - p0.x) * t,
-            y: targetY,
-            d: p0.d + (p1.d - p0.d) * t
-          };
-        }
-
-        function updateSpineLayout() {
-          if (!tracker || !path) return;
-          const trackerRect = tracker.getBoundingClientRect();
-          const trackerTopDoc = trackerRect.top + window.scrollY;
-
-          const heroX = 685;
-          const heroY = 260;
-          const spineX = 75;
-
-          const pHeading = document.querySelector("#principles-section [data-scroll-reveal=\"text\"]") || document.querySelector("#principles-section h2");
-          const sHeading = document.querySelector("#squad-section [data-scroll-reveal=\"text\"]") || document.querySelector("#squad-section h2");
-          const squadSection = document.getElementById("squad-section");
-
-          const pRect = pHeading ? pHeading.getBoundingClientRect() : null;
-          const sRect = sHeading ? sHeading.getBoundingClientRect() : null;
-          const squadRect = squadSection ? squadSection.getBoundingClientRect() : null;
-
-          const principlesY = pRect ? (pRect.top + window.scrollY - trackerTopDoc + 7) : 740;
-          const squadY = sRect ? (sRect.top + window.scrollY - trackerTopDoc + 7) : 1310;
-          const endY = squadRect ? (squadRect.bottom + window.scrollY - trackerTopDoc - 36) : 1750;
-
-          const curveStart = heroY + 160;
-          const newD = `M ${heroX} ${heroY} L ${heroX} ${curveStart} C ${heroX} ${curveStart + 120}, 360 ${principlesY - 140}, 160 ${principlesY - 80} C 95 ${principlesY - 60}, ${spineX} ${principlesY - 30}, ${spineX} ${principlesY} L ${spineX} ${squadY} L ${spineX} ${endY - 60} C ${spineX} ${endY - 20}, 105 ${endY}, 140 ${endY}`;
-
-          path.setAttribute("d", newD);
-          if (tracerPath) {
-            tracerPath.setAttribute("d", newD);
-          }
-
-          const n2C = document.getElementById("spine-node-02-circle");
-          const n2T = document.getElementById("spine-node-02-text");
-          if (n2C) n2C.setAttribute("cy", `${principlesY}`);
-          if (n2T) n2T.setAttribute("y", `${principlesY + 4}`);
-
-          const n3C = document.getElementById("spine-node-03-circle");
-          const n3T = document.getElementById("spine-node-03-text");
-          if (n3C) n3C.setAttribute("cy", `${squadY}`);
-          if (n3T) n3T.setAttribute("y", `${squadY + 4}`);
-
-          const termOut = document.getElementById("spine-node-terminal-outer");
-          const termIn = document.getElementById("spine-node-terminal-inner");
-          if (termOut) termOut.setAttribute("cy", `${endY}`);
-          if (termIn) termIn.setAttribute("cy", `${endY}`);
-
-          buildLUT();
-        }
-
-        updateSpineLayout();
-
-        let targetY = lut.length ? lut[0].y : 260;
-        let currentY = targetY;
-        let isRunning = false;
-
-        function calculateTargetY() {
-          if (!lut.length) return;
-          const rect = tracker.getBoundingClientRect();
-          const currentScroll = window.scrollY;
-          const startY = lut[0].y;
-          const endY = lut[lut.length - 1].y;
-
-          // Target center of viewport (50% of screen height)
-          const targetViewportCenter = window.innerHeight * 0.5;
-
-          // Resting hero position in viewport coordinates:
-          const heroRestingViewportY = startY + (rect.top + currentScroll);
-
-          // Smoothly transition from resting hero position to viewport center over first 140px of scroll
-          const blend = Math.min(Math.max(currentScroll / 140, 0), 1);
-          const activeViewportY = (heroRestingViewportY - currentScroll) * (1 - blend) + targetViewportCenter * blend;
-
-          // Desired Y in tracker coordinates such that: rect.top + desired = activeViewportY
-          const desired = activeViewportY - rect.top;
-
-          targetY = Math.min(Math.max(desired, startY), endY);
-        }
-
-        function updatePosition(y: number) {
-          const pt = getPointForY(y);
-          movingHex.setAttribute("transform", `translate(${pt.x}, ${pt.y}) scale(0.48)`);
-
-          if (tracerPath) {
-            tracerPath.style.strokeDashoffset = `${pathLength - pt.d}`;
-          }
-        }
-
-        function renderLoop() {
-          // Physics lerp damping (0.085 for responsive, silky smooth glide)
-          currentY += (targetY - currentY) * 0.085;
-
-          updatePosition(currentY);
-
-          if (Math.abs(targetY - currentY) > 0.15) {
-            requestAnimationFrame(renderLoop);
-          } else {
-            currentY = targetY;
-            updatePosition(currentY);
-            isRunning = false;
-          }
-        }
-
-        function onScroll() {
-          calculateTargetY();
-          if (!isRunning) {
-            isRunning = true;
-            requestAnimationFrame(renderLoop);
-          }
-        }
-
-        function onResize() {
-          updateSpineLayout();
-          calculateTargetY();
-          currentY = targetY;
-          updatePosition(currentY);
-        }
-
-        window.addEventListener("scroll", onScroll, { passive: true });
-        window.addEventListener("resize", onResize);
-        window.addEventListener("load", onResize);
-        if ("fonts" in document) {
-          document.fonts.ready.then(onResize);
-        }
-
-        calculateTargetY();
-        currentY = targetY;
-        updatePosition(currentY);
-      }
-
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initHexagonMotion);
-      } else {
-        initHexagonMotion();
-      }
-    </script>
   </body>
 </html>

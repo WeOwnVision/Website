@@ -10,13 +10,13 @@ const { member, index = 0 } = Astro.props;
 ---
 
 <div 
-  class="group py-5 sm:py-6 border-b border-white/[0.08] grid grid-cols-1 md:grid-cols-12 gap-4 items-start transition-colors hover:bg-white/[0.015] px-2 -mx-2 rounded-lg"
+  class="group py-4 sm:py-5 border-b border-white/[0.08] grid grid-cols-1 md:grid-cols-12 gap-4 items-center transition-colors hover:bg-white/[0.015]"
   data-scroll-reveal="card"
-  style={`transition-delay: ${index * 45}ms;`}
+  style={`transition-delay: ${index * 40}ms;`}
 >
-  <!-- Left Column: Avatar + Name + Plain Grey Mono Role (md:col-span-4) -->
+  <!-- Col 1: Photo + Name + Role (md:col-span-4) -->
   <div class="md:col-span-4 flex items-center gap-3.5">
-    <div class="w-11 h-11 rounded-lg overflow-hidden flex-shrink-0 border border-white/10 group-hover:border-white/30 transition-all group-hover:scale-105 bg-[#111113]">
+    <div class="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 border border-white/10 group-hover:border-white/30 transition-all bg-[#111113]">
       <img 
         src={member.avatar} 
         alt={member.name} 
@@ -24,30 +24,38 @@ const { member, index = 0 } = Astro.props;
         loading="lazy" 
       />
     </div>
-    <div>
+    <div class="min-w-0">
       <div class="flex items-baseline gap-2">
-        <h3 class="text-base font-semibold text-[#EDEDEF] group-hover:text-white transition-colors tracking-tight">
+        <h3 class="text-sm sm:text-base font-semibold text-[#EDEDEF] group-hover:text-white transition-colors tracking-tight truncate">
           {member.name}
         </h3>
-        <span class="text-xs font-mono text-[#8A8A93] tracking-wide">
+        <span 
+          class="text-[11px] font-mono text-[#8A8A93] tracking-wide flex-shrink-0"
+          data-en={`· ${member.role.toUpperCase()}`}
+          data-tr={`· ${member.roleTr.toUpperCase()}`}
+        >
           · {member.role.toUpperCase()}
         </span>
       </div>
     </div>
   </div>
 
-  <!-- Middle Column: Focus Description (md:col-span-5, capped at 2 lines) -->
+  <!-- Col 2: Bio (md:col-span-5, strictly <= 70 chars, no ellipsis) -->
   <div class="md:col-span-5">
-    <p class="text-sm text-[#A1A1AA] leading-relaxed font-normal line-clamp-2 pt-0.5">
+    <p 
+      class="text-xs sm:text-sm text-[#A1A1AA] font-normal leading-relaxed"
+      data-en={member.bio}
+      data-tr={member.bioTr}
+    >
       {member.bio}
     </p>
   </div>
 
-  <!-- Right Column: Skills & Social Links (md:col-span-3) -->
-  <div class="md:col-span-3 flex items-center justify-between md:justify-end gap-3 pt-0.5">
-    <div class="flex flex-wrap gap-1.5">
+  <!-- Col 3: Chips + Social Links (md:col-span-3, single line, 2 chips max) -->
+  <div class="md:col-span-3 flex items-center justify-between md:justify-end gap-3">
+    <div class="flex items-center gap-1.5 flex-nowrap">
       {member.skills.slice(0, 2).map((skill) => (
-        <span class="px-2 py-0.5 text-xs font-mono bg-white/[0.03] border border-white/[0.06] text-[#8A8A93] rounded">
+        <span class="px-2 py-0.5 text-[11px] font-mono bg-white/[0.04] border border-white/[0.08] text-[#8A8A93] rounded whitespace-nowrap">
           {skill}
         </span>
       ))}

@@ -3,7 +3,7 @@ import { siteConfig } from "../config/site";
 const year = new Date().getFullYear();
 ---
 
-<footer class="w-full border-t border-white/[0.08] bg-[#0A0A0B] py-12 mt-24">
+<footer class="w-full border-t border-white/[0.08] bg-[#0A0A0B] py-12 mt-20">
   <div class="max-w-5xl mx-auto px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
     <!-- Brand -->
     <div class="flex items-center gap-2.5">
@@ -14,13 +14,13 @@ const year = new Date().getFullYear();
         </svg>
       </div>
       <span class="text-sm font-semibold tracking-tight text-[#EDEDEF]">WeOwnVision</span>
-      <span class="text-xs text-[#8A8A93] ml-1">Hackathon Collective</span>
+      <span class="text-xs text-[#8A8A93] ml-1" data-en="Hackathon Collective" data-tr="Hackathon Kolektifi">Hackathon Collective</span>
     </div>
 
     <!-- Links -->
     <div class="flex items-center gap-6 text-sm text-[#A1A1AA]">
-      <a href="/" class="hover:text-[#EDEDEF] transition-colors">Home</a>
-      <a href="/about/" class="hover:text-[#EDEDEF] transition-colors">About</a>
+      <a href="/" class="hover:text-[#EDEDEF] transition-colors" data-en="Home" data-tr="Ana Sayfa">Home</a>
+      <a href="/about/" class="hover:text-[#EDEDEF] transition-colors" data-en="About" data-tr="Hakkımızda">About</a>
       <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer" class="hover:text-[#EDEDEF] transition-colors">GitHub</a>
     </div>
 

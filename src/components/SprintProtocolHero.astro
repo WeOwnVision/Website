@@ -1,0 +1,100 @@
+---
+// 36-Hour Sprint Telemetry Console Component
+---
+
+<div class="sprint-hero-console relative w-full max-w-md mx-auto rounded-xl border border-white/[0.08] bg-[#111113]/90 backdrop-blur-md p-6 sm:p-7 shadow-2xl select-none hero-render-hex overflow-hidden group">
+  <!-- Subtle top accent line -->
+  <div class="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#FF5B1F]/60 to-transparent"></div>
+
+  <!-- Ambient Glow -->
+  <div class="absolute -right-20 -top-20 w-44 h-44 bg-[#FF5B1F]/5 rounded-full blur-3xl pointer-events-none"></div>
+
+  <!-- Header HUD -->
+  <div class="flex items-center justify-between pb-4 border-b border-white/[0.08] text-xs font-mono">
+    <div class="flex items-center gap-2">
+      <span class="text-[#A1A1AA] tracking-wider" data-en="// SPRINT PROTOCOL" data-tr="// SPRINT PROTOKOLÜ">
+        // SPRINT PROTOCOL
+      </span>
+    </div>
+    <div class="flex items-center gap-2 text-[#EDEDEF]">
+      <span class="inline-block w-1.5 h-1.5 rounded-full bg-[#FF5B1F] animate-pulse"></span>
+      <span class="text-[#FF5B1F] font-semibold tracking-wide" data-en="36:00:00 LIVE" data-tr="36:00:00 CANLI">
+        36:00:00 LIVE
+      </span>
+    </div>
+  </div>
+
+  <!-- Interactive 36-Hour Timeline Track -->
+  <div class="py-5 space-y-4 font-mono text-xs relative">
+    <!-- Connecting Vertical Spine Line -->
+    <div class="absolute left-[13px] top-7 bottom-7 w-[1.5px] bg-white/[0.08]">
+      <!-- Animated Orange Fill Bar -->
+      <div class="w-full h-3/4 bg-gradient-to-b from-[#FF5B1F] to-[#FF5B1F]/30 rounded-full transition-all duration-700"></div>
+    </div>
+
+    <!-- Step 1: H-00 -->
+    <div class="relative flex items-start gap-4 pl-0.5">
+      <div class="w-6 h-6 rounded-full border border-[#FF5B1F] bg-[#0A0A0B] flex items-center justify-center flex-shrink-0 z-10">
+        <div class="w-2 h-2 rounded-full bg-[#FF5B1F]"></div>
+      </div>
+      <div class="flex-1 flex items-baseline justify-between pt-0.5">
+        <div>
+          <span class="font-bold text-[#EDEDEF]" data-en="H-00 Kickoff" data-tr="H-00 Başlangıç">H-00 Kickoff</span>
+          <p class="text-[11px] text-[#A1A1AA] font-normal mt-0.5" data-en="Repo init · Arch & DB schemas" data-tr="Depo başlatma · Mimari & Şema">Repo init · Arch & DB schemas</p>
+        </div>
+        <span class="text-[10px] text-[#8A8A93] uppercase tracking-wider" data-en="LOCKED" data-tr="KİLİTLİ">LOCKED</span>
+      </div>
+    </div>
+
+    <!-- Step 2: H-06 -->
+    <div class="relative flex items-start gap-4 pl-0.5">
+      <div class="w-6 h-6 rounded-full border border-[#FF5B1F] bg-[#0A0A0B] flex items-center justify-center flex-shrink-0 z-10">
+        <div class="w-2 h-2 rounded-full bg-[#FF5B1F]"></div>
+      </div>
+      <div class="flex-1 flex items-baseline justify-between pt-0.5">
+        <div>
+          <span class="font-bold text-[#EDEDEF]" data-en="H-06 Freeze" data-tr="H-06 Kilit">H-06 Freeze</span>
+          <p class="text-[11px] text-[#A1A1AA] font-normal mt-0.5" data-en="Scope sealed · Core loop locked" data-tr="Kapsam mühürlü · Çekirdek kilitli">Scope sealed · Core loop locked</p>
+        </div>
+        <span class="text-[10px] text-[#FF5B1F] uppercase tracking-wider font-semibold" data-en="SEALED" data-tr="MÜHÜRLÜ">SEALED</span>
+      </div>
+    </div>
+
+    <!-- Step 3: H-24 -->
+    <div class="relative flex items-start gap-4 pl-0.5">
+      <div class="w-6 h-6 rounded-full border border-white/20 bg-[#0A0A0B] flex items-center justify-center flex-shrink-0 z-10">
+        <div class="w-1.5 h-1.5 rounded-full bg-white/40"></div>
+      </div>
+      <div class="flex-1 flex items-baseline justify-between pt-0.5">
+        <div>
+          <span class="font-semibold text-[#EDEDEF]" data-en="H-24 Dry Run" data-tr="H-24 Genel Prova">H-24 Dry Run</span>
+          <p class="text-[11px] text-[#A1A1AA] font-normal mt-0.5" data-en="End-to-end failover & load test" data-tr="Uçtan uca yük & hata testi">End-to-end failover & load test</p>
+        </div>
+        <span class="text-[10px] text-[#8A8A93] uppercase tracking-wider" data-en="PASS" data-tr="BAŞARILI">PASS</span>
+      </div>
+    </div>
+
+    <!-- Step 4: H-36 -->
+    <div class="relative flex items-start gap-4 pl-0.5">
+      <div class="w-6 h-6 rounded-full border border-white/20 bg-[#0A0A0B] flex items-center justify-center flex-shrink-0 z-10">
+        <div class="w-1.5 h-1.5 rounded-full bg-white/40"></div>
+      </div>
+      <div class="flex-1 flex items-baseline justify-between pt-0.5">
+        <div>
+          <span class="font-semibold text-[#EDEDEF]" data-en="H-36 Buzzer" data-tr="H-36 Bitiş">H-36 Buzzer</span>
+          <p class="text-[11px] text-[#A1A1AA] font-normal mt-0.5" data-en="Live production deploy" data-tr="Canlı dağıtım & üretim">Live production deploy</p>
+        </div>
+        <span class="text-[10px] text-[#EDEDEF] uppercase tracking-wider font-bold" data-en="SHIPPED" data-tr="YAYINDA">SHIPPED</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Telemetry Readout -->
+  <div class="pt-4 border-t border-white/[0.08] flex items-center justify-between text-[11px] font-mono text-[#8A8A93]">
+    <div class="flex items-center gap-3">
+      <span class="text-[#A1A1AA]">SYS://READY</span>
+      <span>FAILURES: 0</span>
+    </div>
+    <span class="text-[#FF5B1F] font-semibold">100% COMMITTED</span>
+  </div>
+</div>

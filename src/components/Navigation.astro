@@ -1,6 +1,11 @@
 ---
 import { siteConfig } from "../config/site";
 const currentPath = Astro.url.pathname;
+
+const navTranslations: Record<string, { en: string; tr: string }> = {
+  "/": { en: "Home", tr: "Ana Sayfa" },
+  "/about/": { en: "About", tr: "Hakkımızda" },
+};
 ---
 
 <header class="sticky top-0 z-50 w-full bg-[#0A0A0B]/85 backdrop-blur-md border-b border-white/[0.08] transition-all">
@@ -22,6 +27,7 @@ const currentPath = Astro.url.pathname;
     <nav class="hidden sm:flex items-center gap-6">
       {siteConfig.nav.map((item) => {
         const isActive = currentPath === item.href || (item.href !== "/" && currentPath.startsWith(item.href));
+        const labels = navTranslations[item.href] || { en: item.name, tr: item.name };
         return (
           <a
             href={item.href}
@@ -30,8 +36,10 @@ const currentPath = Astro.url.pathname;
                 ? "text-[#EDEDEF]"
                 : "text-[#A1A1AA] hover:text-[#EDEDEF]"
             }`}
+            data-en={labels.en}
+            data-tr={labels.tr}
           >
-            {item.name}
+            {labels.en}
             {isActive && (
               <span class="absolute bottom-0 left-0 right-0 h-[2px] bg-[#FF5B1F] rounded-full"></span>
             )}
@@ -68,14 +76,19 @@ const currentPath = Astro.url.pathname;
 
   <!-- Mobile Dropdown -->
   <div id="mobile-menu" class="hidden sm:hidden px-6 py-4 border-t border-white/[0.08] bg-[#0A0A0B] flex flex-col gap-2">
-    {siteConfig.nav.map((item) => (
-      <a
-        href={item.href}
-        class="px-3 py-2 rounded-md text-sm font-medium text-[#A1A1AA] hover:text-[#EDEDEF] hover:bg-white/5 transition-colors"
-      >
-        {item.name}
-      </a>
-    ))}
+    {siteConfig.nav.map((item) => {
+      const labels = navTranslations[item.href] || { en: item.name, tr: item.name };
+      return (
+        <a
+          href={item.href}
+          class="px-3 py-2 rounded-md text-sm font-medium text-[#A1A1AA] hover:text-[#EDEDEF] hover:bg-white/5 transition-colors"
+          data-en={labels.en}
+          data-tr={labels.tr}
+        >
+          {labels.en}
+        </a>
+      );
+    })}
   </div>
 </header>
 
