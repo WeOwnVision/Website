@@ -42,83 +42,83 @@ import { teamData } from "../config/team";
     </script>
   </head>
 
-  <body class="min-h-screen bg-[#0A0A0B] text-[#EDEDEF] flex flex-col relative selection:bg-[#EDEDEF] selection:text-[#0A0A0B]">
+  <body class="min-h-screen bg-[#0A0A0B] text-[#EDEDEF] flex flex-col relative selection:bg-[#EDEDEF] selection:text-[#0A0A0B] overflow-x-hidden">
     <!-- Top Navigation -->
     <Navigation />
 
-    <main class="relative z-10 flex-1 flex flex-col">
+    <main id="main-content" class="relative z-10 flex-1 flex flex-col w-full overflow-x-hidden">
       
+      <!-- ================= FULL-BLEED FULL-WIDTH SERPENTINE SVG (Desktop) ================= -->
+      <svg 
+        id="trajectory-svg" 
+        fill="none" 
+        class="absolute top-0 left-0 w-full h-full pointer-events-none z-20 overflow-visible hidden md:block" 
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <!-- Background Dashed Serpentine Track (Wide Organic S-Curve) -->
+        <path 
+          id="serpentine-motion-path" 
+          d="M 1200 220 C 1200 400, 500 480, 400 640 C 370 800, 370 900, 400 1060 C 430 1220, 1400 1130, 1520 1290 C 1550 1450, 1550 1550, 1520 1710 C 1490 1870, 520 1730, 400 1890 C 380 1990, 380 2080, 400 2100 C 410 2130, 490 2135, 520 2135" 
+          stroke="rgba(255, 255, 255, 0.12)" 
+          stroke-width="1.8" 
+          stroke-dasharray="4 4" 
+          fill="none" 
+        />
+
+        <!-- Active Kinetic Tracer Line (Illuminating Glowing Orange) -->
+        <path 
+          id="serpentine-tracer-path" 
+          d="M 1200 220 C 1200 400, 500 480, 400 640 C 370 800, 370 900, 400 1060 C 430 1220, 1400 1130, 1520 1290 C 1550 1450, 1550 1550, 1520 1710 C 1490 1870, 520 1730, 400 1890 C 380 1990, 380 2080, 400 2100 C 410 2130, 490 2135, 520 2135" 
+          stroke="#FF5B1F" 
+          stroke-width="2.2" 
+          fill="none" 
+        />
+
+        <!-- Milestone Nodes Along The Full-Bleed S-Curve -->
+        <!-- Node H-00: Hero Start -->
+        <g id="milestone-node-00">
+          <circle id="milestone-node-00-circle" cx="1200" cy="220" r="5" fill="#FF5B1F" />
+          <text id="milestone-node-00-text" x="1220" y="224" class="text-[11px] font-mono fill-[#A1A1AA] font-semibold">H-00 KICKOFF</text>
+        </g>
+
+        <!-- Node H-06: Principles (Left Outer Margin) -->
+        <g id="milestone-node-06">
+          <circle id="milestone-node-06-circle" cx="400" cy="640" r="5" fill="#EDEDEF" />
+          <text id="milestone-node-06-text" x="380" y="644" class="text-[11px] font-mono fill-[#A1A1AA] font-semibold" text-anchor="end">H-06 FREEZE</text>
+        </g>
+
+        <!-- Node H-24: Squad (Right Outer Margin) -->
+        <g id="milestone-node-24">
+          <circle id="milestone-node-24-circle" cx="1520" cy="1290" r="5" fill="#EDEDEF" />
+          <text id="milestone-node-24-text" x="1540" y="1294" class="text-[11px] font-mono fill-[#A1A1AA] font-semibold">H-24 DRY RUN</text>
+        </g>
+
+        <!-- Node H-36: Terminal Drop (Bottom Left Hook) -->
+        <g id="milestone-node-36">
+          <circle id="milestone-node-36-outer" cx="520" cy="2135" r="8" stroke="#EDEDEF" stroke-width="1.5" fill="#0A0A0B" />
+          <circle id="milestone-node-36-inner" cx="520" cy="2135" r="3" fill="#FF5B1F" />
+          <text id="milestone-node-36-text" x="540" y="2139" class="text-[11px] font-mono fill-[#EDEDEF] font-bold">H-36 SHIPPED</text>
+        </g>
+
+        <!-- THE SERPENTINE MOVING TRACKER (Hexagon + 0H->36H Chronometer HUD) -->
+        <g id="scroll-moving-tracker" transform="translate(1200, 220)" class="pointer-events-auto">
+          <!-- Cybernetic Hexagon Graphic (Rotates & Breathes) -->
+          <g transform="scale(0.44)">
+            <HexagonVisual asSvgGroup={true} />
+          </g>
+          
+          <!-- Real-Time Telemetry Chronometer Badge -->
+          <g id="tracker-hud-badge" transform="translate(54, -22)">
+            <rect x="-4" y="-12" width="102" height="24" rx="4" fill="#0A0A0B" stroke="#FF5B1F" stroke-width="1.2" fill-opacity="0.95" />
+            <circle cx="5" cy="0" r="2.5" fill="#FF5B1F" class="animate-pulse" />
+            <text id="tracker-timer-display" x="14" y="3.5" class="text-[11px] font-mono fill-[#EDEDEF] font-bold tracking-wider">00:00:00</text>
+          </g>
+        </g>
+      </svg>
+
       <!-- ================= MAIN CONTAINER ================= -->
       <div id="timeline-container" class="relative max-w-5xl mx-auto w-full px-6 sm:px-8 pt-8 sm:pt-12">
         
-        <!-- ================= FULL-PAGE SERPENTINE TRAJECTORY SVG (Desktop) ================= -->
-        <svg 
-          id="trajectory-svg" 
-          fill="none" 
-          class="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible hidden md:block" 
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <!-- Background Dashed Serpentine Track (The User-Drawn Red Line) -->
-          <path 
-            id="serpentine-motion-path" 
-            d="M 740 220 L 740 380 C 740 540, 400 620, 40 680 L 40 1080 C 40 1200, 500 1240, 920 1340 L 920 1660 C 920 1780, 500 1820, 40 1900 L 40 2060 C 40 2100, 70 2120, 110 2120" 
-            stroke="rgba(255, 255, 255, 0.12)" 
-            stroke-width="1.5" 
-            stroke-dasharray="4 4" 
-            fill="none" 
-          />
-
-          <!-- Active Kinetic Tracer Line (Glowing Orange) -->
-          <path 
-            id="serpentine-tracer-path" 
-            d="M 740 220 L 740 380 C 740 540, 400 620, 40 680 L 40 1080 C 40 1200, 500 1240, 920 1340 L 920 1660 C 920 1780, 500 1820, 40 1900 L 40 2060 C 40 2100, 70 2120, 110 2120" 
-            stroke="#FF5B1F" 
-            stroke-width="2" 
-            fill="none" 
-          />
-
-          <!-- Fixed Milestone Nodes Along The S-Curve -->
-          <!-- Node H-00: Hero Start (Top Right) -->
-          <g id="milestone-node-00">
-            <circle id="milestone-node-00-circle" cx="740" cy="220" r="4.5" fill="#FF5B1F" />
-            <text id="milestone-node-00-text" x="760" y="224" class="text-[11px] font-mono fill-[#A1A1AA] font-semibold">H-00 KICKOFF</text>
-          </g>
-
-          <!-- Node H-06: Principles (Left Edge) -->
-          <g id="milestone-node-06">
-            <circle id="milestone-node-06-circle" cx="40" cy="680" r="4.5" fill="#EDEDEF" />
-            <text id="milestone-node-06-text" x="60" y="684" class="text-[11px] font-mono fill-[#A1A1AA] font-semibold">H-06 FREEZE</text>
-          </g>
-
-          <!-- Node H-24: Squad (Right Edge) -->
-          <g id="milestone-node-24">
-            <circle id="milestone-node-24-circle" cx="920" cy="1340" r="4.5" fill="#EDEDEF" />
-            <text id="milestone-node-24-text" x="900" y="1344" class="text-[11px] font-mono fill-[#A1A1AA] font-semibold" text-anchor="end">H-24 DRY RUN</text>
-          </g>
-
-          <!-- Node H-36: Terminal Drop (Bottom Left) -->
-          <g id="milestone-node-36">
-            <circle id="milestone-node-36-outer" cx="110" cy="2120" r="7.5" stroke="#EDEDEF" stroke-width="1.5" fill="#0A0A0B" />
-            <circle id="milestone-node-36-inner" cx="110" cy="2120" r="3" fill="#FF5B1F" />
-            <text id="milestone-node-36-text" x="130" y="2124" class="text-[11px] font-mono fill-[#EDEDEF] font-bold">H-36 SHIPPED</text>
-          </g>
-
-          <!-- THE SERPENTINE MOVING TRACKER (Hexagon + Real-Time 0H->36H Chronometer HUD) -->
-          <g id="scroll-moving-tracker" transform="translate(740, 220)" class="pointer-events-auto">
-            <!-- Cybernetic Hexagon Graphic (Rotates & Breathes) -->
-            <g transform="scale(0.44)">
-              <HexagonVisual asSvgGroup={true} />
-            </g>
-            
-            <!-- Real-Time Telemetry Chronometer Badge -->
-            <g id="tracker-hud-badge" transform="translate(54, -22)">
-              <rect x="-4" y="-12" width="102" height="24" rx="4" fill="#0A0A0B" stroke="#FF5B1F" stroke-width="1.2" fill-opacity="0.95" />
-              <circle cx="5" cy="0" r="2.5" fill="#FF5B1F" class="animate-pulse" />
-              <text id="tracker-timer-display" x="14" y="3.5" class="text-[11px] font-mono fill-[#EDEDEF] font-bold tracking-wider">00:00:00</text>
-            </g>
-          </g>
-        </svg>
-
         <!-- ================= 1. HERO SECTION ================= -->
         <section id="hero-section" class="relative min-h-[520px] flex items-center pb-16 sm:pb-24">
           <div class="w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
@@ -178,7 +178,7 @@ import { teamData } from "../config/team";
 
         <!-- ================= 2. PRINCIPLES / HOW WE BUILD (H-06 FREEZE) ================= -->
         <section id="principles-section" class="relative py-16 sm:py-20 scroll-mt-16 border-t border-white/[0.08]">
-          <div class="space-y-8 pl-0 md:pl-10">
+          <div class="space-y-8">
             <div data-scroll-reveal="text">
               <span 
                 class="text-[11px] font-mono text-[#A1A1AA] uppercase tracking-wider"
@@ -235,7 +235,7 @@ import { teamData } from "../config/team";
 
         <!-- ================= 3. SQUAD PREVIEW STRIP (H-24 DRY RUN) ================= -->
         <section id="squad-section" class="relative py-16 sm:py-20 scroll-mt-16 border-t border-white/[0.08]">
-          <div class="space-y-8 pr-0 md:pr-10">
+          <div class="space-y-8">
             <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4" data-scroll-reveal="text">
               <div>
                 <span 
@@ -317,7 +317,7 @@ import { teamData } from "../config/team";
 
         <!-- ================= 4. BUILDS / HACKATHON DROPS (H-36 BUZZER) ================= -->
         <section id="builds-section" class="relative py-16 sm:py-20 border-t border-white/[0.08]">
-          <div class="space-y-6 pl-0 md:pl-10" data-scroll-reveal="text">
+          <div class="space-y-6" data-scroll-reveal="text">
             <div class="flex items-baseline justify-between">
               <div>
                 <span 
@@ -373,16 +373,17 @@ import { teamData } from "../config/team";
 
     <ScrollObserver />
 
-    <!-- ================= DYNAMIC SERPENTINE TRACKER & 0H->36H CHRONOMETER SCRIPT ================= -->
+    <!-- ================= FULL-BLEED ORGANIC S-CURVE & 0H->36H CHRONOMETER SCRIPT ================= -->
     <script>
       function initSerpentineTracker() {
+        const main = document.getElementById("main-content");
         const container = document.getElementById("timeline-container");
         const path = document.getElementById("serpentine-motion-path") as SVGPathElement | null;
         const tracerPath = document.getElementById("serpentine-tracer-path") as SVGPathElement | null;
         const movingTracker = document.getElementById("scroll-moving-tracker") as SVGGElement | null;
         const timerDisplay = document.getElementById("tracker-timer-display");
 
-        if (!container || !path || !movingTracker) return;
+        if (!main || !container || !path || !movingTracker) return;
 
         let pathLength = path.getTotalLength();
         let lut: Array<{ d: number; x: number; y: number }> = [];
@@ -393,7 +394,7 @@ import { teamData } from "../config/team";
           if (tracerPath) {
             tracerPath.style.strokeDasharray = `${pathLength}`;
           }
-          const steps = 400;
+          const steps = 450;
           lut = [];
           for (let i = 0; i <= steps; i++) {
             const d = (i / steps) * pathLength;
@@ -402,9 +403,9 @@ import { teamData } from "../config/team";
           }
         }
 
-        // Fast binary search to find exact point on path for any target Y coordinate
+        // Binary search to find exact (x, y, d) on path for any target Y coordinate
         function getPointForY(targetY: number) {
-          if (!lut.length) return { x: 740, y: 220, d: 0 };
+          if (!lut.length) return { x: window.innerWidth * 0.75, y: 220, d: 0 };
           const startY = lut[0].y;
           const endY = lut[lut.length - 1].y;
 
@@ -440,12 +441,17 @@ import { teamData } from "../config/team";
           return `${pad(h)}:${pad(m)}:${pad(s)}`;
         }
 
-        // Dynamically compute the exact serpentine path anchored to actual DOM section bounds
+        // Dynamically compute the FULL-BLEED continuous organic bezier spline
         function updateSerpentineLayout() {
-          if (!container || !path) return;
-          const containerRect = container.getBoundingClientRect();
-          const containerTopDoc = containerRect.top + window.scrollY;
-          const cWidth = containerRect.width;
+          if (!main || !container || !path) return;
+
+          const screenW = window.innerWidth;
+          const mainRect = main.getBoundingClientRect();
+          const mainTopDoc = mainRect.top + window.scrollY;
+
+          const cRect = container.getBoundingClientRect();
+          const cLeft = cRect.left;
+          const cRight = cRect.right;
 
           // Measured DOM Sections
           const heroSec = document.getElementById("hero-section");
@@ -460,34 +466,48 @@ import { teamData } from "../config/team";
           const sRect = squadSec.getBoundingClientRect();
           const bRect = buildsSec.getBoundingClientRect();
 
-          // Anchor Y coordinates relative to container top
+          // Section Y coordinates in main reference frame
           const heroY = 220;
-          const heroBottom = hRect.bottom + window.scrollY - containerTopDoc;
+          const pTop = pRect.top + window.scrollY - mainTopDoc;
+          const pBottom = pRect.bottom + window.scrollY - mainTopDoc;
 
-          const pTop = pRect.top + window.scrollY - containerTopDoc;
-          const pBottom = pRect.bottom + window.scrollY - containerTopDoc;
+          const sTop = sRect.top + window.scrollY - mainTopDoc;
+          const sBottom = sRect.bottom + window.scrollY - mainTopDoc;
 
-          const sTop = sRect.top + window.scrollY - containerTopDoc;
-          const sBottom = sRect.bottom + window.scrollY - containerTopDoc;
+          const bTop = bRect.top + window.scrollY - mainTopDoc;
+          const bBottom = bRect.bottom + window.scrollY - mainTopDoc;
 
-          const bTop = bRect.top + window.scrollY - containerTopDoc;
-          const bBottom = bRect.bottom + window.scrollY - containerTopDoc;
+          // Wide sweeping horizontal coordinates in margins
+          // P0: Hero right
+          const x0 = cLeft + cRect.width * 0.76;
+          const y0 = heroY;
 
-          // Serpentine coordinates: Right -> Left -> Right -> Left
-          const rightX = Math.min(cWidth - 36, 920);
-          const leftX = 32;
-          const heroStartX = Math.min(cWidth * 0.78, 750);
+          // P1: Principles left flank (sweeps wide into left margin!)
+          const x1 = Math.max(cLeft - 75, 40);
+          const y1 = pTop + 60;
 
-          // Generate the exact S-curve matching the user sketch
+          // P2: Squad right flank (sweeps wide into right margin!)
+          const x2 = Math.min(cRight + 75, screenW - 40);
+          const y2 = sTop + 60;
+
+          // P3: Builds left flank (sweeps wide into left margin!)
+          const x3 = Math.max(cLeft - 75, 40);
+          const y3 = bTop + 60;
+
+          // P4: Terminal hook under GitHub link
+          const x4 = x3 + 120;
+          const y4 = bBottom + 35;
+
+          // Continuous C1 cubic bezier wave (zero sharp turns, pure fluid harmonics)
           const newD = [
-            `M ${heroStartX} ${heroY}`,
-            `C ${heroStartX} ${heroBottom - 50}, ${cWidth * 0.45} ${pTop - 60}, ${leftX} ${pTop + 24}`,
-            `L ${leftX} ${pBottom - 40}`,
-            `C ${leftX} ${pBottom + 70}, ${cWidth * 0.5} ${sTop - 40}, ${rightX} ${sTop + 24}`,
-            `L ${rightX} ${sBottom - 40}`,
-            `C ${rightX} ${sBottom + 70}, ${cWidth * 0.5} ${bTop - 40}, ${leftX} ${bTop + 24}`,
-            `L ${leftX} ${bBottom - 30}`,
-            `C ${leftX} ${bBottom + 15}, ${leftX + 40} ${bBottom + 30}, ${leftX + 100} ${bBottom + 30}`
+            `M ${x0} ${y0}`,
+            `C ${x0} ${y0 + (y1 - y0) * 0.55}, ${x1 + 60} ${y1 - (y1 - y0) * 0.45}, ${x1} ${y1}`,
+            `C ${x1 - 40} ${y1 + (pBottom - y1) * 0.5}, ${x1 - 40} ${pBottom - 30}, ${x1} ${pBottom + 20}`,
+            `C ${x1 + 60} ${pBottom + 80}, ${x2 - 140} ${sTop - 40}, ${x2} ${y2}`,
+            `C ${x2 + 40} ${y2 + (sBottom - y2) * 0.5}, ${x2 + 40} ${sBottom - 30}, ${x2} ${sBottom + 20}`,
+            `C ${x2 - 60} ${sBottom + 80}, ${x3 + 140} ${bTop - 40}, ${x3} ${y3}`,
+            `C ${x3 - 30} ${y3 + 60}, ${x3 - 30} ${bBottom - 20}, ${x3} ${bBottom}`,
+            `C ${x3 + 20} ${bBottom + 30}, ${x4 - 30} ${y4}, ${x4} ${y4}`
           ].join(" ");
 
           path.setAttribute("d", newD);
@@ -498,27 +518,25 @@ import { teamData } from "../config/team";
           // Update Milestone Node Positions
           const n00C = document.getElementById("milestone-node-00-circle");
           const n00T = document.getElementById("milestone-node-00-text");
-          if (n00C) { n00C.setAttribute("cx", `${heroStartX}`); n00C.setAttribute("cy", `${heroY}`); }
-          if (n00T) { n00T.setAttribute("x", `${heroStartX + 18}`); n00T.setAttribute("y", `${heroY + 4}`); }
+          if (n00C) { n00C.setAttribute("cx", `${x0}`); n00C.setAttribute("cy", `${y0}`); }
+          if (n00T) { n00T.setAttribute("x", `${x0 + 18}`); n00T.setAttribute("y", `${y0 + 4}`); }
 
           const n06C = document.getElementById("milestone-node-06-circle");
           const n06T = document.getElementById("milestone-node-06-text");
-          if (n06C) { n06C.setAttribute("cx", `${leftX}`); n06C.setAttribute("cy", `${pTop + 24}`); }
-          if (n06T) { n06T.setAttribute("x", `${leftX + 18}`); n06T.setAttribute("y", `${pTop + 28}`); }
+          if (n06C) { n06C.setAttribute("cx", `${x1}`); n06C.setAttribute("cy", `${y1}`); }
+          if (n06T) { n06T.setAttribute("x", `${x1 - 18}`); n06T.setAttribute("y", `${y1 + 4}`); }
 
           const n24C = document.getElementById("milestone-node-24-circle");
           const n24T = document.getElementById("milestone-node-24-text");
-          if (n24C) { n24C.setAttribute("cx", `${rightX}`); n24C.setAttribute("cy", `${sTop + 24}`); }
-          if (n24T) { n24T.setAttribute("x", `${rightX - 18}`); n24T.setAttribute("y", `${sTop + 28}`); }
+          if (n24C) { n24C.setAttribute("cx", `${x2}`); n24C.setAttribute("cy", `${y2}`); }
+          if (n24T) { n24T.setAttribute("x", `${x2 + 18}`); n24T.setAttribute("y", `${y2 + 4}`); }
 
           const n36O = document.getElementById("milestone-node-36-outer");
           const n36I = document.getElementById("milestone-node-36-inner");
           const n36T = document.getElementById("milestone-node-36-text");
-          const termX = leftX + 100;
-          const termY = bBottom + 30;
-          if (n36O) { n36O.setAttribute("cx", `${termX}`); n36O.setAttribute("cy", `${termY}`); }
-          if (n36I) { n36I.setAttribute("cx", `${termX}`); n36I.setAttribute("cy", `${termY}`); }
-          if (n36T) { n36T.setAttribute("x", `${termX + 20}`); n36T.setAttribute("y", `${termY + 4}`); }
+          if (n36O) { n36O.setAttribute("cx", `${x4}`); n36O.setAttribute("cy", `${y4}`); }
+          if (n36I) { n36I.setAttribute("cx", `${x4}`); n36I.setAttribute("cy", `${y4}`); }
+          if (n36T) { n36T.setAttribute("x", `${x4 + 20}`); n36T.setAttribute("y", `${y4 + 4}`); }
 
           buildLUT();
         }
@@ -531,7 +549,7 @@ import { teamData } from "../config/team";
 
         function calculateTargetY() {
           if (!lut.length) return;
-          const rect = container.getBoundingClientRect();
+          const mainRect = main.getBoundingClientRect();
           const currentScroll = window.scrollY;
           const startY = lut[0].y;
           const endY = lut[lut.length - 1].y;
@@ -540,14 +558,14 @@ import { teamData } from "../config/team";
           const targetViewportCenter = window.innerHeight * 0.5;
 
           // Resting hero Y in viewport coordinates:
-          const heroRestingViewportY = startY + (rect.top + currentScroll);
+          const heroRestingViewportY = startY + (mainRect.top + currentScroll);
 
           // Smoothly glide from resting hero position to exact viewport center over first 140px of scroll
           const blend = Math.min(Math.max(currentScroll / 140, 0), 1);
           const activeViewportY = (heroRestingViewportY - currentScroll) * (1 - blend) + targetViewportCenter * blend;
 
-          // Desired Y in container coordinates such that: rect.top + desired = activeViewportY
-          const desired = activeViewportY - rect.top;
+          // Desired Y in main coordinates such that: mainRect.top + desired = activeViewportY
+          const desired = activeViewportY - mainRect.top;
 
           targetY = Math.min(Math.max(desired, startY), endY);
         }
@@ -570,7 +588,7 @@ import { teamData } from "../config/team";
         }
 
         function renderLoop() {
-          // Physics lerp damping (0.085 for responsive glide)
+          // Physics lerp damping (0.085 for responsive silky glide)
           currentY += (targetY - currentY) * 0.085;
 
           updatePosition(currentY);
