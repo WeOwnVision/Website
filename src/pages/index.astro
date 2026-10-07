@@ -39,7 +39,7 @@ import { teamData } from "../config/team";
           <!-- Background Dashed Track Line (The Deliberate Spine) -->
           <path 
             id="hexagon-motion-path" 
-            d="M 685 260 L 685 450 C 685 570, 360 620, 160 660 C 95 680, 75 700, 75 740 L 75 1310 L 75 1690 C 75 1730, 105 1750, 140 1750" 
+            d="M 720 240 L 720 360 C 720 540, 90 560, 90 740 L 90 1310 L 90 1750" 
             stroke="rgba(255, 255, 255, 0.12)" 
             stroke-width="1.5" 
             stroke-dasharray="4 4" 
@@ -49,7 +49,7 @@ import { teamData } from "../config/team";
           <!-- Active Tracer Line -->
           <path 
             id="hexagon-tracer-path" 
-            d="M 685 260 L 685 450 C 685 570, 360 620, 160 660 C 95 680, 75 700, 75 740 L 75 1310 L 75 1690 C 75 1730, 105 1750, 140 1750" 
+            d="M 720 240 L 720 360 C 720 540, 90 560, 90 740 L 90 1310 L 90 1750" 
             stroke="#FF5B1F" 
             stroke-width="1.8" 
             fill="none" 
@@ -57,23 +57,23 @@ import { teamData } from "../config/team";
 
           <!-- Numbered Spine Node Markers -->
           <!-- Node 01: Hero Start -->
-          <circle id="spine-node-01-circle" cx="685" cy="260" r="4" fill="#FF5B1F" />
-          <text id="spine-node-01-text" x="660" y="264" class="text-[11px] font-mono fill-[#A1A1AA]" text-anchor="end">01</text>
+          <circle id="spine-node-01-circle" cx="720" cy="240" r="4" fill="#FF5B1F" />
+          <text id="spine-node-01-text" x="696" y="244" class="text-[11px] font-mono fill-[#A1A1AA]" text-anchor="end">01</text>
 
-          <!-- Node 02: Principles Start (Beside \"How We Build\" Heading) -->
-          <circle id="spine-node-02-circle" cx="75" cy="740" r="4" fill="#EDEDEF" />
-          <text id="spine-node-02-text" x="48" y="744" class="text-[11px] font-mono fill-[#A1A1AA]" text-anchor="end">02</text>
+          <!-- Node 02: Principles Start (Beside "How We Build" Heading) -->
+          <circle id="spine-node-02-circle" cx="90" cy="740" r="4" fill="#EDEDEF" />
+          <text id="spine-node-02-text" x="66" y="744" class="text-[11px] font-mono fill-[#A1A1AA]" text-anchor="end">02</text>
 
-          <!-- Node 03: Squad Start (Beside \"The Collective\" Heading) -->
-          <circle id="spine-node-03-circle" cx="75" cy="1310" r="4" fill="#EDEDEF" />
-          <text id="spine-node-03-text" x="48" y="1314" class="text-[11px] font-mono fill-[#A1A1AA]" text-anchor="end">03</text>
+          <!-- Node 03: Squad Start (Beside "The Collective" Heading) -->
+          <circle id="spine-node-03-circle" cx="90" cy="1310" r="4" fill="#EDEDEF" />
+          <text id="spine-node-03-text" x="66" y="1314" class="text-[11px] font-mono fill-[#A1A1AA]" text-anchor="end">03</text>
 
           <!-- Terminal Circle Node (○ at end of Squad) -->
-          <circle id="spine-node-terminal-outer" cx="140" cy="1750" r="7" stroke="#EDEDEF" stroke-width="1.5" fill="#0A0A0B" />
-          <circle id="spine-node-terminal-inner" cx="140" cy="1750" r="2.5" fill="#FF5B1F" />
+          <circle id="spine-node-terminal-outer" cx="90" cy="1750" r="6" stroke="#EDEDEF" stroke-width="1.5" fill="#0A0A0B" />
+          <circle id="spine-node-terminal-inner" cx="90" cy="1750" r="2.5" fill="#FF5B1F" />
 
-          <!-- THE MOVING HEXAGON: Centered in the middle of the screen at all times -->
-          <g id="scroll-moving-hexagon" transform="translate(685, 260) scale(0.48)" class="pointer-events-auto">
+          <!-- THE MOVING HEXAGON: Precision Telemetry Instrument -->
+          <g id="scroll-moving-hexagon" transform="translate(720, 240) scale(0.46)" class="pointer-events-auto">
             <HexagonVisual asSvgGroup={true} />
           </g>
         </svg>
@@ -98,29 +98,31 @@ import { teamData } from "../config/team";
                 We build and deploy functional software prototypes under hackathon constraints. Every project is engineered from scratch and shipped before the buzzer.
               </p>
 
-              <div class="flex flex-wrap items-center gap-4 pt-2 hero-render-4">
+              <div class="flex flex-wrap items-center gap-3 pt-2 hero-render-4">
                 <a 
                   href="#squad-section" 
-                  class="px-5 py-2.5 rounded-lg text-sm font-semibold bg-[#EDEDEF] text-[#0A0A0B] hover:bg-white transition-all duration-200"
+                  class="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-lg text-sm font-semibold text-[#EDEDEF] bg-[#141416] hover:bg-[#1a1a1d] border border-white/15 hover:border-white/30 transition-all shadow-sm group"
                 >
-                  Meet the squad ↓
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#FF5B1F] group-hover:scale-125 transition-transform"></span>
+                  <span>Meet the squad</span>
+                  <span class="text-[#8A8A93] group-hover:translate-y-0.5 transition-transform text-xs">↓</span>
                 </a>
                 <a 
                   href={siteConfig.social.github} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  class="px-3 py-2.5 text-sm font-medium text-[#A1A1AA] hover:text-[#EDEDEF] transition-colors inline-flex items-center gap-1.5 group"
+                  class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium text-[#A1A1AA] hover:text-[#EDEDEF] hover:bg-white/[0.04] border border-white/[0.06] hover:border-white/15 transition-all group"
                 >
+                  <svg class="w-3.5 h-3.5 fill-current opacity-70 group-hover:opacity-100 transition-opacity" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                   <span>GitHub</span>
-                  <svg class="w-4 h-4 inline-block transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
+                  <span class="text-xs transition-transform group-hover:translate-x-0.5">→</span>
                 </a>
               </div>
             </div>
 
-            <!-- Right Spacer / Mobile Hexagon Anchor -->
-            <div class="sm:col-span-4 flex items-center justify-center sm:justify-end min-h-[220px]">
+            <!-- Right Spacer / Hexagon Anchor -->
+            <div class="sm:col-span-4 flex items-center justify-center sm:justify-end min-h-[260px]">
+              <div id="hero-hex-anchor" class="w-56 h-56 hidden sm:flex items-center justify-center"></div>
               <div class="sm:hidden w-48 h-48 flex items-center justify-center hero-render-hex">
                 <HexagonVisual size="responsive" className="w-full h-full" />
               </div>
@@ -134,7 +136,7 @@ import { teamData } from "../config/team";
           <div class="grid grid-cols-1 sm:grid-cols-12 gap-8 items-start">
             
             <!-- Left Spine Spacer (Desktop) -->
-            <div class="hidden sm:block sm:col-span-2">
+            <div id="principles-spine-anchor" class="hidden sm:block sm:col-span-2">
               <!-- Clear room for the left spine & hexagon tracker -->
             </div>
 
@@ -181,7 +183,7 @@ import { teamData } from "../config/team";
           <div class="grid grid-cols-1 sm:grid-cols-12 gap-8 items-start">
             
             <!-- Left Spine Spacer (Desktop) -->
-            <div class="hidden sm:block sm:col-span-2">
+            <div id="squad-spine-anchor" class="hidden sm:block sm:col-span-2">
               <!-- Clear room for the left spine & hexagon tracker -->
             </div>
 
@@ -313,9 +315,23 @@ import { teamData } from "../config/team";
           const trackerRect = tracker.getBoundingClientRect();
           const trackerTopDoc = trackerRect.top + window.scrollY;
 
-          const heroX = 685;
-          const heroY = 260;
-          const spineX = 75;
+          // Dynamically compute Hero Hex center from desktop anchor
+          const heroAnchor = document.getElementById("hero-hex-anchor");
+          let heroX = 700;
+          let heroY = 190;
+          if (heroAnchor) {
+            const hRect = heroAnchor.getBoundingClientRect();
+            heroX = hRect.left + hRect.width / 2 - trackerRect.left;
+            heroY = hRect.top + hRect.height / 2 - trackerTopDoc;
+          }
+
+          // Dynamically compute spine gutter center from spacer column
+          const spineAnchor = document.getElementById("principles-spine-anchor") || document.getElementById("squad-spine-anchor");
+          let spineX = 90;
+          if (spineAnchor) {
+            const spRect = spineAnchor.getBoundingClientRect();
+            spineX = spRect.left + spRect.width * 0.5 - trackerRect.left;
+          }
 
           const pHeading = document.querySelector("#principles-section [data-scroll-reveal=\"text\"]") || document.querySelector("#principles-section h2");
           const sHeading = document.querySelector("#squad-section [data-scroll-reveal=\"text\"]") || document.querySelector("#squad-section h2");
@@ -325,32 +341,40 @@ import { teamData } from "../config/team";
           const sRect = sHeading ? sHeading.getBoundingClientRect() : null;
           const squadRect = squadSection ? squadSection.getBoundingClientRect() : null;
 
-          const principlesY = pRect ? (pRect.top + window.scrollY - trackerTopDoc + 7) : 740;
-          const squadY = sRect ? (sRect.top + window.scrollY - trackerTopDoc + 7) : 1310;
-          const endY = squadRect ? (squadRect.bottom + window.scrollY - trackerTopDoc - 36) : 1750;
+          const principlesY = pRect ? (pRect.top + window.scrollY - trackerTopDoc + 8) : 740;
+          const squadY = sRect ? (sRect.top + window.scrollY - trackerTopDoc + 8) : 1310;
+          const endY = squadRect ? (squadRect.bottom + window.scrollY - trackerTopDoc - 24) : 1750;
 
-          const curveStart = heroY + 270  ;
-          const newD = `M ${heroX} ${heroY} L ${heroX} ${curveStart} C ${heroX} ${curveStart + 120}, 360 ${principlesY - 140}, 160 ${principlesY - 80} C 95 ${principlesY - 60}, ${spineX} ${principlesY - 30}, ${spineX} ${principlesY} L ${spineX} ${squadY} L ${spineX} ${endY - 60} C ${spineX} ${endY - 20}, 105 ${endY}, 140 ${endY}`;
+          // Smooth architectural curve from hero into straight spine
+          const curveStart = heroY + 150;
+          const cpY1 = curveStart + (principlesY - curveStart) * 0.5;
+          const cpY2 = principlesY - (principlesY - curveStart) * 0.4;
+          const newD = `M ${heroX} ${heroY} L ${heroX} ${curveStart} C ${heroX} ${cpY1}, ${spineX} ${cpY2}, ${spineX} ${principlesY} L ${spineX} ${squadY} L ${spineX} ${endY}`;
 
           path.setAttribute("d", newD);
           if (tracerPath) {
             tracerPath.setAttribute("d", newD);
           }
 
+          const n1C = document.getElementById("spine-node-01-circle");
+          const n1T = document.getElementById("spine-node-01-text");
+          if (n1C) { n1C.setAttribute("cx", `${heroX}`); n1C.setAttribute("cy", `${heroY}`); }
+          if (n1T) { n1T.setAttribute("x", `${heroX - 24}`); n1T.setAttribute("y", `${heroY + 4}`); }
+
           const n2C = document.getElementById("spine-node-02-circle");
           const n2T = document.getElementById("spine-node-02-text");
-          if (n2C) n2C.setAttribute("cy", `${principlesY}`);
-          if (n2T) n2T.setAttribute("y", `${principlesY + 4}`);
+          if (n2C) { n2C.setAttribute("cx", `${spineX}`); n2C.setAttribute("cy", `${principlesY}`); }
+          if (n2T) { n2T.setAttribute("x", `${spineX - 22}`); n2T.setAttribute("y", `${principlesY + 4}`); }
 
           const n3C = document.getElementById("spine-node-03-circle");
           const n3T = document.getElementById("spine-node-03-text");
-          if (n3C) n3C.setAttribute("cy", `${squadY}`);
-          if (n3T) n3T.setAttribute("y", `${squadY + 4}`);
+          if (n3C) { n3C.setAttribute("cx", `${spineX}`); n3C.setAttribute("cy", `${squadY}`); }
+          if (n3T) { n3T.setAttribute("x", `${spineX - 22}`); n3T.setAttribute("y", `${squadY + 4}`); }
 
           const termOut = document.getElementById("spine-node-terminal-outer");
           const termIn = document.getElementById("spine-node-terminal-inner");
-          if (termOut) termOut.setAttribute("cy", `${endY}`);
-          if (termIn) termIn.setAttribute("cy", `${endY}`);
+          if (termOut) { termOut.setAttribute("cx", `${spineX}`); termOut.setAttribute("cy", `${endY}`); }
+          if (termIn) { termIn.setAttribute("cx", `${spineX}`); termIn.setAttribute("cy", `${endY}`); }
 
           buildLUT();
         }
@@ -386,7 +410,12 @@ import { teamData } from "../config/team";
 
         function updatePosition(y: number) {
           const pt = getPointForY(y);
-          movingHex.setAttribute("transform", `translate(${pt.x}, ${pt.y}) scale(0.48)`);
+          // Scale from 0.46 in resting hero down to 0.28 along the gutter spine
+          const startY = lut.length ? lut[0].y : 240;
+          const progress = Math.min(Math.max((pt.y - startY) / 220, 0), 1);
+          const currentScale = 0.46 - progress * 0.18; // 0.46 -> 0.28
+
+          movingHex.setAttribute("transform", `translate(${pt.x}, ${pt.y}) scale(${currentScale.toFixed(3)})`);
 
           if (tracerPath) {
             tracerPath.style.strokeDashoffset = `${pathLength - pt.d}`;
