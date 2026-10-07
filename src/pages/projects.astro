@@ -1,0 +1,89 @@
+---
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import ScrollObserver from "../components/ScrollObserver.astro";
+import { siteConfig } from "../config/site";
+import { teamData } from "../config/team";
+---
+
+<!DOCTYPE html>
+<html lang="en" class="bg-black text-zinc-100">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Projects & Builds | {siteConfig.title}</title>
+    <meta name="description" content="Explore hackathon projects and software drops engineered by WeOwnVision." />
+    <link rel="stylesheet" href="/src/styles/global.css" />
+  </head>
+
+  <body class="min-h-screen bg-black text-zinc-100 flex flex-col relative selection:bg-white selection:text-black">
+
+    <Navigation />
+
+    <main class="relative z-10 flex-1 max-w-5xl mx-auto px-4 sm:px-6 py-16 w-full">
+      <div class="text-left max-w-xl mb-12" data-scroll-reveal="text">
+        <span class="text-xs font-mono text-zinc-500 uppercase tracking-wider">
+          // ARCHIVE
+        </span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-1">
+          Hackathon Drops & Builds
+        </h1>
+        <p class="mt-3 text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">
+          From rapid 36-hour sprint prototypes to fully deployed production experiments. Here is what happens when we lock in.
+        </p>
+      </div>
+
+      {teamData.projects.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {teamData.projects.map((project, idx) => (
+            <ProjectCard project={project} index={idx} />
+          ))}
+        </div>
+      ) : (
+        <div class="p-8 sm:p-14 rounded-2xl tech-panel max-w-2xl mx-auto text-center space-y-6" data-scroll-reveal="card">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-zinc-900 border border-zinc-800 text-zinc-400">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+            <span>SYSTEM STATUS: COMPILING // STANDBY</span>
+          </div>
+
+          <div class="space-y-2">
+            <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
+              No Public Repositories Deployed Yet
+            </h2>
+            <p class="text-xs sm:text-sm text-zinc-400 font-light max-w-md mx-auto leading-relaxed">
+              We do not push placeholder or filler repositories. Active builds and prototypes are currently undergoing development under sprint constraints.
+            </p>
+          </div>
+
+          <div class="bg-black/60 border border-zinc-800/80 rounded-lg p-4 font-mono text-xs text-left max-w-md mx-auto space-y-1.5 text-zinc-400">
+            <div class="flex items-center justify-between text-zinc-500 border-b border-zinc-900 pb-1 mb-2">
+              <span>// REPO_INDEX</span>
+              <span class="text-zinc-600">STAGING</span>
+            </div>
+            <div><span class="text-zinc-600">&gt;</span> ACTIVE_SPRINTS: <span class="text-white">5 ENGINEERS INITIALIZING</span></div>
+            <div><span class="text-zinc-600">&gt;</span> COMMITS: <span class="text-zinc-300">QUEUED_FOR_DEPLOYMENT</span></div>
+            <div><span class="text-zinc-600">&gt;</span> NEXT_DROP: <span class="text-white">UPCOMING_HACKATHON</span></div>
+          </div>
+
+          <div class="pt-2">
+            <a 
+              href={siteConfig.social.github} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-mono font-semibold bg-white text-black hover:bg-zinc-200 transition-colors"
+            >
+              <span>Track Activity on GitHub</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      )}
+    </main>
+
+    <Footer />
+    <ScrollObserver />
+  </body>
+</html>

@@ -1,0 +1,109 @@
+---
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+import ScrollObserver from "../components/ScrollObserver.astro";
+import { siteConfig } from "../config/site";
+import { getAllPosts } from "../utils/getPosts";
+
+const allPosts = getAllPosts();
+---
+
+<!DOCTYPE html>
+<html lang="en" class="bg-black text-zinc-100">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Dispatches & Blog | {siteConfig.title}</title>
+    <meta name="description" content="Technical writeups, hackathon post-mortems, and engineering insights from WeOwnVision." />
+    <link rel="stylesheet" href="/src/styles/global.css" />
+  </head>
+
+  <body class="min-h-screen bg-black text-zinc-100 flex flex-col relative selection:bg-white selection:text-black">
+
+    <Navigation />
+
+    <main class="relative z-10 flex-1 max-w-4xl mx-auto px-4 sm:px-6 py-16 w-full">
+      <div class="text-left max-w-xl mb-12" data-scroll-reveal="text">
+        <span class="text-xs font-mono text-zinc-500 uppercase tracking-wider">
+          // DISPATCHES
+        </span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-1">
+          Notes from the Terminal
+        </h1>
+        <p class="mt-3 text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">
+          Technical breakdowns, hackathon architecture strategies, and systems engineering logs.
+        </p>
+      </div>
+
+      {allPosts.length > 0 ? (
+        <div class="space-y-4">
+          {allPosts.map((post, idx) => (
+            <a
+              href={post.href}
+              class="group block p-5 rounded-xl tech-panel"
+              data-scroll-reveal="card"
+              style={`transition-delay: ${idx * 40}ms;`}
+            >
+              <div class="flex items-center justify-between text-xs font-mono text-zinc-500">
+                <span class="text-zinc-300">{post.date}</span>
+                <span>{post.readTime}</span>
+              </div>
+
+              <h2 class="text-lg font-bold text-white group-hover:text-zinc-300 transition-colors mt-1.5 tracking-tight">
+                {post.title}
+              </h2>
+
+              <p class="mt-1.5 text-xs text-zinc-400 font-light leading-relaxed">
+                {post.description}
+              </p>
+
+              <div class="mt-3 text-xs font-mono text-zinc-500 group-hover:text-white transition-colors">
+                Read Entry →
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="p-8 sm:p-14 rounded-2xl tech-panel max-w-2xl mx-auto text-center space-y-6" data-scroll-reveal="card">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-zinc-900 border border-zinc-800 text-zinc-400">
+            <span class="w-1.5 h-1.5 rounded-full bg-zinc-500 animate-pulse"></span>
+            <span>FEED STATUS: IDLE // WAITING FOR SPRINT</span>
+          </div>
+
+          <div class="space-y-2">
+            <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
+              No Dispatches Published Yet
+            </h2>
+            <p class="text-xs sm:text-sm text-zinc-400 font-light max-w-md mx-auto leading-relaxed">
+              Technical field notes, system architecture teardowns, and sprint post-mortems will be logged here following our upcoming hackathons.
+            </p>
+          </div>
+
+          <div class="bg-black/60 border border-zinc-800/80 rounded-lg p-4 font-mono text-xs text-left max-w-md mx-auto space-y-1.5 text-zinc-400">
+            <div class="flex items-center justify-between text-zinc-500 border-b border-zinc-900 pb-1 mb-2">
+              <span>// DISPATCH_BUFFER</span>
+              <span class="text-zinc-600">STANDBY</span>
+            </div>
+            <div><span class="text-zinc-600">&gt;</span> LOGS_COUNT: <span class="text-white">0 POSTS</span></div>
+            <div><span class="text-zinc-600">&gt;</span> SPRINT_NOTES: <span class="text-zinc-300">AWAITING_RELEASE</span></div>
+            <div><span class="text-zinc-600">&gt;</span> SUBSCRIPTION: <span class="text-white">CHECK_BACK_SOON</span></div>
+          </div>
+
+          <div class="pt-2">
+            <a 
+              href="/" 
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-mono font-semibold bg-zinc-900 border border-zinc-800 text-zinc-200 hover:text-white hover:border-zinc-700 transition-colors"
+            >
+              <span>← Back to Overview</span>
+            </a>
+          </div>
+        </div>
+      )}
+    </main>
+
+    <Footer />
+    <ScrollObserver />
+  </body>
+</html>
