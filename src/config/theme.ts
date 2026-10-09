@@ -9,8 +9,8 @@
 
 export const themePalette = {
   // ================= 1. PAGE BACKGROUNDS =================
-  bgBase: "#120E0C",             // Main page background (Deep Espresso)
-  bgSurface: "#1B1412",          // Card & navigation panel surface
+  bgBase: "#110e0dff",            // Main page background (Deep Espresso)
+  bgSurface: "#191514ff",         // Card & navigation panel surface
   bgSurfaceElevated: "#231B18",  // Elevated surfaces & card hover background
 
   // ================= 2. TYPOGRAPHY =================
