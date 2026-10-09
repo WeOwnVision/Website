@@ -1,31 +1,30 @@
 ---
-import Navigation from "../components/Navigation.astro";
-import Footer from "../components/Footer.astro";
-import TeamCard from "../components/TeamCard.astro";
-import NextDropCard from "../components/NextDropCard.astro";
-import ScrollObserver from "../components/ScrollObserver.astro";
-import ThemeHead from "../components/ThemeHead.astro";
-import { siteConfig } from "../config/site";
-import { translations } from "../i18n/translations";
+import Navigation from "../../components/Navigation.astro";
+import Footer from "../../components/Footer.astro";
+import TeamCard from "../../components/TeamCard.astro";
+import NextDropCard from "../../components/NextDropCard.astro";
+import ScrollObserver from "../../components/ScrollObserver.astro";
+import ThemeHead from "../../components/ThemeHead.astro";
+import { siteConfig } from "../../config/site";
+import { translations } from "../../i18n/translations";
 
-const t = translations.en;
+const t = translations.tr;
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth bg-theme-base text-theme-primary">
+<html lang="tr" class="scroll-smooth bg-theme-base text-theme-primary">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>{siteConfig.title}</title>
-    <meta name="description" content={siteConfig.description} />
+    <title>WeOwnVision — Hackathon Ekibi | Atatürk Üniversitesi</title>
+    <meta name="description" content="Erzurum Atatürk Üniversitesi'nden 36 saatlik sprint kısıtlarında sıfırdan çalışan yazılımlar üreten beş kişilik mühendislik ekibi." />
     <ThemeHead />
   </head>
 
   <body class="min-h-screen bg-theme-base text-theme-primary flex flex-col relative selection:bg-theme-accent selection:text-theme-base">
-    <!-- Top Navigation (Auto TR routing, zero toggle button) -->
-    <Navigation locale="en" />
+    <Navigation locale="tr" />
 
     <main class="relative z-10 flex-1 flex flex-col">
       
@@ -33,26 +32,22 @@ const t = translations.en;
       <section id="hero-section" class="relative max-w-5xl mx-auto w-full px-6 sm:px-8 pt-14 pb-16">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
-          <!-- Left Column: Headline & Primary Action -->
+          <!-- Sol Kolon: Başlık ve Ana Eylem -->
           <div class="lg:col-span-7 space-y-6 text-left">
-            <!-- Campus Eyebrow -->
             <div class="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-theme-surface border border-theme text-xs font-mono text-theme-secondary hero-render-1">
               <span class="w-1.5 h-1.5 rounded-full bg-theme-accent"></span>
               <span>{t.campusBadge}</span>
             </div>
 
-            <!-- H1: Confident and Clean -->
             <h1 class="text-5xl sm:text-7xl font-black text-theme-primary tracking-tight leading-[0.98] hero-render-2">
-              Five engineers.<br />
-              <span class="text-white">36 hours. Shipped.</span>
+              Beş mühendis.<br />
+              <span class="text-white">36 saat. Yayında.</span>
             </h1>
 
-            <!-- 18px Subhead: Clear & Readable -->
             <p class="text-base sm:text-lg text-theme-secondary max-w-xl font-normal leading-relaxed hero-render-3">
               {t.hero.subhead}
             </p>
 
-            <!-- One Primary CTA + Subtle Secondary Link -->
             <div class="flex flex-wrap items-center gap-5 pt-2 hero-render-4">
               <a 
                 href="#squad-section" 
@@ -71,7 +66,7 @@ const t = translations.en;
             </div>
           </div>
 
-          <!-- Right Column: Editorial 36-Hour Sprint Rules Card -->
+          <!-- Sağ Kolon: 36 Saatlik Sprint Kuralları Kartı -->
           <div class="lg:col-span-5 hero-render-4">
             <div class="p-6 sm:p-7 rounded-2xl bg-theme-surface border border-theme space-y-5 relative overflow-hidden">
               <div class="flex items-center justify-between border-b border-theme pb-4">
@@ -102,7 +97,7 @@ const t = translations.en;
         </div>
       </section>
 
-      <!-- ================= 2. HONEST PROOF OF WORK ================= -->
+      <!-- ================= 2. GELİŞTİRME KANITI ================= -->
       <section id="proof-section" class="relative max-w-5xl mx-auto w-full px-6 sm:px-8 py-16 border-t border-theme">
         <div class="space-y-2 mb-10" data-scroll-reveal="text">
           <span class="text-xs font-mono font-semibold text-theme-muted tracking-wider uppercase">
@@ -116,10 +111,10 @@ const t = translations.en;
           </p>
         </div>
 
-        <NextDropCard locale="en" />
+        <NextDropCard locale="tr" />
       </section>
 
-      <!-- ================= 3. SPRINT PRINCIPLES ================= -->
+      <!-- ================= 3. SPRİNT DİSİPLİNİ ================= -->
       <section id="principles-section" class="relative max-w-5xl mx-auto w-full px-6 sm:px-8 py-16 border-t border-theme">
         <div class="space-y-2 mb-10" data-scroll-reveal="text">
           <span class="text-xs font-mono font-semibold text-theme-muted tracking-wider uppercase">
@@ -152,7 +147,7 @@ const t = translations.en;
         </div>
       </section>
 
-      <!-- ================= 4. SQUAD SECTION ================= -->
+      <!-- ================= 4. KADRO ================= -->
       <section id="squad-section" class="relative max-w-5xl mx-auto w-full px-6 sm:px-8 py-16 border-t border-theme">
         <div class="space-y-2 mb-10" data-scroll-reveal="text">
           <span class="text-xs font-mono font-semibold text-theme-muted tracking-wider uppercase">
@@ -166,7 +161,7 @@ const t = translations.en;
           </p>
         </div>
 
-        <!-- Strict 3-Column Squad Rows -->
+        <!-- Kadro Satırları -->
         <div class="border-t border-theme">
           {t.squad.members.map((member, idx) => (
             <TeamCard member={member} index={idx} />
@@ -174,15 +169,15 @@ const t = translations.en;
         </div>
       </section>
 
-      <!-- ================= 5. CLOSING CTA ================= -->
+      <!-- ================= 5. KAPANIS CTA ================= -->
       <section class="relative max-w-5xl mx-auto w-full px-6 sm:px-8 py-16 border-t border-theme">
         <div class="p-8 sm:p-10 rounded-2xl bg-theme-surface border border-theme flex flex-col md:flex-row items-start md:items-center justify-between gap-6" data-scroll-reveal="card">
           <div class="space-y-2">
             <h3 class="text-xl sm:text-2xl font-bold text-theme-primary tracking-tight">
-              Want WeOwnVision at your hackathon?
+              WeOwnVision'ı hackathonunuza davet etmek ister misiniz?
             </h3>
             <p class="text-sm text-theme-secondary max-w-lg">
-              We travel from Erzurum Atatürk University to build on stage. Reach out for collaborations or sprint demos.
+              Erzurum Atatürk Üniversitesi'nden gelip sahnede çalışan kodlar üretiyoruz. Davetler ve işbirlikleri için bize ulaşın.
             </p>
           </div>
 
@@ -191,14 +186,14 @@ const t = translations.en;
               href={siteConfig.social.email}
               class="btn-primary"
             >
-              <span>Contact Squad</span>
+              <span>Ekiple İletişime Geçin</span>
               <span class="text-xs">→</span>
             </a>
             <a 
-              href="/about/"
+              href="/tr/about/"
               class="btn-secondary"
             >
-              <span>About us</span>
+              <span>Hakkımızda</span>
             </a>
           </div>
         </div>
@@ -206,7 +201,7 @@ const t = translations.en;
 
     </main>
 
-    <Footer locale="en" />
+    <Footer locale="tr" />
     <ScrollObserver />
   </body>
 </html>

@@ -1,29 +1,29 @@
 ---
-import Navigation from "../components/Navigation.astro";
-import Footer from "../components/Footer.astro";
-import NextDropCard from "../components/NextDropCard.astro";
-import ScrollObserver from "../components/ScrollObserver.astro";
-import ThemeHead from "../components/ThemeHead.astro";
-import { siteConfig } from "../config/site";
-import { translations } from "../i18n/translations";
+import Navigation from "../../components/Navigation.astro";
+import Footer from "../../components/Footer.astro";
+import NextDropCard from "../../components/NextDropCard.astro";
+import ScrollObserver from "../../components/ScrollObserver.astro";
+import ThemeHead from "../../components/ThemeHead.astro";
+import { siteConfig } from "../../config/site";
+import { translations } from "../../i18n/translations";
 
-const t = translations.en;
+const t = translations.tr;
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth bg-theme-base text-theme-primary">
+<html lang="tr" class="scroll-smooth bg-theme-base text-theme-primary">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>Projects | {siteConfig.title}</title>
-    <meta name="description" content="Explore hackathon projects and sprint targets engineered by WeOwnVision at Atatürk University." />
+    <title>Projeler | {siteConfig.title}</title>
+    <meta name="description" content="Atatürk Üniversitesi WeOwnVision ekibinin hackathon sürümleri ve aktif sprint yol haritası." />
     <ThemeHead />
   </head>
 
   <body class="min-h-screen bg-theme-base text-theme-primary flex flex-col relative selection:bg-theme-accent selection:text-theme-base">
-    <Navigation locale="en" />
+    <Navigation locale="tr" />
 
     <main class="relative z-10 flex-1 max-w-5xl mx-auto px-6 sm:px-8 py-14 w-full">
       <div class="text-left max-w-2xl mb-12" data-scroll-reveal="text">
@@ -39,10 +39,10 @@ const t = translations.en;
         </p>
       </div>
 
-      <NextDropCard locale="en" />
+      <NextDropCard locale="tr" />
     </main>
 
-    <Footer locale="en" />
+    <Footer locale="tr" />
     <ScrollObserver />
   </body>
 </html>

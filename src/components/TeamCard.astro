@@ -1,8 +1,8 @@
 ---
-import type { TeamMember } from "../config/team";
+import type { MemberTranslation } from "../i18n/translations";
 
 interface Props {
-  member: TeamMember;
+  member: MemberTranslation;
   index?: number;
 }
 
@@ -10,71 +10,70 @@ const { member, index = 0 } = Astro.props;
 ---
 
 <div 
-  class="group py-5 sm:py-6 border-b border-white/[0.08] grid grid-cols-1 md:grid-cols-12 gap-4 items-start transition-colors hover:bg-white/[0.015] px-2 -mx-2 rounded-lg"
+  class="group py-7 border-b border-theme grid grid-cols-1 md:grid-cols-12 gap-6 items-start transition-colors hover:bg-theme-elevated/20 px-2 rounded-lg"
   data-scroll-reveal="card"
-  style={`transition-delay: ${index * 45}ms;`}
+  style={`transition-delay: ${index * 50}ms;`}
 >
-  <!-- Left Column: Avatar + Name + Clean Mono Role (md:col-span-4) -->
-  <div class="md:col-span-4 flex items-center gap-3.5 min-w-0">
-    <div class="w-11 h-11 rounded-lg overflow-hidden flex-shrink-0 border border-white/10 group-hover:border-white/30 transition-all group-hover:scale-105 bg-[#111113]">
+  <!-- Column 1: Portrait (88px) + Name + Single Role + Socials (md:col-span-4) -->
+  <div class="md:col-span-4 flex items-start gap-4 min-w-0">
+    <div class="w-20 h-20 sm:w-22 sm:h-22 rounded-xl overflow-hidden flex-shrink-0 border border-theme group-hover:border-theme-accent/60 transition-all bg-theme-surface">
       <img 
         src={member.avatar} 
         alt={member.name} 
-        class="w-full h-full object-cover filter contrast-[1.05] grayscale-[0.25] group-hover:grayscale-0 transition-all duration-300" 
+        class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" 
         loading="lazy" 
       />
     </div>
-    <div class="min-w-0 flex-1">
-      <h3 class="text-base font-semibold text-[#EDEDEF] group-hover:text-white transition-colors tracking-tight truncate">
+
+    <div class="min-w-0 flex-1 space-y-1.5">
+      <h3 class="text-base sm:text-lg font-bold text-theme-primary group-hover:text-theme-text-hover transition-colors tracking-tight">
         {member.name}
       </h3>
-      <p class="text-xs font-mono text-[#8A8A93] tracking-wide mt-0.5 flex items-center gap-1.5 whitespace-nowrap">
-        <span class="w-1 h-1 rounded-full bg-[#FF5B1F]/70"></span>
-        <span>{member.role.toUpperCase()}</span>
+      <p class="text-xs font-mono font-semibold tracking-wide text-theme-cognac uppercase">
+        {member.role}
       </p>
+
+      <!-- Social Icons cleanly placed under identity -->
+      <div class="flex items-center gap-2 pt-1">
+        {member.social.github && (
+          <a 
+            href={member.social.github} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="text-theme-muted hover:text-theme-text-hover transition-colors" 
+            aria-label={`${member.name} GitHub`}
+          >
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+        )}
+        {member.social.twitter && (
+          <a 
+            href={member.social.twitter} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="text-theme-muted hover:text-theme-text-hover transition-colors" 
+            aria-label={`${member.name} Twitter`}
+          >
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        )}
+      </div>
     </div>
   </div>
 
-  <!-- Middle Column: Focus Description (md:col-span-5, fully readable without truncation) -->
+  <!-- Column 2: Bio (md:col-span-5) - Max 55ch Line Length -->
   <div class="md:col-span-5">
-    <p class="text-sm text-[#A1A1AA] leading-relaxed font-normal pt-0.5">
+    <p class="text-sm text-theme-secondary leading-relaxed font-normal max-w-[55ch]">
       {member.bio}
     </p>
   </div>
 
-  <!-- Right Column: Skills & Social Links (md:col-span-3) -->
-  <div class="md:col-span-3 flex items-center justify-between md:justify-end gap-3 pt-0.5">
-    <div class="flex flex-wrap gap-1.5">
-      {member.skills.slice(0, 2).map((skill) => (
-        <span class="px-2 py-0.5 text-xs font-mono bg-white/[0.03] border border-white/[0.08] text-[#8A8A93] group-hover:text-[#A1A1AA] rounded transition-colors">
-          {skill}
-        </span>
-      ))}
-    </div>
-
-    <div class="flex items-center gap-0.5 flex-shrink-0">
-      {member.social.github && (
-        <a 
-          href={member.social.github} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          class="w-7 h-7 rounded-md flex items-center justify-center text-[#8A8A93] hover:text-[#EDEDEF] hover:bg-white/5 transition-all opacity-70 hover:opacity-100" 
-          aria-label={`${member.name} GitHub`}
-        >
-          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-        </a>
-      )}
-      {member.social.twitter && (
-        <a 
-          href={member.social.twitter} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          class="w-7 h-7 rounded-md flex items-center justify-center text-[#8A8A93] hover:text-[#EDEDEF] hover:bg-white/5 transition-all opacity-70 hover:opacity-100" 
-          aria-label={`${member.name} Twitter`}
-        >
-          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a>
-      )}
-    </div>
+  <!-- Column 3: Fixed-width Tag Chips (md:col-span-3) -->
+  <div class="md:col-span-3 flex flex-wrap gap-1.5 md:justify-start">
+    {member.skills.map((skill) => (
+      <span class="px-2.5 py-1 text-xs font-mono bg-theme-surface border border-theme text-theme-secondary group-hover:text-theme-text-hover group-hover:border-theme-strong rounded-md transition-colors">
+        {skill}
+      </span>
+    ))}
   </div>
 </div>

@@ -6,6 +6,13 @@ import vercel from '@astrojs/vercel';
 export default defineConfig({
   adapter: vercel(),
   integrations: [tailwind()],
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'tr'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   server: {
     port: 4321,
     host: true

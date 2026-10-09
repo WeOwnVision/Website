@@ -4,15 +4,6 @@
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-
-  /* Refined High-Contrast Studio Dark Palette */
-  --bg-base: #0A0A0B;
-  --bg-surface: #111113;
-  --text-primary: #EDEDEF;
-  --text-secondary: #A1A1AA;
-  --text-tertiary: #8A8A93;
-  --border-hairline: rgba(255, 255, 255, 0.08);
-  --accent-signal: #FF5B1F;
 }
 
 html, body {
@@ -30,12 +21,68 @@ html, body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  letter-spacing: -0.035em;
+  letter-spacing: -0.03em;
   color: var(--text-primary);
 }
 
 code, pre, .font-mono {
   font-family: var(--font-mono);
+}
+
+/* Primary CTA Button - Clean, Crisp, Zero Glow */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 0.75rem 1.375rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--btn-primary-text) !important;
+  background-color: var(--btn-primary-bg) !important;
+  border: 1px solid transparent;
+  border-radius: 0.625rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: none !important;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--btn-primary-hover-bg) !important;
+  color: var(--btn-primary-hover-text) !important;
+  transform: translateY(-1px);
+  box-shadow: none !important;
+}
+
+/* Secondary CTA Button - Clean, Bordered, Zero Glow */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--btn-secondary-text) !important;
+  background-color: var(--btn-secondary-bg) !important;
+  border: 1px solid var(--btn-secondary-border) !important;
+  border-radius: 0.625rem;
+  transition: all 0.2s ease;
+  box-shadow: none !important;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  background-color: var(--btn-secondary-hover-bg) !important;
+  border-color: var(--btn-secondary-hover-border) !important;
+  color: var(--btn-secondary-hover-text) !important;
+  box-shadow: none !important;
+}
+
+/* Section Spacing Consistency - 96px Rhythm */
+.section-gap {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
 }
 
 /* Hairline borders & surfaces */
@@ -51,7 +98,7 @@ code, pre, .font-mono {
   border-top: 1px solid var(--border-hairline);
 }
 
-/* Crisp editorial surface */
+/* Editorial Surface Panel */
 .editorial-panel {
   background-color: var(--bg-surface);
   border: 1px solid var(--border-hairline);
@@ -59,26 +106,14 @@ code, pre, .font-mono {
 }
 
 .editorial-panel:hover {
-  border-color: rgba(255, 255, 255, 0.16);
+  border-color: var(--border-strong);
 }
 
-/* ================= RENDER & SCROLL ANIMATIONS ================= */
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+/* Render animations */
 @keyframes fadeInUpText {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -86,54 +121,26 @@ code, pre, .font-mono {
   }
 }
 
-@keyframes scaleInSubtle {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Header entrance on page render */
-.animate-nav-enter {
-  animation: fadeInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Hero elements initial render classes */
 .hero-render-1 {
-  animation: fadeInUpText 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+  animation: fadeInUpText 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
 }
 .hero-render-2 {
-  animation: fadeInUpText 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+  animation: fadeInUpText 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
 }
 .hero-render-3 {
-  animation: fadeInUpText 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+  animation: fadeInUpText 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
 }
 .hero-render-4 {
-  animation: fadeInUpText 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
-}
-.hero-render-hex {
-  animation: scaleInSubtle 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  animation: fadeInUpText 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both;
 }
 
-/* Scroll reveal for texts and cards as you scroll down */
+/* Scroll reveal for texts and cards */
 [data-scroll-reveal] {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-
-[data-scroll-reveal="text"] {
   transform: translateY(20px);
-}
-
-[data-scroll-reveal="card"] {
-  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
 [data-scroll-reveal].is-revealed {
@@ -141,58 +148,7 @@ code, pre, .font-mono {
   transform: translate3d(0, 0, 0) !important;
 }
 
-/* ================= HEXAGON VISUAL KEYFRAME ANIMATIONS ================= */
-.outer-hex {
-  transform-origin: 0px 0px;
-  animation: spinClockwise 40s linear infinite;
-}
-
-.middle-hex {
-  transform-origin: 0px 0px;
-  animation: spinCounterClockwise 26s linear infinite;
-}
-
-.inner-hex {
-  transform-origin: 0px 0px;
-  animation: breatheHex 5s ease-in-out infinite;
-}
-
-.radar-sweep {
-  transform-origin: 0px 0px;
-  animation: sweepBeam 6s linear infinite;
-}
-
-.core-pulse {
-  animation: pulseCore 2.5s ease-in-out infinite;
-  transform-origin: 0px 0px;
-}
-
-@keyframes spinClockwise {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes spinCounterClockwise {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
-}
-
-@keyframes breatheHex {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-
-@keyframes sweepBeam {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes pulseCore {
-  0%, 100% { transform: scale(1); opacity: 0.9; }
-  50% { transform: scale(1.3); opacity: 1; }
-}
-
-/* Minimal scrollbar */
+/* Clean Minimal Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -200,14 +156,14 @@ code, pre, .font-mono {
   background: var(--bg-base);
 }
 ::-webkit-scrollbar-thumb {
-  background: #232326;
+  background: var(--scrollbar-thumb);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #37373b;
+  background: var(--scrollbar-thumb-hover);
 }
 
 ::selection {
-  background: #EDEDEF;
-  color: #0A0A0B;
+  background: var(--selection-bg);
+  color: var(--selection-text);
 }

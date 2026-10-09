@@ -1,0 +1,50 @@
+---
+import "../styles/global.css";
+import { themePalette } from "../config/theme";
+
+const themeCss = `
+  :root, :root:root, html, body {
+    /* Backgrounds */
+    --bg-base: ${themePalette.bgBase} !important;
+    --bg-surface: ${themePalette.bgSurface} !important;
+    --bg-surface-elevated: ${themePalette.bgSurfaceElevated} !important;
+
+    /* Typography */
+    --text-primary: ${themePalette.textPrimary} !important;
+    --text-secondary: ${themePalette.textSecondary} !important;
+    --text-tertiary: ${themePalette.textMuted} !important;
+    --text-hover: ${themePalette.textHover} !important;
+
+    /* Borders */
+    --border-hairline: ${themePalette.borderHairline} !important;
+    --border-strong: ${themePalette.borderStrong} !important;
+
+    /* Primary Button */
+    --btn-primary-bg: ${themePalette.btnPrimaryBg} !important;
+    --btn-primary-text: ${themePalette.btnPrimaryText} !important;
+    --btn-primary-hover-bg: ${themePalette.btnPrimaryHoverBg} !important;
+    --btn-primary-hover-text: ${themePalette.btnPrimaryHoverText} !important;
+
+    /* Secondary Button */
+    --btn-secondary-bg: ${themePalette.btnSecondaryBg} !important;
+    --btn-secondary-text: ${themePalette.btnSecondaryText} !important;
+    --btn-secondary-hover-bg: ${themePalette.btnSecondaryHoverBg} !important;
+    --btn-secondary-hover-text: ${themePalette.btnSecondaryHoverText} !important;
+    --btn-secondary-border: ${themePalette.btnSecondaryBorder} !important;
+    --btn-secondary-hover-border: ${themePalette.btnSecondaryHoverBorder} !important;
+
+    /* Brand Accents */
+    --accent-amber: ${themePalette.accentAmber} !important;
+    --accent-cognac: ${themePalette.accentCognac} !important;
+    --accent-hover: ${themePalette.accentHover} !important;
+
+    /* Interactive & System */
+    --selection-bg: ${themePalette.selectionBg} !important;
+    --selection-text: ${themePalette.selectionText} !important;
+    --scrollbar-thumb: ${themePalette.scrollbarThumb} !important;
+    --scrollbar-thumb-hover: ${themePalette.scrollbarThumbHover} !important;
+  }
+`;
+---
+
+<style is:inline set:html={themeCss} />

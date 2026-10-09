@@ -1,31 +1,51 @@
 ---
 import { siteConfig } from "../config/site";
+import type { Locale } from "../i18n/translations";
+import { translations } from "../i18n/translations";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = "en" } = Astro.props;
+const t = translations[locale].footer;
 const year = new Date().getFullYear();
+const isTr = locale === "tr";
 ---
 
-<footer class="w-full border-t border-white/[0.08] bg-[#0A0A0B] py-12 mt-24">
-  <div class="max-w-5xl mx-auto px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-    <!-- Brand -->
-    <div class="flex items-center gap-2.5">
+<footer class="w-full border-t border-theme bg-theme-base py-12 mt-20">
+  <div class="max-w-5xl mx-auto px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-theme-muted">
+    <!-- Brand Info -->
+    <div class="flex items-center gap-3">
       <div class="w-4 h-4 flex items-center justify-center">
-        <svg class="w-full h-full" viewBox="-50 -50 100 100" fill="none">
-          <polygon points="0,-42 36.4,-21 36.4,21 0,42 -36.4,21 -36.4,-21" stroke="#EDEDEF" stroke-width="7" />
-          <circle cx="0" cy="0" r="10" fill="#FF5B1F" />
+        <svg class="w-full h-full" viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" class="text-theme-primary" stroke-width="2" />
+          <circle cx="12" cy="12" r="3.5" class="fill-theme-accent" />
         </svg>
       </div>
-      <span class="text-sm font-semibold tracking-tight text-[#EDEDEF]">WeOwnVision</span>
-      <span class="text-xs text-[#8A8A93] ml-1">Hackathon Collective</span>
+      <span class="text-sm font-semibold tracking-tight text-theme-primary">WeOwnVision</span>
+      <span>•</span>
+      <span>{t.brandDesc}</span>
     </div>
 
     <!-- Links -->
-    <div class="flex items-center gap-6 text-sm text-[#A1A1AA]">
-      <a href="/" class="hover:text-[#EDEDEF] transition-colors">Home</a>
-      <a href="/about/" class="hover:text-[#EDEDEF] transition-colors">About</a>
-      <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer" class="hover:text-[#EDEDEF] transition-colors">GitHub</a>
+    <div class="flex items-center gap-6">
+      <a href={isTr ? "/tr/" : "/"} class="hover:text-theme-text-hover transition-colors">
+        {isTr ? "Anasayfa" : "Home"}
+      </a>
+      <a href={isTr ? "/tr/about/" : "/about/"} class="hover:text-theme-text-hover transition-colors">
+        {isTr ? "Hakkımızda" : "About"}
+      </a>
+      <a href={isTr ? "/tr/projects/" : "/projects/"} class="hover:text-theme-text-hover transition-colors">
+        {isTr ? "Projeler" : "Projects"}
+      </a>
+      <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer" class="hover:text-theme-text-hover transition-colors">
+        GitHub
+      </a>
     </div>
 
     <!-- Copyright -->
-    <div class="text-xs text-[#8A8A93]">
+    <div>
       © {year} WeOwnVision.
     </div>
   </div>

@@ -1,33 +1,33 @@
 ---
-import Navigation from "../components/Navigation.astro";
-import Footer from "../components/Footer.astro";
-import TeamCard from "../components/TeamCard.astro";
-import ScrollObserver from "../components/ScrollObserver.astro";
-import ThemeHead from "../components/ThemeHead.astro";
-import { siteConfig } from "../config/site";
-import { translations } from "../i18n/translations";
+import Navigation from "../../components/Navigation.astro";
+import Footer from "../../components/Footer.astro";
+import TeamCard from "../../components/TeamCard.astro";
+import ScrollObserver from "../../components/ScrollObserver.astro";
+import ThemeHead from "../../components/ThemeHead.astro";
+import { siteConfig } from "../../config/site";
+import { translations } from "../../i18n/translations";
 
-const t = translations.en;
+const t = translations.tr;
 const a = t.aboutPage;
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth bg-theme-base text-theme-primary">
+<html lang="tr" class="scroll-smooth bg-theme-base text-theme-primary">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>About | {siteConfig.title}</title>
-    <meta name="description" content="The origin story and 36-hour sprint methodology of WeOwnVision from Atatürk University." />
+    <title>Hakkımızda | {siteConfig.title}</title>
+    <meta name="description" content="Erzurum Atatürk Üniversitesi'nden WeOwnVision hackathon ekibinin kuruluş hikayesi ve 36 saatlik sprint metodolojisi." />
     <ThemeHead />
   </head>
 
   <body class="min-h-screen bg-theme-base text-theme-primary flex flex-col relative selection:bg-theme-accent selection:text-theme-base">
-    <Navigation locale="en" />
+    <Navigation locale="tr" />
 
     <main class="relative z-10 flex-1 max-w-5xl mx-auto px-6 sm:px-8 py-14 w-full">
-      <!-- Page Header -->
+      <!-- Sayfa Başlığı -->
       <div class="text-left max-w-2xl mb-16" data-scroll-reveal="text">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-theme-surface border border-theme text-xs font-mono text-theme-secondary mb-4">
           <span class="w-1.5 h-1.5 rounded-full bg-theme-accent"></span>
@@ -41,31 +41,31 @@ const a = t.aboutPage;
         </p>
       </div>
 
-      <!-- Section 1: The Origin Story & Campus Roots -->
+      <!-- Bölüm 1: Köken Hikayesi ve Üniversite Kökleri -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-20 border-t border-theme pt-14">
         <div class="lg:col-span-5">
           <div class="p-6 sm:p-7 rounded-2xl border border-theme bg-theme-surface space-y-4 shadow-xl">
             <div class="flex items-center justify-between text-xs font-mono text-theme-muted border-b border-theme pb-3">
-              <span class="text-theme-primary font-semibold">// BASE OF OPERATIONS</span>
+              <span class="text-theme-primary font-semibold">// OPERASYON MERKEZİ</span>
               <span class="text-theme-accent">ERZURUM</span>
             </div>
             
             <div class="space-y-2.5 font-mono text-xs">
               <div class="flex items-center justify-between py-1 border-b border-theme/50">
-                <span class="text-theme-muted">Campus</span>
-                <span class="text-theme-primary font-semibold">Atatürk University</span>
+                <span class="text-theme-muted">Üniversite</span>
+                <span class="text-theme-primary font-semibold">Atatürk Üniversitesi</span>
               </div>
               <div class="flex items-center justify-between py-1 border-b border-theme/50">
-                <span class="text-theme-muted">Squad Size</span>
-                <span class="text-theme-primary">5 Engineers</span>
+                <span class="text-theme-muted">Kadro Boyutu</span>
+                <span class="text-theme-primary">5 Mühendis</span>
               </div>
               <div class="flex items-center justify-between py-1 border-b border-theme/50">
-                <span class="text-theme-muted">Constraint</span>
-                <span class="text-theme-accent font-bold">36 Hours Strict</span>
+                <span class="text-theme-muted">Sprint Süresi</span>
+                <span class="text-theme-accent font-bold">36 Saat Kesintisiz</span>
               </div>
               <div class="flex items-center justify-between py-1">
-                <span class="text-theme-muted">Focus</span>
-                <span class="text-theme-primary">Shipped Software</span>
+                <span class="text-theme-muted">Odak</span>
+                <span class="text-theme-primary">Çalışan Yazılım</span>
               </div>
             </div>
           </div>
@@ -84,11 +84,11 @@ const a = t.aboutPage;
         </div>
       </div>
 
-      <!-- Section 2: The 3 Rules Breakdown -->
+      <!-- Bölüm 2: 3 Kural -->
       <div class="border-t border-theme pt-14 mb-20">
         <div class="mb-10 max-w-xl" data-scroll-reveal="text">
           <span class="text-xs font-mono font-semibold text-theme-muted uppercase tracking-wider">
-            METHODOLOGY
+            METODOLOJİ
           </span>
           <h2 class="text-2xl sm:text-3xl font-extrabold text-theme-primary tracking-tight mt-1">
             {a.protocolTitle}
@@ -102,7 +102,7 @@ const a = t.aboutPage;
           {t.hero.manifestoRules.map((rule) => (
             <div class="p-6 rounded-2xl bg-theme-surface border border-theme space-y-3">
               <span class="text-xs font-mono font-bold text-theme-accent">
-                PHASE {rule.num}
+                FAZ {rule.num}
               </span>
               <h3 class="text-base font-bold text-theme-primary tracking-tight">
                 {rule.name}
@@ -115,17 +115,17 @@ const a = t.aboutPage;
         </div>
       </div>
 
-      <!-- Section 3: The Squad Roster -->
+      <!-- Bölüm 3: Kadro -->
       <div class="border-t border-theme pt-14 mb-20">
         <div class="mb-10 max-w-xl" data-scroll-reveal="text">
           <span class="text-xs font-mono font-semibold text-theme-muted uppercase tracking-wider">
-            THE SQUAD
+            KADRO
           </span>
           <h2 class="text-2xl sm:text-3xl font-extrabold text-theme-primary tracking-tight mt-1">
-            Five Members
+            Beş Üye
           </h2>
           <p class="mt-2 text-sm text-theme-secondary leading-relaxed">
-            Full-stack ownership across distributed systems, ML pipelines, frontend, and cloud ops.
+            Dağıtık sistemler, yapay zeka, ön yüz ve bulut altyapısında tam sahiplik.
           </p>
         </div>
 
@@ -136,7 +136,7 @@ const a = t.aboutPage;
         </div>
       </div>
 
-      <!-- Section 4: Closing CTA -->
+      <!-- Bölüm 4: Kapanış CTA -->
       <div class="p-8 sm:p-10 rounded-2xl bg-theme-surface border border-theme flex flex-col md:flex-row items-start md:items-center justify-between gap-6" data-scroll-reveal="card">
         <div class="space-y-2">
           <h3 class="text-xl sm:text-2xl font-bold text-theme-primary tracking-tight">
@@ -160,7 +160,7 @@ const a = t.aboutPage;
 
     </main>
 
-    <Footer locale="en" />
+    <Footer locale="tr" />
     <ScrollObserver />
   </body>
 </html>
