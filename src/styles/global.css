@@ -12,7 +12,7 @@
   .section-x { @apply px-margin-sm md:px-margin lg:px-margin-lg; }
   .eyebrow { @apply flex items-center gap-space-sm font-mono text-label-md text-primary; }
   .tag { @apply px-space-sm py-space-xs rounded bg-surface-container-high text-tertiary; }
-  .card-lift { @apply transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_0_24px_rgba(195,149,91,0.12)]; }
+  .card-lift { @apply transition-transform duration-200 hover:-translate-y-0.5; }
 }
 
 .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
