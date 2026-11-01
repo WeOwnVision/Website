@@ -1,0 +1,147 @@
+---
+import { site, type Locale } from '../i18n/content';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const ui = {
+  en: {
+    eyebrow: 'Public repositories',
+    title: 'Open Source',
+    body: 'Every repository on our GitHub, pulled live and sorted by latest activity.',
+    loading: 'Fetching repositories from GitHub…',
+    error: 'GitHub could not be reached right now.',
+    errorCta: 'Browse on GitHub →',
+    org: 'All repos on GitHub →',
+    updated: 'Updated',
+    live: 'Live',
+    noDesc: 'No description yet.',
+    archived: 'Archived',
+  },
+  tr: {
+    eyebrow: 'Açık depolar',
+    title: 'Açık Kaynak',
+    body: 'GitHub\'daki tüm depolarımız, canlı olarak çekilip son aktiviteye göre sıralanır.',
+    loading: 'Depolar GitHub\'dan çekiliyor…',
+    error: 'Şu anda GitHub\'a ulaşılamıyor.',
+    errorCta: 'GitHub\'da incele →',
+    org: 'Tüm depolar GitHub\'da →',
+    updated: 'Güncellendi',
+    live: 'Canlı',
+    noDesc: 'Henüz açıklama yok.',
+    archived: 'Arşiv',
+  },
+}[locale];
+---
+
+<section id="open-source" class="section-x py-space-xl md:py-16 bg-surface-container-lowest">
+  <div class="max-w-6xl mx-auto flex flex-col gap-space-lg">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+      <div class="flex flex-col gap-space-xs">
+        <div class="eyebrow"><span class="font-bold">03 //</span><span class="uppercase tracking-widest text-outline">{ui.eyebrow}</span></div>
+        <h2 class="text-headline-lg-mobile md:text-headline-lg font-bold text-on-surface">{ui.title}</h2>
+        <p class="text-body-md text-on-surface-variant max-w-2xl">{ui.body}</p>
+      </div>
+      <a href={site.github} target="_blank" rel="noopener" class="font-mono text-label-md text-primary hover:underline shrink-0">{ui.org}</a>
+    </div>
+
+    <div class="rounded-xl bg-surface-container-low border border-outline-variant/30 overflow-hidden">
+      <div class="flex items-center justify-between px-space-md py-space-sm border-b border-outline-variant/30 font-mono text-label-sm">
+        <span class="text-outline">github.com/WeOwnVision</span>
+        <span id="repoCount" class="text-tertiary"></span>
+      </div>
+      <ul id="repoList" class="divide-y divide-outline-variant/20" aria-live="polite">
+        <li class="px-space-md py-space-lg font-mono text-label-md text-outline">{ui.loading}</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ ui, locale, orgUrl: site.github }}>
+  const list = document.getElementById('repoList');
+  const count = document.getElementById('repoCount');
+  const fmt = new Intl.DateTimeFormat(locale === 'tr' ? 'tr-TR' : 'en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+  const el = (tag, cls, text) => {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  };
+  const icon = (name) => el('span', 'material-symbols-outlined !text-sm', name);
+
+  const render = (repos) => {
+    list.replaceChildren();
+    count.textContent = `${repos.length} repos`;
+    repos.forEach((r) => {
+      const li = el('li', 'group flex flex-col md:flex-row md:items-center gap-space-sm md:gap-space-lg px-space-md py-space-md hover:bg-surface-container transition-colors');
+
+      const main = el('div', 'flex-1 min-w-0');
+      const head = el('div', 'flex flex-wrap items-center gap-space-sm');
+      const name = el('a', 'font-display text-headline-sm font-semibold text-on-surface group-hover:text-primary transition-colors break-all', r.name);
+      name.href = r.url;
+      name.target = '_blank';
+      name.rel = 'noopener';
+      head.append(name);
+      if (r.archived) head.append(el('span', 'px-space-xs rounded bg-surface-container-high font-mono text-label-sm text-outline', ui.archived));
+      main.append(head, el('p', 'mt-1 text-body-sm text-on-surface-variant', r.description || ui.noDesc));
+      if (r.topics.length) {
+        const tags = el('div', 'mt-space-sm flex flex-wrap gap-1 font-mono text-label-sm');
+        r.topics.slice(0, 6).forEach((t) => tags.append(el('span', 'px-1.5 py-0.5 rounded bg-surface-container-high text-tertiary', t)));
+        main.append(tags);
+      }
+
+      const meta = el('div', 'flex flex-wrap items-center gap-space-md font-mono text-label-sm text-outline shrink-0');
+      if (r.language) {
+        const lang = el('span', 'flex items-center gap-1 text-on-surface-variant');
+        lang.append(el('span', 'w-2 h-2 rounded-full bg-primary-container'), document.createTextNode(r.language));
+        meta.append(lang);
+      }
+      const stars = el('span', 'flex items-center gap-1');
+      stars.append(icon('star'), document.createTextNode(String(r.stars)));
+      const forks = el('span', 'flex items-center gap-1');
+      forks.append(icon('fork_right'), document.createTextNode(String(r.forks)));
+      meta.append(stars, forks, el('span', '', `${ui.updated} ${fmt.format(new Date(r.pushedAt))}`));
+      if (r.homepage) {
+        const live = el('a', 'flex items-center gap-1 px-space-sm py-space-xs rounded bg-surface-container-highest text-primary hover:bg-primary-container hover:text-on-primary transition-colors');
+        live.href = r.homepage;
+        live.target = '_blank';
+        live.rel = 'noopener';
+        live.append(icon('open_in_new'), document.createTextNode(ui.live));
+        meta.append(live);
+      }
+
+      li.append(main, meta);
+      list.append(li);
+    });
+  };
+
+  const fail = () => {
+    const li = el('li', 'px-space-md py-space-lg flex flex-wrap items-center gap-space-sm font-mono text-label-md text-outline', ui.error);
+    const a = el('a', 'text-primary hover:underline', ui.errorCta);
+    a.href = orgUrl;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    li.append(a);
+    list.replaceChildren(li);
+  };
+
+  // Fallback: if our cached endpoint fails, ask GitHub directly from the visitor's browser.
+  const direct = () =>
+    fetch('https://api.github.com/orgs/WeOwnVision/repos?per_page=100&sort=pushed&type=public')
+      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+      .then((repos) =>
+        repos
+          .filter((r) => !r.private && !r.fork)
+          .map((r) => ({ name: r.name, description: r.description, url: r.html_url, homepage: r.homepage || null, language: r.language, stars: r.stargazers_count, forks: r.forks_count, topics: r.topics ?? [], pushedAt: r.pushed_at, archived: r.archived })),
+      );
+
+  fetch('/api/repos.json')
+    .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+    .then((data) => data.repos)
+    .catch(direct)
+    .then(render)
+    .catch(fail);
+</script>

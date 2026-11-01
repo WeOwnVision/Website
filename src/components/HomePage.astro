@@ -2,6 +2,8 @@
 import '../styles/global.css';
 import { dict, site, stack, type Locale } from '../i18n/content';
 import Hackathons from './Hackathons.astro';
+import LinkedInPosts from './LinkedInPosts.astro';
+import OpenSource from './OpenSource.astro';
 
 interface Props {
   locale: Locale;
@@ -10,7 +12,6 @@ interface Props {
 const { locale } = Astro.props;
 const t = dict[locale];
 const linkHref = { github: site.github, twitter: site.twitter } as const;
-const commands = ['git clone https://github.com/WeOwnVision/Website.git', 'cd Website && npm install && npm run dev'];
 ---
 
 <!doctype html>
@@ -42,12 +43,12 @@ const commands = ['git clone https://github.com/WeOwnVision/Website.git', 'cd We
           <a href={locale === 'tr' ? '/tr/' : '/'} class="flex items-center" aria-label="We Own Vision">
             <img src="/wov-logo.png" alt="W.O.V — We Own Vision" class="h-12 w-auto" />
           </a>
-          <div class="hidden xl:flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-surface-container-low">
+          <div class="hidden 2xl:flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-surface-container-low">
             <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
             <span class="font-mono text-label-sm text-tertiary">{t.statusPill}</span>
           </div>
         </div>
-        <nav class="hidden lg:flex items-center gap-space-sm" aria-label="Primary">
+        <nav class="hidden xl:flex items-center gap-space-xs" aria-label="Primary">
           {t.nav.map((item) => (
             <a href={item.href} data-nav class="px-space-sm py-space-xs rounded-lg font-mono text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors">{item.label}</a>
           ))}
@@ -57,12 +58,12 @@ const commands = ['git clone https://github.com/WeOwnVision/Website.git', 'cd We
           <a href={site.github} target="_blank" rel="noopener" class="hidden sm:inline-flex items-center gap-space-xs px-space-md py-space-sm rounded-lg bg-surface-container font-mono text-label-md text-primary hover:bg-surface-container-high hover:text-on-surface transition-colors">
             <span class="material-symbols-outlined text-base">code</span>{t.githubCta}
           </a>
-          <button id="menuBtn" class="lg:hidden w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary" aria-label="Menu" aria-expanded="false" aria-controls="mobileNav">
+          <button id="menuBtn" class="xl:hidden w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary" aria-label="Menu" aria-expanded="false" aria-controls="mobileNav">
             <span class="material-symbols-outlined">menu</span>
           </button>
         </div>
       </div>
-      <nav id="mobileNav" class="hidden lg:hidden section-x pb-space-md flex-col gap-space-xs" aria-label="Mobile">
+      <nav id="mobileNav" class="hidden xl:hidden section-x pb-space-md flex-col gap-space-xs" aria-label="Mobile">
         {t.nav.map((item) => (
           <a href={item.href} class="py-space-sm font-mono text-label-lg uppercase tracking-wider text-on-surface-variant hover:text-primary">{item.label}</a>
         ))}
@@ -98,7 +99,13 @@ const commands = ['git clone https://github.com/WeOwnVision/Website.git', 'cd We
       <!-- 2. HACKATHONS -->
       <Hackathons locale={locale} />
 
-      <!-- 2. MANIFESTO -->
+      <!-- 3. LINKEDIN -->
+      <LinkedInPosts locale={locale} />
+
+      <!-- 4. OPEN SOURCE -->
+      <OpenSource locale={locale} />
+
+      <!-- 5. MANIFESTO -->
       <section id="manifesto" class="section-x py-space-xl md:py-16">
         <div class="max-w-6xl mx-auto flex flex-col gap-space-lg">
           <div class="eyebrow"><span class="font-bold">{t.manifesto.index}</span><span class="uppercase tracking-widest text-outline">{t.manifesto.eyebrow}</span></div>
@@ -130,62 +137,8 @@ const commands = ['git clone https://github.com/WeOwnVision/Website.git', 'cd We
         </div>
       </section>
 
-      <!-- 4. OPEN SOURCE -->
-      <section id="open-source" class="section-x py-space-xl md:py-16 bg-surface-container-lowest">
-        <div class="max-w-6xl mx-auto flex flex-col gap-space-lg">
-          <div class="flex items-center justify-between">
-            <div class="eyebrow"><span class="font-bold">{t.openSource.index}</span><span class="uppercase tracking-widest text-outline">{t.openSource.eyebrow}</span></div>
-            <span class="font-mono text-label-sm text-tertiary hidden sm:inline">{t.openSource.meta}</span>
-          </div>
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
-            <div class="lg:col-span-7 bg-surface-container-low rounded-xl p-space-md flex flex-col">
-              <div class="flex items-center justify-between pb-space-sm">
-                <div class="flex items-center gap-2">
-                  <div class="w-3 h-3 rounded-full bg-error/80"></div>
-                  <div class="w-3 h-3 rounded-full bg-primary/80"></div>
-                  <div class="w-3 h-3 rounded-full bg-outline/50"></div>
-                  <span class="font-mono text-label-sm text-outline ml-2">bash ~ weownvision</span>
-                </div>
-                <button id="copyBtn" data-copy={commands.join('\n')} data-copied={t.openSource.copied} class="flex items-center gap-1 font-mono text-label-sm text-primary hover:text-on-surface transition-colors">
-                  <span class="material-symbols-outlined text-sm">content_copy</span><span id="copyState">{t.openSource.copy}</span>
-                </button>
-              </div>
-              <div class="flex-1 bg-surface-container-lowest rounded p-space-md font-mono text-label-md overflow-x-auto text-on-surface leading-relaxed whitespace-nowrap">
-                <p class="text-outline">{t.openSource.comments[0]}</p>
-                <p class="text-tertiary">$ {commands[0]}</p>
-                <p class="text-outline mt-2">{t.openSource.comments[1]}</p>
-                <p class="text-primary">$ {commands[1]}</p>
-                <p class="text-on-surface-variant mt-2">&gt;&gt; astro dev</p>
-                <p class="text-primary-container font-semibold">&gt;&gt; Local: http://localhost:4321/</p>
-              </div>
-            </div>
-            <div class="lg:col-span-5 bg-surface-container rounded-xl p-space-md flex flex-col justify-between gap-space-md">
-              <div>
-                <div class="flex items-center justify-between pb-space-xs font-mono text-label-sm">
-                  <span class="text-on-surface font-semibold uppercase">{t.openSource.panelTitle}</span>
-                  <span class="text-primary">{t.openSource.panelMeta}</span>
-                </div>
-                <p class="text-body-sm text-on-surface-variant mb-space-md">{t.openSource.panelBody}</p>
-                <ol class="flex flex-col gap-space-xs">
-                  {t.openSource.steps.map((step, i) => (
-                    <li class="flex items-center gap-space-sm bg-surface-container-lowest rounded p-space-sm font-mono text-label-md">
-                      <span class="w-6 h-6 shrink-0 rounded bg-primary-container/20 text-primary flex items-center justify-center text-label-sm">{i + 1}</span>
-                      <span class={i === t.openSource.steps.length - 1 ? 'text-primary' : 'text-on-surface-variant'}>{step}</span>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-              <div class="flex flex-wrap items-center justify-between gap-space-xs font-mono text-label-sm">
-                <span class="text-outline">{t.openSource.org}</span>
-                <a href={site.github} target="_blank" rel="noopener" class="text-primary hover:underline">{t.openSource.orgCta}</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 5. DISCIPLINE & STACK -->
-      <section id="stack" class="section-x py-space-xl md:py-16">
+      <!-- 6. DISCIPLINE & STACK -->
+      <section id="stack" class="section-x py-space-xl md:py-16 bg-surface-container-lowest">
         <div class="max-w-6xl mx-auto flex flex-col gap-space-lg">
           <div class="eyebrow"><span class="font-bold">{t.discipline.index}</span><span class="uppercase tracking-widest text-outline">{t.discipline.eyebrow}</span></div>
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
@@ -229,8 +182,8 @@ const commands = ['git clone https://github.com/WeOwnVision/Website.git', 'cd We
         </div>
       </section>
 
-      <!-- 6. CONTACT -->
-      <section id="contact" class="section-x py-space-xl md:py-16 bg-surface-container-lowest">
+      <!-- 7. CONTACT -->
+      <section id="contact" class="section-x py-space-xl md:py-16">
         <div class="max-w-6xl mx-auto rounded-xl bg-surface-container p-space-lg md:p-space-xl flex flex-col lg:flex-row items-center justify-between gap-space-xl">
           <div class="flex flex-col gap-space-sm max-w-xl">
             <div class="flex items-center gap-space-xs font-mono text-label-sm text-primary uppercase font-bold tracking-widest">
@@ -303,16 +256,6 @@ const commands = ['git clone https://github.com/WeOwnVision/Website.git', 'cd We
         }),
       );
 
-      const copyBtn = document.getElementById('copyBtn');
-      copyBtn?.addEventListener('click', async () => {
-        const state = document.getElementById('copyState');
-        try {
-          await navigator.clipboard.writeText(copyBtn.dataset.copy ?? '');
-          if (state) state.textContent = copyBtn.dataset.copied ?? '';
-        } catch {
-          /* clipboard unavailable */
-        }
-      });
 
       // Highlight the nav item for the section in view.
       const links = document.querySelectorAll<HTMLAnchorElement>('[data-nav]');
