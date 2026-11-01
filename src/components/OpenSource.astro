@@ -103,7 +103,8 @@ const ui = {
       stars.append(icon('star'), document.createTextNode(String(r.stars)));
       const forks = el('span', 'flex items-center gap-1');
       forks.append(icon('fork_right'), document.createTextNode(String(r.forks)));
-      meta.append(stars, forks, el('span', '', `${ui.updated} ${fmt.format(new Date(r.pushedAt))}`));
+      meta.append(stars, forks);
+      if (r.pushedAt) meta.append(el('span', '', `${ui.updated} ${fmt.format(new Date(r.pushedAt))}`));
       if (r.homepage) {
         const live = el('a', 'flex items-center gap-1 px-space-sm py-space-xs rounded bg-surface-container-highest text-primary hover:bg-primary-container hover:text-on-primary transition-colors');
         live.href = r.homepage;
@@ -130,7 +131,7 @@ const ui = {
 
   // Fallback: if our cached endpoint fails, ask GitHub directly from the visitor's browser.
   const direct = () =>
-    fetch('https://api.github.com/orgs/WeOwnVision/repos?per_page=100&sort=pushed&type=public')
+    fetch('https://api.github.com/users/WeOwnVision/repos?per_page=100&sort=pushed&type=owner')
       .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
       .then((repos) =>
         repos

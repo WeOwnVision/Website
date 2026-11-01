@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { dict, site, stack, type Locale } from '../i18n/content';
+import { dict, site, type Locale } from '../i18n/content';
 import Hackathons from './Hackathons.astro';
 import LinkedInPosts from './LinkedInPosts.astro';
 import OpenSource from './OpenSource.astro';
@@ -137,53 +137,8 @@ const linkHref = { github: site.github, twitter: site.twitter } as const;
         </div>
       </section>
 
-      <!-- 6. DISCIPLINE & STACK -->
-      <section id="stack" class="section-x py-space-xl md:py-16 bg-surface-container-lowest">
-        <div class="max-w-6xl mx-auto flex flex-col gap-space-lg">
-          <div class="eyebrow"><span class="font-bold">{t.discipline.index}</span><span class="uppercase tracking-widest text-outline">{t.discipline.eyebrow}</span></div>
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
-            <div class="lg:col-span-6 flex flex-col gap-space-md">
-              <h2 class="text-headline-lg-mobile md:text-headline-lg font-bold text-on-surface">{t.discipline.title}</h2>
-              <p class="text-body-lg text-on-surface-variant">{t.discipline.body}</p>
-              <div class="flex flex-col gap-space-sm mt-space-xs">
-                {t.discipline.items.map((item) => (
-                  <div class="p-space-md rounded-lg bg-surface-container flex items-start gap-space-md">
-                    <span class="material-symbols-outlined text-primary !text-2xl mt-1">{item.icon}</span>
-                    <div>
-                      <h3 class="text-headline-sm text-on-surface font-semibold">{item.title}</h3>
-                      <p class="text-body-sm text-on-surface-variant">{item.body}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div class="lg:col-span-6 bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-md">
-              <div class="flex items-center justify-between pb-space-xs font-mono text-label-sm">
-                <span class="text-outline uppercase font-semibold">{t.discipline.stackTitle}</span>
-                <span class="text-primary">{t.discipline.stackMeta}</span>
-              </div>
-              <div class="grid grid-cols-2 sm:grid-cols-3 gap-space-sm">
-                {stack.map((s) => (
-                  <div class="bg-surface-container p-space-md rounded-lg flex flex-col gap-1 hover:bg-surface-container-high transition-colors">
-                    <span class={`font-display text-headline-sm font-bold ${s.accent ? 'text-primary' : 'text-on-surface'}`}>{s.name}</span>
-                    <span class="font-mono text-label-sm text-outline">{s.note[locale]}</span>
-                  </div>
-                ))}
-              </div>
-              <div class="bg-surface-container p-space-md rounded-lg flex items-center gap-space-sm">
-                <span class="material-symbols-outlined text-primary">shield_lock</span>
-                <div>
-                  <div class="font-mono text-label-md text-on-surface font-semibold">{t.discipline.extraTitle}</div>
-                  <div class="text-body-sm text-on-surface-variant">{t.discipline.extraBody}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 7. CONTACT -->
-      <section id="contact" class="section-x py-space-xl md:py-16">
+      <!-- 6. CONTACT -->
+      <section id="contact" class="section-x py-space-xl md:py-16 bg-surface-container-lowest">
         <div class="max-w-6xl mx-auto rounded-xl bg-surface-container p-space-lg md:p-space-xl flex flex-col lg:flex-row items-center justify-between gap-space-xl">
           <div class="flex flex-col gap-space-sm max-w-xl">
             <div class="flex items-center gap-space-xs font-mono text-label-sm text-primary uppercase font-bold tracking-widest">

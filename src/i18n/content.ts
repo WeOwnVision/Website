@@ -9,15 +9,6 @@ export const site = {
   email: 'contact@weownvision.dev',
 };
 
-export const stack = [
-  { name: 'TypeScript', note: { en: 'End-to-end type safety', tr: 'Uçtan uca tip güvenliği' }, accent: true },
-  { name: 'Go', note: { en: 'Fast, boring backends', tr: 'Hızlı ve sağlam backend' } },
-  { name: 'PyTorch', note: { en: 'ML pipelines & inference', tr: 'ML hatları ve çıkarım' } },
-  { name: 'Astro', note: { en: 'Lean, fast frontends', tr: 'Hafif ve hızlı arayüz' }, accent: true },
-  { name: 'Docker', note: { en: 'Reproducible deploys', tr: 'Tekrarlanabilir dağıtım' } },
-  { name: 'PostgreSQL', note: { en: 'Schema locked early', tr: 'Erken kilitlenen şema' } },
-];
-
 const missionEn = 'We are a borderless team building open-source projects and aiming for podiums at global hackathons.';
 const missionTr = 'Global hackathonlarda derece hedefleyen, açık kaynak projeler geliştiren, sınır tanımayan bir ekibiz.';
 
@@ -30,7 +21,6 @@ export const dict = {
       { label: 'Updates', href: '#updates' },
       { label: 'Open Source', href: '#open-source' },
       { label: 'Story', href: '#manifesto' },
-      { label: 'Stack', href: '#stack' },
       { label: 'Contact', href: '#contact' },
     ],
     statusPill: 'Training for the next hackathon season',
@@ -62,21 +52,6 @@ export const dict = {
         { tag: 'PILLAR // GAMMA', icon: 'rocket_launch', title: 'CI/CD from Hour One', body: 'Everyone commits to main with automated builds. A public production URL is live from the first commit, so there is no last-minute merge panic.', foot: 'RULE 03: ALWAYS DEPLOYED' },
       ],
     },
-    discipline: {
-      index: '05 //',
-      eyebrow: 'Engineering discipline',
-      title: 'Sprint Discipline Over Slide Decks',
-      body: 'We don’t build fragile demo slides. We build small, working systems that compile fast, deploy cleanly and survive a live judge evaluation.',
-      items: [
-        { icon: 'speed', title: 'Zero Bloat', body: 'Lean dependencies and fast builds. If a library does not earn its place, it does not ship.' },
-        { icon: 'bolt', title: 'Ship Before Sleep', body: 'Hackathon sprints teach brutal prioritization. If a feature does not advance the core idea, it is cut.' },
-        { icon: 'verified_user', title: 'Full-Stack Ownership', body: 'From migrations to typography, everyone commits across the stack and owns the result.' },
-      ],
-      stackTitle: 'Battle-tested arsenal',
-      stackMeta: 'CORE STACK',
-      extraTitle: 'Security & cloud ops',
-      extraBody: 'Linux, Kubernetes and zero-trust defaults so fast shipping never means sloppy deploys.',
-    },
     contact: {
       eyebrow: 'Alliance & sponsor commons',
       title: 'Have a Problem Worth a Hackathon?',
@@ -105,7 +80,6 @@ export const dict = {
       { label: 'Güncellemeler', href: '#updates' },
       { label: 'Açık Kaynak', href: '#open-source' },
       { label: 'Hikaye', href: '#manifesto' },
-      { label: 'Stack', href: '#stack' },
       { label: 'İletişim', href: '#contact' },
     ],
     statusPill: 'Yeni hackathon sezonuna hazırlanıyoruz',
@@ -136,21 +110,6 @@ export const dict = {
         { tag: 'PILLAR // BETA', icon: 'database', title: 'Gerçek Veri ve Yedekler', body: 'Hız, bozuk ekranların mazereti olamaz. Her uç noktanın çevrimdışı yedek verisi hazırdır; salonun Wi-Fi\'ı çökse bile demo ayakta kalır.', foot: 'KURAL 02: BOZUK DEMO YOK' },
         { tag: 'PILLAR // GAMMA', icon: 'rocket_launch', title: 'İlk Saatten CI/CD', body: 'Herkes otomatik derlemeyle main\'e commit atar. İlk commit\'ten itibaren canlı bir adres vardır; son dakika merge paniği yaşanmaz.', foot: 'KURAL 03: HER ZAMAN YAYINDA' },
       ],
-    },
-    discipline: {
-      index: '05 //',
-      eyebrow: 'Mühendislik disiplini',
-      title: 'Slayt Yerine Sprint Disiplini',
-      body: 'Kırılgan demo slaytları hazırlamayız. Hızlı derlenen, temiz dağıtılan ve canlı jüri değerlendirmesinde ayakta kalan küçük, çalışan sistemler kurarız.',
-      items: [
-        { icon: 'speed', title: 'Sıfır Şişkinlik', body: 'Az bağımlılık, hızlı derleme. Yerini hak etmeyen kütüphane yayına çıkmaz.' },
-        { icon: 'bolt', title: 'Uyumadan Yayına Al', body: 'Hackathon sprintleri acımasız önceliklendirme öğretir. Ana fikre hizmet etmeyen özellik kesilir.' },
-        { icon: 'verified_user', title: 'Uçtan Uca Sahiplik', body: 'Migration\'lardan tipografiye kadar herkes tüm stack\'e commit atar ve sonucun sahibidir.' },
-      ],
-      stackTitle: 'Sahada test edilmiş araçlar',
-      stackMeta: 'ANA STACK',
-      extraTitle: 'Güvenlik & bulut operasyonları',
-      extraBody: 'Linux, Kubernetes ve zero-trust varsayılanlarıyla hızlı yayın asla özensiz dağıtım anlamına gelmez.',
     },
     contact: {
       eyebrow: 'İş birliği & sponsorluk',

@@ -1,5 +1,5 @@
 ---
-import { linkedinPage, linkedinPosts, toEmbedUrl } from '../data/linkedin';
+import { embedUrl, fetchLatestPostUrns, linkedinPage } from '../data/linkedin';
 import type { Locale } from '../i18n/content';
 
 interface Props {
@@ -12,7 +12,13 @@ const ui = {
   tr: { eyebrow: 'LinkedIn\'den', title: 'Son Paylaşımlar', follow: 'LinkedIn\'de takip et →', empty: 'En güncel paylaşımlarımız LinkedIn\'de.' },
 }[locale];
 
-const embeds = linkedinPosts.map(toEmbedUrl).filter((u): u is string => u !== null).slice(0, 3);
+// Baked in at build time so posts show even without JS; refreshed live from /api/linkedin.json below.
+let urns: string[] = [];
+try {
+  urns = await fetchLatestPostUrns();
+} catch {
+  urns = [];
+}
 ---
 
 <section id="updates" class="section-x py-space-xl md:py-16">
@@ -25,19 +31,45 @@ const embeds = linkedinPosts.map(toEmbedUrl).filter((u): u is string => u !== nu
       <a href={linkedinPage} target="_blank" rel="noopener" class="font-mono text-label-md text-primary hover:underline">{ui.follow}</a>
     </div>
 
-    {embeds.length === 0 ? (
-      <a href={linkedinPage} target="_blank" rel="noopener" class="rounded-xl bg-surface-container p-space-lg flex items-center justify-between gap-space-md hover:bg-surface-container-high transition-colors">
-        <span class="text-body-md text-on-surface-variant">{ui.empty}</span>
-        <span class="font-mono text-label-md text-primary shrink-0">{ui.follow}</span>
-      </a>
-    ) : (
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter items-start">
-        {embeds.map((src) => (
-          <div class="rounded-xl bg-surface-container p-space-xs overflow-hidden">
-            <iframe src={src} title="LinkedIn post" loading="lazy" class="w-full h-[560px] rounded-lg bg-white" frameborder="0" allowfullscreen></iframe>
-          </div>
-        ))}
-      </div>
-    )}
+    <div id="liPosts" data-urns={urns.join(',')} class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter items-start">
+      {urns.map((urn) => (
+        <div class="rounded-xl bg-surface-container p-space-xs overflow-hidden">
+          <iframe src={embedUrl(urn)} title="LinkedIn post" loading="lazy" class="w-full h-[600px] rounded-lg bg-white" frameborder="0" allowfullscreen></iframe>
+        </div>
+      ))}
+    </div>
+
+    <a id="liEmpty" href={linkedinPage} target="_blank" rel="noopener" class:list={['rounded-xl bg-surface-container p-space-lg flex items-center justify-between gap-space-md hover:bg-surface-container-high transition-colors', urns.length > 0 && 'hidden']}>
+      <span class="text-body-md text-on-surface-variant">{ui.empty}</span>
+      <span class="font-mono text-label-md text-primary shrink-0">{ui.follow}</span>
+    </a>
   </div>
 </section>
+
+<script>
+  // Swap in newer posts if any were published after the last deploy.
+  const grid = document.getElementById('liPosts');
+  const empty = document.getElementById('liEmpty');
+  fetch('/api/linkedin.json')
+    .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+    .then(({ urns }: { urns: string[] }) => {
+      if (!grid || !urns?.length || urns.join(',') === grid.dataset.urns) return;
+      grid.replaceChildren(
+        ...urns.map((urn) => {
+          const wrap = document.createElement('div');
+          wrap.className = 'rounded-xl bg-surface-container p-space-xs overflow-hidden';
+          const frame = document.createElement('iframe');
+          frame.src = `https://www.linkedin.com/embed/feed/update/${urn}`;
+          frame.title = 'LinkedIn post';
+          frame.loading = 'lazy';
+          frame.className = 'w-full h-[600px] rounded-lg bg-white';
+          frame.allowFullscreen = true;
+          wrap.append(frame);
+          return wrap;
+        }),
+      );
+      grid.dataset.urns = urns.join(',');
+      empty?.classList.add('hidden');
+    })
+    .catch(() => {});
+</script>

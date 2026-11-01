@@ -21,7 +21,7 @@ export interface HackathonEntry {
 export const hackathons: HackathonEntry[] = [
   {
     id: 'weownfeed',
-    hackathon: 'NVIDIA × Nebius × Tavily',
+    hackathon: 'Nebius × NVIDIA Global AI Hackathon',
     date: '2026',
     placement: 'Track: Best Apps & Agents',
     title: 'WeOwnFeed',
