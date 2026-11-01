@@ -8,10 +8,10 @@ export default defineConfig({
   integrations: [tailwind({ applyBaseStyles: false })],
   redirects: {
     "/about": "/#manifesto",
-    "/projects": "/#builds",
+    "/projects": "/#hackathons",
     "/posts": "/",
     "/tr/about": "/tr/#manifesto",
-    "/tr/projects": "/tr/#builds",
+    "/tr/projects": "/tr/#hackathons",
   },
   i18n: {
     defaultLocale: 'en',

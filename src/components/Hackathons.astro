@@ -1,0 +1,142 @@
+---
+import { hackathons } from '../data/hackathons';
+import { site, type Locale } from '../i18n/content';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const ui = {
+  en: {
+    eyebrow: 'Battle records',
+    title: 'Recent Hackathons',
+    latest: 'Latest entry',
+    archive: 'Full archive on GitHub →',
+    details: 'View details',
+    video: 'Demo video',
+    close: 'Close',
+    empty: 'Our next hackathon entry lands here as soon as the sprint ends.',
+  },
+  tr: {
+    eyebrow: 'Savaş kayıtları',
+    title: 'Son Hackathonlar',
+    latest: 'Son kayıt',
+    archive: 'Tüm arşiv GitHub\'da →',
+    details: 'Detayları gör',
+    video: 'Demo videosu',
+    close: 'Kapat',
+    empty: 'Sıradaki hackathon kaydımız sprint biter bitmez burada.',
+  },
+}[locale];
+
+// Show only the most recent entries; the stacked edge behind the card signals the archive.
+const recent = hackathons.slice(0, 2);
+---
+
+<section id="hackathons" class="section-x py-space-xl md:py-16 bg-surface-container-lowest">
+  <div class="max-w-6xl mx-auto flex flex-col gap-space-lg">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+      <div class="flex flex-col gap-space-xs">
+        <div class="eyebrow"><span class="font-bold">01 //</span><span class="uppercase tracking-widest text-outline">{ui.eyebrow}</span></div>
+        <h2 class="text-headline-lg-mobile md:text-headline-lg font-bold text-on-surface">{ui.title}</h2>
+      </div>
+      <a href={site.github} target="_blank" rel="noopener" class="font-mono text-label-md text-primary hover:underline">{ui.archive}</a>
+    </div>
+
+    {recent.length === 0 && (
+      <div class="rounded-xl bg-surface-container p-space-lg font-mono text-label-md text-outline">{ui.empty}</div>
+    )}
+
+    <div class="grid grid-cols-1 gap-space-xl">
+      {recent.map((h, i) => (
+        <div class="relative pb-space-md pr-space-md">
+          <!-- Stacked sheets behind the card: older entries in the archive -->
+          <div class="absolute inset-0 translate-x-4 translate-y-4 rounded-xl bg-surface-container-low border border-outline-variant/30" aria-hidden="true"></div>
+          <div class="absolute inset-0 translate-x-2 translate-y-2 rounded-xl bg-surface-container-high/60 border border-outline-variant/30" aria-hidden="true"></div>
+
+          <article class="relative rounded-xl bg-surface-container border border-outline-variant/40 hover:border-primary-container/60 transition-colors">
+            <button type="button" data-open={h.id} class="w-full text-left p-space-lg flex flex-col gap-space-md rounded-xl focus-visible:outline focus-visible:outline-1 focus-visible:outline-primary">
+              <div class="flex flex-wrap items-center justify-between gap-space-xs font-mono text-label-sm">
+                <span class="text-primary uppercase font-bold tracking-widest">{String(i + 1).padStart(3, '0')} // {h.hackathon}</span>
+                <span class="flex items-center gap-space-sm">
+                  {i === 0 && <span class="px-space-sm py-space-xs rounded-full bg-surface-container-high text-tertiary">{ui.latest}</span>}
+                  {h.placement && <span class="px-space-sm py-space-xs rounded-full bg-secondary-container text-on-secondary-container font-bold flex items-center gap-1"><span class="material-symbols-outlined !text-xs">emoji_events</span>{h.placement}</span>}
+                </span>
+              </div>
+              <div>
+                <h3 class="text-headline-lg-mobile md:text-headline-lg text-on-surface font-bold">{h.title}</h3>
+                <p class="mt-space-xs text-body-md text-on-surface-variant max-w-3xl">{h.tagline}</p>
+              </div>
+              <div class="flex flex-wrap gap-space-xs font-mono text-label-sm">{h.tags.map((tag) => <span class="tag">{tag}</span>)}</div>
+              <span class="font-mono text-label-sm text-outline flex items-center gap-1">{h.date} · <span class="text-primary">{ui.details}</span><span class="material-symbols-outlined text-sm text-primary">open_in_full</span></span>
+            </button>
+            <div class="px-space-lg pb-space-lg flex flex-wrap gap-space-sm font-mono text-label-sm">
+              {h.links.map((l) => (
+                <a href={l.href} target="_blank" rel="noopener" class="inline-flex items-center gap-1 px-space-md py-space-xs rounded bg-surface-container-highest text-primary hover:bg-primary-container hover:text-on-primary transition-colors">
+                  <span class="material-symbols-outlined text-sm">{l.icon}</span>{l.label}
+                </a>
+              ))}
+            </div>
+          </article>
+
+          <dialog id={`dlg-${h.id}`} data-video={h.youtubeId ?? ''} class="w-[min(56rem,calc(100vw-2rem))] max-h-[calc(100vh-2rem)] p-0 rounded-xl bg-surface-container text-on-surface border border-outline-variant/50 backdrop:bg-black/70">
+            <div class="flex items-start justify-between gap-space-md p-space-lg pb-space-md border-b border-outline-variant/30">
+              <div>
+                <div class="font-mono text-label-sm text-primary uppercase tracking-widest">{h.hackathon} · {h.date}</div>
+                <h3 class="mt-1 text-headline-md md:text-headline-lg font-bold">{h.title}</h3>
+                {h.placement && <div class="mt-1 font-mono text-label-md text-on-secondary-container">{h.placement}</div>}
+              </div>
+              <button type="button" data-close class="shrink-0 w-9 h-9 rounded-lg bg-surface-container-high text-on-surface-variant hover:text-primary flex items-center justify-center" aria-label={ui.close}>
+                <span class="material-symbols-outlined">close</span>
+              </button>
+            </div>
+            <div class="p-space-lg flex flex-col gap-space-lg">
+              {h.youtubeId && (
+                <div class="aspect-video w-full rounded-lg overflow-hidden bg-surface-container-lowest" data-video-slot></div>
+              )}
+              <div class="flex flex-col gap-space-sm text-body-md text-on-surface-variant">
+                {h.description.map((p) => <p>{p}</p>)}
+              </div>
+              <div class="flex flex-wrap gap-space-xs font-mono text-label-sm">{h.tags.map((tag) => <span class="tag">{tag}</span>)}</div>
+              <div class="flex flex-wrap gap-space-sm font-mono text-label-sm">
+                {h.links.map((l) => (
+                  <a href={l.href} target="_blank" rel="noopener" class="inline-flex items-center gap-1 px-space-md py-space-xs rounded bg-surface-container-highest text-primary hover:bg-primary-container hover:text-on-primary transition-colors">
+                    <span class="material-symbols-outlined text-sm">{l.icon}</span>{l.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </dialog>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  // Open the detail dialog; the YouTube iframe is created on open and removed on close so it stops playing.
+  document.querySelectorAll<HTMLButtonElement>('[data-open]').forEach((btn) => {
+    const dlg = document.getElementById(`dlg-${btn.dataset.open}`) as HTMLDialogElement | null;
+    if (!dlg) return;
+    const slot = dlg.querySelector<HTMLElement>('[data-video-slot]');
+    btn.addEventListener('click', () => {
+      if (slot && dlg.dataset.video) {
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube-nocookie.com/embed/${dlg.dataset.video}?rel=0`;
+        iframe.title = 'YouTube video';
+        iframe.className = 'w-full h-full';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.allowFullscreen = true;
+        slot.replaceChildren(iframe);
+      }
+      dlg.showModal();
+    });
+    dlg.querySelector('[data-close]')?.addEventListener('click', () => dlg.close());
+    dlg.addEventListener('click', (e) => {
+      if (e.target === dlg) dlg.close();
+    });
+    dlg.addEventListener('close', () => slot?.replaceChildren());
+    if (location.hash === `#hackathon-${btn.dataset.open}`) btn.click();
+  });
+</script>

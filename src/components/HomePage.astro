@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { dict, site, stack, type Locale } from '../i18n/content';
+import Hackathons from './Hackathons.astro';
 
 interface Props {
   locale: Locale;
@@ -70,7 +71,7 @@ const commands = ['git clone https://github.com/WeOwnVision/Website.git', 'cd We
 
     <main class="w-full pt-20">
       <!-- 1. HERO -->
-      <section class="section-x py-space-xl md:py-16 flex flex-col items-center">
+      <section class="section-x pt-space-xl pb-16 md:pt-16 md:pb-24 flex flex-col items-center">
         <div class="flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container mb-space-xl">
           <span class="w-2 h-2 rounded-full bg-primary"></span>
           <span class="font-mono text-label-sm tracking-widest text-primary uppercase">{t.hero.pill}</span>
@@ -82,8 +83,8 @@ const commands = ['git clone https://github.com/WeOwnVision/Website.git', 'cd We
           </h1>
           <p class="mt-space-md font-mono text-label-lg md:text-headline-sm tracking-[0.3em] uppercase text-outline">{t.hero.tagline}</p>
           <p class="mt-space-lg text-body-lg text-on-surface-variant max-w-2xl">{t.hero.body}</p>
-          <div class="flex flex-wrap items-center justify-center gap-space-md mt-space-xl mb-space-xl">
-            <a href="#builds" class="inline-flex items-center gap-space-xs px-space-lg py-space-sm rounded-lg bg-primary-container text-on-primary font-mono text-label-md uppercase tracking-wider font-semibold hover:bg-primary transition-colors">
+          <div class="flex flex-wrap items-center justify-center gap-space-md mt-space-xl">
+            <a href="#hackathons" class="inline-flex items-center gap-space-xs px-space-lg py-space-sm rounded-lg bg-primary-container text-on-primary font-mono text-label-md uppercase tracking-wider font-semibold hover:bg-primary transition-colors">
               <span class="material-symbols-outlined text-base">terminal</span>{t.hero.primaryCta}
             </a>
             <a href="#open-source" class="inline-flex items-center gap-space-xs px-space-lg py-space-sm rounded-lg bg-surface-container text-tertiary font-mono text-label-md uppercase tracking-wider hover:bg-surface-container-high hover:text-on-surface transition-colors">
@@ -92,35 +93,13 @@ const commands = ['git clone https://github.com/WeOwnVision/Website.git', 'cd We
           </div>
         </div>
 
-        <!-- HUD -->
-        <div class="w-full max-w-6xl rounded-xl bg-surface-container-low p-space-md md:p-space-lg">
-          <div class="flex flex-col rounded-lg bg-surface-container p-space-md">
-            <div class="flex items-center gap-space-xs pb-space-sm font-mono text-label-sm text-primary uppercase">
-              <span class="material-symbols-outlined text-sm">satellite_alt</span><span class="truncate">{t.hero.origin}</span>
-            </div>
-            <div class="relative w-full h-44 my-space-sm bg-surface-container-lowest rounded overflow-hidden">
-              <svg class="w-full h-full text-primary" fill="none" preserveAspectRatio="none" viewBox="0 0 600 160" aria-hidden="true">
-                <path d="M0,40 H600 M0,80 H600 M0,120 H600" stroke="currentColor" stroke-dasharray="4 4" stroke-opacity="0.08" />
-                <path d="M100,0 V160 M250,0 V160 M400,0 V160 M520,0 V160" stroke="currentColor" stroke-dasharray="4 4" stroke-opacity="0.08" />
-                <path d="M40,120 C180,20 340,140 540,40" stroke="#c3955b" stroke-opacity="0.7" stroke-width="2" vector-effect="non-scaling-stroke" />
-                <circle cx="40" cy="120" fill="#c3955b" r="4" />
-                <circle cx="260" cy="70" fill="#9c8e81" r="3" />
-                <circle cx="390" cy="100" fill="#9c8e81" r="3" />
-                <circle cx="540" cy="40" fill="#c3955b" r="5" />
-              </svg>
-              <span class="absolute bottom-2 left-3 font-mono text-label-sm text-outline">{t.hero.originLabel}</span>
-              <span class="absolute top-2 right-3 font-mono text-label-sm text-primary">{t.hero.targetLabel}</span>
-            </div>
-            <div class="flex flex-wrap items-center justify-between gap-space-xs font-mono text-label-sm text-on-surface-variant pt-space-xs">
-              <span class="flex items-center gap-space-xs"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span>{t.hero.target}</span>
-              <span class="text-tertiary">{t.hero.targetNote}</span>
-            </div>
-          </div>
-        </div>
       </section>
 
+      <!-- 2. HACKATHONS -->
+      <Hackathons locale={locale} />
+
       <!-- 2. MANIFESTO -->
-      <section id="manifesto" class="section-x py-space-xl md:py-16 bg-surface-container-lowest">
+      <section id="manifesto" class="section-x py-space-xl md:py-16">
         <div class="max-w-6xl mx-auto flex flex-col gap-space-lg">
           <div class="eyebrow"><span class="font-bold">{t.manifesto.index}</span><span class="uppercase tracking-widest text-outline">{t.manifesto.eyebrow}</span></div>
           <div class="rounded-xl bg-surface-container p-space-lg md:p-space-xl relative overflow-hidden">
@@ -147,54 +126,6 @@ const commands = ['git clone https://github.com/WeOwnVision/Website.git', 'cd We
                 <div class="font-mono text-label-sm text-tertiary mt-space-md bg-surface-container-lowest/50 p-space-xs rounded">{p.foot}</div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <!-- 3. BUILDS -->
-      <section id="builds" class="section-x py-space-xl md:py-16">
-        <div class="max-w-6xl mx-auto flex flex-col gap-space-lg">
-          <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
-            <div class="flex flex-col gap-space-xs">
-              <div class="eyebrow"><span class="font-bold">{t.builds.index}</span><span class="uppercase tracking-widest text-outline">{t.builds.eyebrow}</span></div>
-              <h2 class="text-headline-lg-mobile md:text-headline-lg font-bold text-on-surface">{t.builds.title}</h2>
-            </div>
-            <div class="font-mono text-label-sm text-tertiary">{t.builds.meta}</div>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
-            <div class="md:col-span-8 bg-surface-container rounded-xl p-space-lg flex flex-col justify-between gap-space-md card-lift">
-              <div>
-                <div class="flex flex-wrap items-center justify-between gap-space-xs mb-space-sm">
-                  <span class="font-mono text-label-sm text-primary uppercase font-bold tracking-widest">{t.builds.next.tag}</span>
-                  <span class="px-space-sm py-space-xs rounded-full bg-secondary-container text-on-secondary-container font-mono text-label-sm font-bold flex items-center gap-space-xs">
-                    <span class="material-symbols-outlined !text-xs">emoji_events</span>{t.builds.next.badge}
-                  </span>
-                </div>
-                <h3 class="text-headline-lg-mobile md:text-headline-lg text-on-surface font-bold mb-space-xs">{t.builds.next.title}</h3>
-                <p class="text-body-md text-on-surface-variant max-w-2xl">{t.builds.next.body}</p>
-              </div>
-              <div class="flex flex-col gap-space-md">
-                <div class="flex flex-wrap gap-space-xs font-mono text-label-sm">{t.builds.next.tags.map((tag) => <span class="tag">{tag}</span>)}</div>
-                <div class="flex flex-wrap items-center justify-between gap-space-sm font-mono text-label-sm">
-                  <span class="flex items-center gap-space-xs text-outline"><span class="material-symbols-outlined text-sm text-primary">hourglass_top</span>{t.builds.next.foot}</span>
-                  <a href={site.github} target="_blank" rel="noopener" class="px-space-md py-space-xs rounded bg-surface-container-highest text-primary hover:bg-primary-container hover:text-on-primary transition-colors">{t.builds.next.cta}</a>
-                </div>
-              </div>
-            </div>
-            <div class="md:col-span-4 bg-surface-container rounded-xl p-space-lg flex flex-col justify-between gap-space-md card-lift">
-              <div>
-                <div class="flex items-center justify-between gap-space-xs mb-space-sm">
-                  <span class="font-mono text-label-sm text-primary uppercase font-bold tracking-widest">{t.builds.site.tag}</span>
-                  <span class="px-space-sm py-space-xs rounded-full bg-surface-container-high text-tertiary font-mono text-label-sm font-semibold flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span>{t.builds.site.badge}</span>
-                </div>
-                <h3 class="text-headline-md text-on-surface font-bold mb-space-xs break-all">{t.builds.site.title}</h3>
-                <p class="text-body-sm text-on-surface-variant">{t.builds.site.body}</p>
-              </div>
-              <div class="flex flex-col gap-space-sm">
-                <div class="flex flex-wrap gap-space-xs font-mono text-label-sm">{t.builds.site.tags.map((tag) => <span class="tag">{tag}</span>)}</div>
-                <a href={site.repo} target="_blank" rel="noopener" class="self-end font-mono text-label-sm text-primary hover:underline">{t.builds.site.cta}</a>
-              </div>
-            </div>
           </div>
         </div>
       </section>
